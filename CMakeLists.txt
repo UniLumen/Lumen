@@ -28,6 +28,10 @@ target_link_libraries(lumenApp PRIVATE
     Qt6::Quick
 )
 
+target_include_directories(lumenApp PRIVATE
+    "./src"
+)
+
 set(QT_QML_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/qml)
 set(QML_IMPORT_PATH ${QT_QML_OUTPUT_DIRECTORY}
     CACHE STRING "Import paths for Qt Creator's code model"
