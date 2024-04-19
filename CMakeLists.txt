@@ -58,3 +58,12 @@ install(TARGETS lumenApp
 # make IDEs aware of the QML import path
 set(QML_IMPORT_PATH ${PROJECT_BINARY_DIR}/qml CACHE PATH
     "Path to the custom QML components defined by the project")
+
+# Generate compile_commands.json, needed by CLion, VSCode, Clangd lsp for diagnostics and auto-completion
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+add_custom_target(
+    copy-compile-commands ALL
+    ${CMAKE_COMMAND} -E copy_if_different
+        ${CMAKE_BINARY_DIR}/compile_commands.json
+        ${CMAKE_SOURCE_DIR}
+)
