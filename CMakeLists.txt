@@ -26,6 +26,11 @@ qt_add_executable(${PROJECT_NAME}
     src/JsonWriter.h
     src/JsonWriter.inl
     src/JsonWriter.cpp
+    src/Models/Location.h
+    src/Models/Doctor.h
+    src/Models/TA.h
+    src/Models/Course.h
+    src/Models/Models.h
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"
