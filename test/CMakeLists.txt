@@ -25,10 +25,12 @@ enable_testing()
 
 # Include all project source files here
 set (MAIN_SOURCE
+    ${CMAKE_SOURCE_DIR}/src/JsonWriter.cpp
+    ${CMAKE_SOURCE_DIR}/src/JsonReader.cpp
 )
 
 qt_add_executable(${PROJECT_NAME} ${MAIN_SOURCE}
-
+    JsonSerializationTest.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
