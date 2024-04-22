@@ -31,6 +31,8 @@ qt_add_executable(${PROJECT_NAME}
     src/Models/TA.h
     src/Models/Course.h
     src/Models/Models.h
+    src/Repository.h 
+    src/Repository.inl
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"
