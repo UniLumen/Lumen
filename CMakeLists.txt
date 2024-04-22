@@ -67,3 +67,5 @@ add_custom_target(
         ${CMAKE_BINARY_DIR}/compile_commands.json
         ${CMAKE_SOURCE_DIR}
 )
+
+add_subdirectory(test/)
