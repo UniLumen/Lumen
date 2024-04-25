@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 
+#include "RepositoryManager.h"
+
 int main(int argc, char* argv[]) {
     QGuiApplication app(argc, argv);
 
@@ -20,5 +22,13 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
-    return app.exec();
+    Lumen::RepositoryManager& repoManager = Lumen::RepositoryManager::instance();
+
+    repoManager.loadFromDisk("db.json");
+
+    int retCode = app.exec();
+
+    repoManager.saveToDisk("db.json");
+
+    return retCode;
 }
