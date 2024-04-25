@@ -1,71 +1,53 @@
 cmake_minimum_required(VERSION 3.21.1)
 
-option(LINK_INSIGHT "Link Qt Insight Tracker library" ON)
-option(BUILD_QDS_COMPONENTS "Build design studio components" ON)
+project(lumen LANGUAGES CXX)
 
-project(lumenApp LANGUAGES CXX)
+# Set C++17 Standard
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+# AUTOMOC must be set to ON (DO NOT CHANGE!!!)
 set(CMAKE_AUTOMOC ON)
 
-find_package(Qt6 6.2 REQUIRED COMPONENTS Core Gui Qml Quick)
+find_package(Qt6 6.3 REQUIRED COMPONENTS Core Qml Quick)
 
 if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
     qt_standard_project_setup()
 endif()
 
-qt_add_executable(lumenApp src/main.cpp)
+qt_add_executable(${PROJECT_NAME} src/Main.cpp)
 
-qt_add_resources(lumenApp "configuration"
+qt_add_resources(${PROJECT_NAME} "configuration"
     PREFIX "/"
     FILES
         qtquickcontrols2.conf
 )
 
-target_link_libraries(lumenApp PRIVATE
-    Qt6::Core
-    Qt6::Gui
-    Qt6::Qml
-    Qt6::Quick
+set_source_files_properties(qml/Constants.qml
+    PROPERTIES
+        QT_QML_SINGLETON_TYPE true
 )
 
-target_include_directories(lumenApp PRIVATE
-    "./src"
+qt_add_qml_module(${CMAKE_PROJECT_NAME}
+    URI "lumen"
+    VERSION 1.0
+    RESOURCE_PREFIX "/qt/qml"
+    QML_FILES
+        qml/Main.qml
+        qml/Constants.qml
 )
 
-set(QT_QML_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/qml)
-set(QML_IMPORT_PATH ${QT_QML_OUTPUT_DIRECTORY}
-    CACHE STRING "Import paths for Qt Creator's code model"
-    FORCE
+
+target_include_directories(${PROJECT_NAME}
+    PRIVATE
+        "./src"
 )
 
-if (BUILD_QDS_COMPONENTS)
-    include(${CMAKE_CURRENT_SOURCE_DIR}/qmlcomponents)
-endif()
-
-include(${CMAKE_CURRENT_SOURCE_DIR}/qmlmodules)
-
-if (LINK_INSIGHT)
-    include(${CMAKE_CURRENT_SOURCE_DIR}/insight)
-endif ()
-
-include(GNUInstallDirs)
-install(TARGETS lumenApp
-    BUNDLE DESTINATION .
-    LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
-    RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-)
-
-# make IDEs aware of the QML import path
-set(QML_IMPORT_PATH ${PROJECT_BINARY_DIR}/qml CACHE PATH
-    "Path to the custom QML components defined by the project")
-
-# Generate compile_commands.json, needed by CLion, VSCode, Clangd lsp for diagnostics and auto-completion
-set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
-add_custom_target(
-    copy-compile-commands ALL
-    ${CMAKE_COMMAND} -E copy_if_different
-        ${CMAKE_BINARY_DIR}/compile_commands.json
-        ${CMAKE_SOURCE_DIR}
+target_link_libraries(${PROJECT_NAME}
+    PRIVATE
+        Qt6::Core
+        Qt6::Qml
+        Qt6::Quick
 )
 
 add_subdirectory(test/)
