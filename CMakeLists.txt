@@ -16,10 +16,14 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 find_package(Qt6 6.3 REQUIRED COMPONENTS Core Qml Quick)
 =======
 find_package(Qt6 6.2 REQUIRED COMPONENTS Core Qml Quick)
 >>>>>>> af28fad (Migrate from QtQuick Design Studio project to QtQuick project)
+=======
+find_package(Qt6 6.2 REQUIRED COMPONENTS Core Qml Quick QuickControls2)
+>>>>>>> b9ca6aa (changed CMake file to include Qt Quick Controls library)
 
 if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
     qt_standard_project_setup()
@@ -116,6 +120,7 @@ target_link_libraries(${PROJECT_NAME}
         Qt6::Core
         Qt6::Qml
         Qt6::Quick
+        Qt6::QuickControls2
 )
 
 add_subdirectory(qml/)
