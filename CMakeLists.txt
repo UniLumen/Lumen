@@ -29,14 +29,13 @@ set_source_files_properties(qml/Constants.qml
 )
 
 qt_add_qml_module(${CMAKE_PROJECT_NAME}
-    URI "lumen"
+    URI "Lumen"
     VERSION 1.0
     RESOURCE_PREFIX "/qt/qml"
     QML_FILES
         qml/Main.qml
         qml/Constants.qml
 )
-
 
 target_include_directories(${PROJECT_NAME}
     PRIVATE

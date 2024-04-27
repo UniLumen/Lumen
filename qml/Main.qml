@@ -1,6 +1,6 @@
 import QtQuick
 import QtQuick.Controls
-import lumen
+import Lumen
 
 ApplicationWindow {
     width: 800
