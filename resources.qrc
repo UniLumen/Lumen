@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>resources/addButton.svg</file>
+        <file>resources/courseIcon.svg</file>
+        <file>resources/removeButton.svg</file>
+    </qresource>
+    <qresource prefix="/"/>
+</RCC>

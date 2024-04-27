@@ -1,47 +1,36 @@
 cmake_minimum_required(VERSION 3.21.1)
 
-<<<<<<< HEAD
 project(lumen LANGUAGES CXX)
 
 # Set C++17 Standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-=======
-project(lumenApp LANGUAGES CXX)
->>>>>>> af28fad (Migrate from QtQuick Design Studio project to QtQuick project)
 
 # AUTOMOC must be set to ON (DO NOT CHANGE!!!)
 set(CMAKE_AUTOMOC ON)
 # Auto-embed resources in the target binary
 set(CMAKE_AUTORCC ON)
-
-<<<<<<< HEAD
-<<<<<<< HEAD
 find_package(Qt6 6.3 REQUIRED COMPONENTS Core Qml Quick)
-=======
-find_package(Qt6 6.2 REQUIRED COMPONENTS Core Qml Quick)
->>>>>>> af28fad (Migrate from QtQuick Design Studio project to QtQuick project)
-=======
-find_package(Qt6 6.2 REQUIRED COMPONENTS Core Qml Quick QuickControls2)
->>>>>>> b9ca6aa (changed CMake file to include Qt Quick Controls library)
 
 if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
     qt_standard_project_setup()
 endif()
 
-<<<<<<< HEAD
 qt_add_executable(${PROJECT_NAME}
     application.qrc
     src/Main.cpp
-)
-=======
-qt_add_executable(${PROJECT_NAME} src/Main.cpp)
->>>>>>> af28fad (Migrate from QtQuick Design Studio project to QtQuick project)
+    src/Course.h
+    qml/CourseEditor.qml
+    qml/CardTemplate.qml
+    resources.qrc
+    src/CourseModel.h
+    src/CourseModel.cpp)
 
 qt_add_resources(${PROJECT_NAME} "configuration"
     PREFIX "/"
     FILES
         qtquickcontrols2.conf
+<<<<<<< HEAD
 )
 
 <<<<<<< HEAD
@@ -57,6 +46,8 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
     QML_FILES
         qml/Main.qml
         qml/Constants.qml
+=======
+>>>>>>> 8b0c76c (created template for cards and had a failed attempt at adding images)
 )
 
 target_include_directories(${PROJECT_NAME}

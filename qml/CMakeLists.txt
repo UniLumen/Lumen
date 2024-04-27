@@ -10,4 +10,6 @@ qt6_add_qml_module(${CMAKE_PROJECT_NAME}
     QML_FILES
         Main.qml
         Constants.qml
+        CardTemplate.qml
+        CourseEditor.qml
 )
