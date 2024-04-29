@@ -58,12 +58,12 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/Main.qml
         qml/Constants.qml
         qml/LandPage.qml
-        qml/LumenLogo.qml
-        qml/YellowLinesImage.qml
         qml/LandPageButton.qml
         qml/ManImage.qml
         qml/TextLandPage.qml
-        qml/LumenHeader.qml
+        qml/EditorHomePage.qml
+        qml/YellowLinesImage.qml
+        qml/LumenLogo.qml
 )
 
 target_include_directories(${PROJECT_NAME}
