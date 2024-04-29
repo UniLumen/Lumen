@@ -8,6 +8,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # AUTOMOC must be set to ON (DO NOT CHANGE!!!)
 set(CMAKE_AUTOMOC ON)
+# Auto-embed resources in the target binary
+set(CMAKE_AUTORCC ON)
 
 find_package(Qt6 6.3 REQUIRED COMPONENTS Core Qml Quick)
 
@@ -15,7 +17,10 @@ if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
     qt_standard_project_setup()
 endif()
 
-qt_add_executable(${PROJECT_NAME} src/Main.cpp)
+qt_add_executable(${PROJECT_NAME}
+    application.qrc
+    src/Main.cpp
+)
 
 qt_add_resources(${PROJECT_NAME} "configuration"
     PREFIX "/"
