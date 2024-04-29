@@ -1,7 +1,7 @@
 <RCC>
     <qresource prefix="/">
-        <file>images/lines.svg</file>
-        <file>images/logo.svg</file>
-        <file>images/man.svg</file>
+        <file>images/land_page_man.svg</file>
+        <file>images/yellow_lines.svg</file>
+        <file>images/lumen_logo.svg</file>
     </qresource>
 </RCC>
