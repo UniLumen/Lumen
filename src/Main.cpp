@@ -6,13 +6,16 @@
 #include "RepositoryManager.h"
 #include "UserConf.h"
 #include "Views/CourseListView.h"
+#include "CourseModel.h"
 
 int main(int argc, char* argv[]) {
     QGuiApplication app(argc, argv);
-
     QQmlApplicationEngine engine;
     QQmlContext* context = engine.rootContext();
     const QUrl url(u"qrc:/qt/qml/Lumen/qml/Main.qml"_qs);
+    CourseModel courseModel;
+    context->setContextProperty("_courseModel", &courseModel);
+
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreated, &app,
         [url](QObject* obj, const QUrl& objUrl) {
