@@ -19,7 +19,7 @@ Rectangle{
     readonly property GridView __view: GridView.view
 
 
-    color: "blue"
+    color: "white"
     width: __view.cellWidth - __view.cellWidth/10
     height: __view.cellHeight - __view.cellHeight/12
     radius: __view.cellWidth*0.07

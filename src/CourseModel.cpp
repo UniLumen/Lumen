@@ -1,5 +1,5 @@
-#include "CourseModel.h"
 #include <QDebug>
+#include "CourseModel.h"
 
 CourseModel::CourseModel(QObject *parent):
     QAbstractListModel(parent){
@@ -62,6 +62,13 @@ void CourseModel::onRemoveCourse(int index){
     m_data.erase(m_data.begin()+index);
     qDebug() << "onRemove course called on index: " + std::to_string(index);
     endRemoveRows();
+}
+
+void CourseModel::onAddCourse(QString name, QString year, QString dept, QString credits){
+    beginInsertRows(QModelIndex(),m_data.size(), m_data.size());
+    m_data.push_back(Course(name, credits.toInt(), year.toInt(), dept));
+    endInsertRows();
+    qDebug() << "adding subject: " + name + " " + year + " " + dept + " " + credits;
 
 }
 

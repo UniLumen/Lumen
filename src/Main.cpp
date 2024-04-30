@@ -2,11 +2,15 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QDebug>
+<<<<<<< HEAD
 
 #include "Controllers/UserConfController.h"
 #include "RepositoryManager.h"
 #include "UserConf.h"
 #include "Views/CourseListView.h"
+=======
+#include <QString>
+>>>>>>> cf0f305 (added the ability to add courses + transition)
 #include "CourseModel.h"
 
 int main(int argc, char* argv[]) {
@@ -57,6 +61,8 @@ int main(int argc, char* argv[]) {
 
     QObject* courseEditorItem = engine.rootObjects()[0]->children()[1]; //I have no idea why this works
     QObject::connect(courseEditorItem, SIGNAL(removeCourse(int)), &courseModel, SLOT(onRemoveCourse(int)));
+    QObject::connect(courseEditorItem, SIGNAL(addCourse(QString,QString,QString,QString)), &courseModel, SLOT(onAddCourse(QString,QString,QString,QString)));
+
 
     int retCode = app.exec();
 

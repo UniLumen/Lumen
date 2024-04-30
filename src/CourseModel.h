@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <QAbstractListModel>
+#include <QString>
 #include "Course.h"
 
 
@@ -23,7 +24,7 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 public slots:
-    // void onAddCourse(Course course);
+    void onAddCourse(QString name, QString year, QString dept, QString credits);
     void onRemoveCourse(int index);
 
 
