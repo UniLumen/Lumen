@@ -5,6 +5,7 @@ import QtQuick.Controls
 Item {
     property var comboBoxModel
     property string comboBoxLabel
+    readonly property string currentSelection: combo.displayText
 
     implicitHeight: 40
     implicitWidth: 100

@@ -3,6 +3,7 @@
 #include <QQuickView>
 #include <QQmlContext>
 #include <QDebug>
+#include <QString>
 #include "CourseModel.h"
 
 int main(int argc, char* argv[]) {
@@ -34,6 +35,8 @@ int main(int argc, char* argv[]) {
 
     QObject* courseEditorItem = engine.rootObjects()[0]->children()[1]; //I have no idea why this works
     QObject::connect(courseEditorItem, SIGNAL(removeCourse(int)), &courseModel, SLOT(onRemoveCourse(int)));
+    QObject::connect(courseEditorItem, SIGNAL(addCourse(QString,QString,QString,QString)), &courseModel, SLOT(onAddCourse(QString,QString,QString,QString)));
+
 
 
     return app.exec();
