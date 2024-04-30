@@ -1,6 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QDebug>
 
 #include "Controllers/UserConfController.h"
 #include "RepositoryManager.h"
@@ -9,12 +10,14 @@
 #include "CourseModel.h"
 
 int main(int argc, char* argv[]) {
+
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
     QQmlContext* context = engine.rootContext();
     const QUrl url(u"qrc:/qt/qml/Lumen/qml/Main.qml"_qs);
     CourseModel courseModel;
     context->setContextProperty("_courseModel", &courseModel);
+
 
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreated, &app,
@@ -51,6 +54,9 @@ int main(int argc, char* argv[]) {
     if (engine.rootObjects().isEmpty()) {
         return -1;
     }
+
+    QObject* courseEditorItem = engine.rootObjects()[0]->children()[1]; //I have no idea why this works
+    QObject::connect(courseEditorItem, SIGNAL(removeCourse(int)), &courseModel, SLOT(onRemoveCourse(int)));
 
     int retCode = app.exec();
 

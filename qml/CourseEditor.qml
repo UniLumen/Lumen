@@ -5,7 +5,10 @@ import QtQuick.Controls
 
 Item{
     id: root
+    signal removeCourse(int deletionIndex)
+
     anchors.fill: parent
+
 
     GridView{
         id: gView
@@ -15,6 +18,10 @@ Item{
         cellHeight: gView.cellWidth*1.5
         clip:true
 
+        displaced: Transition {
+            NumberAnimation { properties: "x,y"; duration: 250 }
+        }
+
         model: _courseModel
 
         delegate: CardTemplate{
@@ -22,6 +29,23 @@ Item{
             content1: "Credit Hours:" + model.creditHours
             content2: "Year Of Study: " + model.YearOfStudy
             content3: "Offering Departmnet: " + model.dept
+
+            RoundButton{
+                id: removeButton
+                background: Rectangle{
+                    radius: 360
+                    color: Constants.cancelRed
+                }
+                width: parent.width/5
+                height: removeButton.width
+
+                anchors{
+                    right: parent.right
+                    top: parent.top
+                }
+
+                onClicked: root.removeCourse(model.index)
+            }
         }
     }
 
@@ -113,7 +137,7 @@ Item{
             Rectangle{
                 id: checkBoxRect
                 clip:true
-                border.color: black
+                border.color: "black"
                 border.width: 1
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 

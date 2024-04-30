@@ -18,11 +18,11 @@ Rectangle{
     property string content3
     readonly property GridView __view: GridView.view
 
+
     color: "blue"
     width: __view.cellWidth - __view.cellWidth/10
     height: __view.cellHeight - __view.cellHeight/12
     radius: __view.cellWidth*0.07
-
     Item{
         anchors{
             fill: parent
@@ -33,20 +33,20 @@ Rectangle{
         }
 
 
-        RoundButton{
-            id: removeButton
-            background: Rectangle{
-                radius: 360
-                color: Constants.cancelRed
-            }
-            width: parent.width/5
-            height: removeButton.width
+        // RoundButton{
+        //     id: removeButton
+        //     background: Rectangle{
+        //         radius: 360
+        //         color: Constants.cancelRed
+        //     }
+        //     width: parent.width/5
+        //     height: removeButton.width
 
-            anchors{
-                right: parent.right
-                top: parent.top
-            }
-        }
+        //     anchors{
+        //         right: parent.right
+        //         top: parent.top
+        //     }
+        // }
 
         Rectangle{
             id: cardIcon

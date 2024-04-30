@@ -18,14 +18,13 @@ public:
     };
 
     CourseModel(QObject *parent = nullptr);
-    // ~CourseModel();
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
 
 public slots:
-    // void addCourse(Course course);
-    // void removeCourse(int row);
+    // void onAddCourse(Course course);
+    void onRemoveCourse(int index);
 
 
 private:
