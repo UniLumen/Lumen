@@ -14,6 +14,8 @@ ApplicationWindow {
     width: Constants.widthDefault
     height: Constants.heightDefault
     color: Constants.colorBackground
+    title: Constants.appName
+
 
     background: Item {
         anchors.fill: parent

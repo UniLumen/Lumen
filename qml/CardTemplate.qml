@@ -1,4 +1,4 @@
-import QtQuick
+ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 import QtQml
@@ -19,16 +19,17 @@ Rectangle{
     readonly property GridView __view: GridView.view
 
     color: "blue"
-    width: __view.cellWidth
-    height: __view.cellHeight
+    width: __view.cellWidth - __view.cellWidth/10
+    height: __view.cellHeight - __view.cellHeight/12
+    radius: __view.cellWidth*0.07
 
     Item{
         anchors{
             fill: parent
             topMargin: 0.05*parent.height
             bottomMargin: 0.05*parent.height
-            leftMargin: 0.05*parent.width
-            rightMargin: 0.05*parent.width
+            leftMargin: 0.07*parent.width
+            rightMargin: 0.07*parent.width
         }
 
 
@@ -78,9 +79,10 @@ Rectangle{
             id: contentCol
             anchors{
                 top: mainText.bottom
-                bottom: parent.bottom
+                topMargin: 0.05*parent.height
             }
             width:parent.width
+            spacing: 0.05*parent.height
 
 
             Text {
@@ -110,5 +112,6 @@ Rectangle{
                 Layout.maximumWidth: parent.width
             }
         }
+
     }
 }
