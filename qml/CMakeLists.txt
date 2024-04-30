@@ -12,4 +12,5 @@ qt6_add_qml_module(${CMAKE_PROJECT_NAME}
         Constants.qml
         CardTemplate.qml
         CourseEditor.qml
+        LabeledComboBox.qml
 )
