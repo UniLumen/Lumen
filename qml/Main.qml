@@ -7,6 +7,8 @@ ApplicationWindow {
     height: 600
     visible: true
     title: Constants.appName
+    color: Constants.screenBackground
+
 
     CourseEditor{
 
