@@ -1,4 +1,5 @@
 #include "CourseModel.h"
+#include <QDebug>
 
 CourseModel::CourseModel(QObject *parent):
     QAbstractListModel(parent){
@@ -54,6 +55,14 @@ QHash<int, QByteArray> CourseModel::roleNames() const{
     };
 
     return mapping;
+}
+
+void CourseModel::onRemoveCourse(int index){
+    beginRemoveRows(QModelIndex(), index,index);
+    m_data.erase(m_data.begin()+index);
+    qDebug() << "onRemove course called on index: " + std::to_string(index);
+    endRemoveRows();
+
 }
 
 
