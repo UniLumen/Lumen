@@ -71,6 +71,10 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/LumenTabButton.qml
         qml/PointingHandCursor.qml
         qml/LumenRectangle.qml
+        qml/UserDashboard.qml
+        qml/CreditHoursDisplay.qml
+        qml/KPI.qml
+        qml/LumenCard.qml
 )
 
 target_include_directories(${PROJECT_NAME}

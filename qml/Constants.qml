@@ -35,4 +35,19 @@ QtObject {
     readonly property string iconCourse: "qrc:/images/course_icon.svg"
     readonly property string iconSchedule: "qrc:/images/schedule_icon.svg"
     readonly property url iconKpi: "qrc:/images/icon_kpi.svg"
+
+    readonly property int sizeHeader1: 32
+    readonly property int sizeHeader2: 24
+    readonly property int sizeHeader3: 18
+    readonly property int sizeHeader4: 16
+    readonly property int sizeHeader5: 14
+    readonly property int sizeHeader6: 10
+
+    readonly property int sizePrimaryText: 16
+    readonly property int sizeSecondaryText: 14
+
+    readonly property size sizeHuge: Qt.size(64, 64)
+    readonly property size sizeLarge: Qt.size(32, 32)
+    readonly property size sizeNormal: Qt.size(24, 24)
+    readonly property size sizeSmall: Qt.size(16, 16)
 }
