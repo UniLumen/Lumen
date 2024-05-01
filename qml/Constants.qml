@@ -34,4 +34,5 @@ QtObject {
     readonly property string iconInstructor: "qrc:/images/instructor_icon.svg"
     readonly property string iconCourse: "qrc:/images/course_icon.svg"
     readonly property string iconSchedule: "qrc:/images/schedule_icon.svg"
+    readonly property url iconKpi: "qrc:/images/icon_kpi.svg"
 }
