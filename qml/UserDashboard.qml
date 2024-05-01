@@ -9,6 +9,7 @@ Item {
     property int _cardHeight: 250
     property int _cellMarginX: 15
     property int _cellMarginY: 25
+    property real _splitValue: 0.65
 
     RowLayout {
         anchors.fill: parent
@@ -16,7 +17,7 @@ Item {
 
         // Courses
         ColumnLayout {
-            Layout.preferredWidth: parent.width * 0.65
+            Layout.preferredWidth: parent.width * _splitValue
             spacing: _headerSpacing
 
             Text {
@@ -51,7 +52,7 @@ Item {
 
         // KPIs
         ColumnLayout {
-            Layout.fillWidth: true
+            Layout.preferredWidth: parent.width * (1 - _splitValue)
             spacing: _headerSpacing
 
             Text {
