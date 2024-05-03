@@ -6,6 +6,7 @@ import QtQuick.Dialogs
 import Lumen
 
 ApplicationWindow {
+    // This is very important, the window doesn't show up without it
     visible: true
     width: Constants.editorWindowWidth
     height: Constants.editorWindowHeight

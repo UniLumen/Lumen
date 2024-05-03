@@ -4,8 +4,6 @@ import QtQuick.Controls
 TabButton {
     id: lumenTabButton
 
-    //hoverEnabled: false
-
     // Sets the color of the text
     // when button is NOT clicked
     Material.foreground: Constants.whiteColor

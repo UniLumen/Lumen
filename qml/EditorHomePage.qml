@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-Window {
+Rectangle {
     id: editorHomePage
     width: Constants.editorWindowWidth
     height: Constants.editorWindowHeight
