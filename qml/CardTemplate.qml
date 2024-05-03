@@ -18,7 +18,6 @@ Rectangle{
     property string content3
     readonly property GridView __view: GridView.view
 
-
     color: "white"
     width: __view.cellWidth - __view.cellWidth/10
     height: __view.cellHeight - __view.cellHeight/12
@@ -35,9 +34,9 @@ Rectangle{
 
         Image {
             id: cardIcon
-            source: ":/courseIcon.svg"
-            height:30
-            width:30
+            source: "qrc:/resources/courseIcon.svg"
+            height:parent.height/10
+            width:cardIcon.height
             anchors{
                 left: parent.left
                 top: parent.top

@@ -59,6 +59,7 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
+<<<<<<< HEAD
     QObject* courseEditorItem = engine.rootObjects()[0]->children()[1]; //I have no idea why this works
     QObject::connect(courseEditorItem, SIGNAL(removeCourse(int)), &courseModel, SLOT(onRemoveCourse(int)));
     QObject::connect(courseEditorItem, SIGNAL(addCourse(QString,QString,QString,QString)), &courseModel, SLOT(onAddCourse(QString,QString,QString,QString)));
@@ -70,4 +71,8 @@ int main(int argc, char* argv[]) {
     userConf.saveToDisk("user.json");
 
     return retCode;
+=======
+
+    return app.exec();
+>>>>>>> 6928b20 (added icons, c++ clots are now called from qml)
 }
