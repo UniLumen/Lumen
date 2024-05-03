@@ -5,8 +5,8 @@ import Lumen
 
 Item {
     property int _headerSpacing: 32
-    property int _cardWidth: 150
-    property int _cardHeight: 250
+    property int _cardWidth: 170
+    property int _cardHeight: 270
     property int _cellMarginX: 15
     property int _cellMarginY: 25
     property real _splitValue: 0.65
