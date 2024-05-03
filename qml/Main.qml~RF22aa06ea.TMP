@@ -1,0 +1,155 @@
+import QtQuick
+import QtQuick.Controls
+import lumen
+import QtQuick.Layouts
+import QtQuick.Window
+import QtQuick.Dialogs
+ApplicationWindow {
+    visible: true
+    width: 1090
+    height: 650
+    property bool isLoggedIn: false
+
+
+    StackView {
+        id: stackView
+        anchors.fill: parent
+        initialItem: loginPageComponent
+
+        Component {
+            id: loginPageComponent
+            Rectangle {
+                color: "#282D32"
+                anchors.fill: parent
+                Item {
+                    width: 250
+                    height: 250
+
+                    Image {
+                        anchors.centerIn: parent
+                        source: "file://logo.svg"
+                        width: parent.width
+                        height: parent.height
+                        fillMode: Image.PreserveAspectFit
+                    }
+                }
+                ColumnLayout {
+                    anchors.centerIn: parent
+                    spacing: 10
+                    Text {
+                        text: "schedule optimized!"
+                        font.pixelSize: 20
+                        color: "#18317c"
+                        anchors.horizontalCenter: parent
+                    }
+                    Text {
+                        text: "brain power optimized"
+                        font.pixelSize: 20
+                        color: "#18317c"
+                        anchors.horizontalCenter: parent
+                    }
+                    Text {
+                        text: "unleash your brain power"
+                        font.pixelSize: 20
+                        color: "#18317c"
+                        anchors.horizontalCenter: parent
+                    }
+                    Text {
+                        text: "build your ideal class schedule in minutes"
+                        font.pixelSize: 20
+                        color: "#18317c"
+                        anchors.horizontalCenter: parent
+                    }
+                    Item {
+                        width: 250
+                        height: 250
+
+                        Image {
+                            anchors.centerIn: parent
+                            source: "file://lines.svg"
+                            width: parent.width
+                            height: parent.height
+                            fillMode: Image.PreserveAspectFit
+                        }
+                    }
+                    Item {
+                        width: 100
+                        height: 100
+
+                        Image {
+                            anchors.centerIn: parent
+                            source: "file://man.svg"
+                            width: parent.width
+                            height: parent.height
+                            fillMode: Image.PreserveAspectFit
+                        }
+                    }
+
+                    Button {
+                        text: "Enter as an Editor"
+                        background: Rectangle {
+                            color: "#18317c"
+                        }
+                        contentItem: Text {
+                            text: parent.text
+                            color: "white"
+                        }
+                        onClicked: {
+
+
+                        }
+
+                        Button {
+                            text: "Enter as User"
+                            background: Rectangle {
+                                color: "#18317c"
+                            }
+                            contentItem: Text {
+                                text: parent.text
+                                color: "white"
+                            }
+                            onClicked: {
+                                stackView.push(signinComponent);
+                            }
+                        }
+                    }
+                }
+            }
+
+            Component{
+                id: welcomePageComponent
+                Rectangle{
+                    color: "#dfcef2"
+                    anchors.fill: parent
+
+                    ColumnLayout {
+                        anchors.centerIn: parent
+                        spacing: 10
+                        Text {
+                            text: "Welcome, "
+                            font.pixelSize: 20
+                            color: "black"
+                        }
+
+                        Item {
+                            anchors.horizontalCenter: parent.horizontalCenter
+                            Button {
+                                text: "Logout"
+                                background: Rectangle {
+                                    color: "#18317c"
+                                }
+                                contentItem: Text {
+                                    text: parent.text
+                                    color: "white"
+                                }
+                                onClicked: {
+                                    stackView.pop();
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
