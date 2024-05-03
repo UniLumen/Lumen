@@ -48,7 +48,6 @@ Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.preferredWidth: 1
-                // color: "transparent"
 
                 contentItem: Text{
                     text: parent.currentText

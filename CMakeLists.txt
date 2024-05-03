@@ -88,20 +88,19 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/UserTabBar.qml
         qml/CourseEditor.qml
         qml/CardTemplate.qml
+        qml/LabeledComboBox.qml
 )
 
 target_include_directories(${PROJECT_NAME}
     PRIVATE
         "./src"
 )
-
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
         Qt6::Core
         Qt6::Qml
         Qt6::Quick
-        Qt6::QuickControls2
+        # Qt6::QuickControls2
 )
 
-add_subdirectory(qml/)
 add_subdirectory(test/)

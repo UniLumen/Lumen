@@ -33,27 +33,11 @@ Rectangle{
         }
 
 
-        // RoundButton{
-        //     id: removeButton
-        //     background: Rectangle{
-        //         radius: 360
-        //         color: Constants.cancelRed
-        //     }
-        //     width: parent.width/5
-        //     height: removeButton.width
-
-        //     anchors{
-        //         right: parent.right
-        //         top: parent.top
-        //     }
-        // }
-
-        Rectangle{
+        Image {
             id: cardIcon
-            width: parent.width/5
-            height: removeButton.width
-            color: "red"
-
+            source: ":/courseIcon.svg"
+            height:30
+            width:30
             anchors{
                 left: parent.left
                 top: parent.top
