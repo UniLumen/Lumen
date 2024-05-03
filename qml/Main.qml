@@ -7,8 +7,8 @@ import QtQuick.Dialogs
 
 ApplicationWindow {
     visible: true
-    width:1000
-    height: 600
+    width:800
+    height:600
 
     StackView {
         id: stackView
@@ -101,11 +101,8 @@ ApplicationWindow {
                             spacing : 30
                             Button {
                                 id: editorButton
-
                                 hoverEnabled: true
-                                background: Rectangle {/*
-                                    width: parent.width
-                                    height: parent.height/1.5*/
+                                background: Rectangle {
                                     color: editorButton.hovered ? Constants.yellowColor: Constants.backgroundDarkColor
                                     border.width: 0.5
                                     radius: 4
@@ -125,9 +122,7 @@ ApplicationWindow {
 
                             Button {
                                 id: userButton
-                                background: Rectangle {/*
-                                    width: parent.width
-                                    height: parent.height/1.5*/
+                                background: Rectangle {
                                     color: userButton.hovered ? Constants.yellowColor : Constants.whiteColor
                                     border.width: 0.5
                                     border.color: Constants.mainFont
@@ -141,6 +136,7 @@ ApplicationWindow {
                                     color: Constants.backgroundDarkColor
                                 }
                                 onClicked: {
+
                                 }
                             }
                         }
@@ -150,7 +146,7 @@ ApplicationWindow {
                             right: parent.right
                             margins:20
                         }
-                        sourceSize: Qt.size(parent.width/2.7,parent.height/2.2)
+                        sourceSize: Qt.size(parent.width/2.3,parent.height/2)
                         source: Constants.manPhotoPath
                     }
                 }
