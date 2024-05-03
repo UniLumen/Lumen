@@ -7,16 +7,21 @@ namespace Lumen {
     class Repository {
     public:
         Repository() = default;
-        virtual ~Repository() = default;
+        virtual ~Repository() {
+            qDeleteAll(m_dataMap);
+            m_dataMap.clear();
+        }
 
-        virtual void insert(const V& value);
         virtual void insert(V* value);
-        virtual QList<QSharedPointer<V>> getAll() const;
-        virtual QSharedPointer<V> get(const V& value) const;
-        virtual size_t remove(const V& value);
+        template <typename... Args>
+        V* insert(Args... args);
+
+        virtual QList<V*> getAll();
+        virtual bool contains(V* value);
+        virtual size_t remove(V* value);
 
     private:
-        QSet<QSharedPointer<V>> m_dataMap;
+        QSet<V*> m_dataMap;
     };
 }
 
