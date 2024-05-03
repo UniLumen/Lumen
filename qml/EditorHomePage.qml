@@ -6,7 +6,7 @@ Window {
     id: editorHomePage
     width: Constants.editorWindowWidth
     height: Constants.editorWindowHeight
-    color: Constants.backgroundDarkColor
+    color: Constants.darkBackgroundColor
 
     YellowLinesImage {id: yellowLinesImage}
 
@@ -29,18 +29,22 @@ Window {
         ListElement {
             title: "Add Location"
             iconPath: "qrc:/images/location_icon.svg"
+            infoText: "Here you can input all the\nlocations and classes available\nat your university"
         }
         ListElement {
             title: "Add Doctors/TAs"
             iconPath: "qrc:/images/instructor_icon.svg"
+            infoText: "Here you can input all the\nDoctors and TAs available\nat your university"
         }
         ListElement {
             title: "Add Courses"
             iconPath: "qrc:/images/course_icon.svg"
+            infoText: "Here you can input all the\nCourses available\nat your university"
         }
         ListElement {
             title: "Add Schedules"
             iconPath: "qrc:/images/schedule_icon.svg"
+            infoText: "Here you can input all\nyears' schedules available\nat your university"
         }
     }
 
