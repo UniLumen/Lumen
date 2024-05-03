@@ -36,7 +36,7 @@ Item {
                 Layout.preferredWidth: parent.width
                 font.bold: true
                 font.pixelSize: Constants.sizeHeader2
-                wrapMode: Text.WordWrap
+                wrapMode: Text.Wrap
             }
 
             Text {
@@ -44,7 +44,7 @@ Item {
 
                 Layout.preferredWidth: parent.width
                 font.pixelSize: Constants.sizePrimaryText
-                wrapMode: Text.WordWrap
+                wrapMode: Text.Wrap
             }
         }
 
