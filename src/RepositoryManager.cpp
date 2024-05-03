@@ -24,10 +24,21 @@ namespace Lumen {
 
         JsonReader reader(root);
 
-        reader.fromJsonObject(root.value("locations").toObject(), &locationRepo);
-        reader.fromJsonObject(root.value("doctors").toObject(), &doctorRepo);
-        reader.fromJsonObject(root.value("tas").toObject(), &taRepo);
-        reader.fromJsonObject(root.value("courses").toObject(), &courseRepo);
+        reader.fromJsonArray<Location>(root.value("locations").toArray(), [&](Location* loc){
+            locationRepo.insert(loc);
+        });
+
+        reader.fromJsonArray<Doctor>(root.value("doctors").toArray(), [&](Doctor* doc) {
+            doctorRepo.insert(doc);
+        });
+
+        reader.fromJsonArray<TA>(root.value("tas").toArray(), [&](TA* ta){
+            taRepo.insert(ta);
+        });
+
+        reader.fromJsonArray<Course>(root.value("courses").toArray(), [&](Course* course) {
+            courseRepo.insert(course);
+        });
     }
 
     void RepositoryManager::loadFromDisk(const QString& file) {
@@ -48,10 +59,15 @@ namespace Lumen {
         } else {
             JsonWriter writer;
 
-            writer["locations"] = writer.toJsonObject(&locationRepo);
-            writer["doctors"] = writer.toJsonObject(&doctorRepo);
-            writer["tas"] = writer.toJsonObject(&taRepo);
-            writer["courses"] = writer.toJsonObject(&courseRepo);
+            writer["locations"] = writer.toJsonArray(locationRepo.getAll());
+            writer["doctors"] = writer.toJsonArray(doctorRepo.getAll());
+            writer["tas"] = writer.toJsonArray(taRepo.getAll());
+
+            QList<Course*> rawPointers;
+            const auto& courses = courseRepo.getAll();
+            std::transform(courses.constBegin(), courses.constEnd(), std::back_inserter(rawPointers),
+                           [](const QSharedPointer<Course>& sharedPtr) { return sharedPtr.data(); });
+            writer["courses"] = writer.toJsonArray(rawPointers);
 
             f.write(QJsonDocument(writer.object()).toJson());
         }
