@@ -5,6 +5,8 @@ import Lumen
 
 ColumnLayout {
     property real _value: 0.5
+    property real _from: 0.0
+    property real _to: 1.0
 
     spacing: 4
 
@@ -14,38 +16,60 @@ ColumnLayout {
         font.bold: true
     }
 
-    RowLayout {
+    Rectangle {
+        id: cProgressBar
+
+        Layout.alignment: Qt.AlignRight
         Layout.fillWidth: true
-        spacing: 64
+        Layout.bottomMargin: 14
+
+        height: 8
+        radius: 100
+        color: Constants.background
 
         Text {
-            id: cText
+            anchors {
+                left: parent.left
+                top: parent.bottom
+            }
 
-            text: qsTr("From 12 to 21")
+            text: _from
+            font.pixelSize: Constants.sizeSecondaryText
+            verticalAlignment: Text.AlignVCenter
+        }
+
+        Text {
+            anchors {
+                right: parent.right
+                top: parent.bottom
+            }
+
+            text: _to
             font.pixelSize: Constants.sizeSecondaryText
             verticalAlignment: Text.AlignVCenter
         }
 
         Rectangle {
-            id: cProgressBar
+            anchors {
+                top: parent.top
+                left: parent.left
+            }
 
-            Layout.alignment: Qt.AlignRight
-            Layout.fillWidth: true
+            height: parent.height
+            radius: parent.radius
+            width: parent.width * Math.max(0, (_value - _from) / (_to - _from))
+            color: (_value >= _from && _value <= _to) ? Constants.accent : Constants.alertRed
 
-            height: 8
-            radius: 100
-            color: Constants.background
-
-            Rectangle {
+            Text {
                 anchors {
-                    top: parent.top
-                    left: parent.left
+                    right: parent.right
+                    top: parent.bottom
                 }
 
-                height: parent.height
-                radius: parent.radius
-                width: parent.width * _value
-                color:  Constants.accent
+                text: _value
+                font.pixelSize: Constants.sizeSecondaryText
+                verticalAlignment: Text.AlignVCenter
+                visible: (_value > _from && _value < _to)
             }
         }
     }

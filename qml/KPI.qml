@@ -32,7 +32,25 @@ Item {
             }
 
             CreditHoursDisplay {
-                _value: 0.5
+            //     _from: __courseModel.minCreditHours
+            //     _to: __courseModel.maxCreditHours
+            //     _value: __courseModel.creditHours
+            }
+
+            Text {
+                // text: __courseModel.errorFormated
+                // visible: __courseModel.errorFormated
+                font.pixelSize: Constants.sizePrimaryText
+                font.bold: true
+                color: Constants.alertRed
+            }
+
+            Text {
+                // text:  __courseModel.noteFormated
+                // visible: __courseModel.noteFormated && !(__courseModel.errorFormated)
+                font.pixelSize: Constants.sizePrimaryText
+                font.bold: true
+                color: Constants.accent
             }
         }
     }
