@@ -41,6 +41,22 @@ namespace Lumen {
     }
 
     template <typename T>
+    void JsonReader::fromJsonArray(const QJsonArray& src, std::function<void(T*)> func) {
+        for (auto& v : src) {
+            JsonReader reader(v);
+            T*         ptr = new T;
+            reader >> ptr;
+            func(ptr);
+
+            // Track new ids, and unresolved dependencies
+            m_idRefMap.insert(reader.m_idRefMap);
+            m_patchMap.insert(reader.m_patchMap);
+        }
+
+        resolveDependencies();
+    }
+
+    template <typename T>
     void JsonReader::fromJsonObject(const QJsonObject& src, T* dst) {
         Q_ASSERT(dst);
 

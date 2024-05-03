@@ -15,6 +15,8 @@ namespace Lumen {
         template <typename T>
         void fromJsonArray(const QJsonArray& src, QList<T*>& dst);
         template <typename T>
+        void fromJsonArray(const QJsonArray& src, std::function<void(T*)> func);
+        template <typename T>
         void fromJsonObject(const QJsonObject& src, T* dst);
         template <typename T>
         bool fromJsonPointer(const QJsonValue& src, T** dst);
