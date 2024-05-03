@@ -1,0 +1,44 @@
+import QtQuick
+import QtQuick.Controls
+import lumen
+import QtQuick.Layouts
+import QtQuick.Window
+import QtQuick.Dialogs
+
+ApplicationWindow {
+  visible: true
+  width: 1090
+  height: 650
+
+  StackView {
+    id: stackView
+    anchors.fill: parent
+    initialItem: landPage
+
+    Component {
+      id: landPage
+      Rectangle {
+        color: "#282D32"
+        anchors.fill: parent
+        Image {
+          anchors.bottom: parent.bottom
+          source: "file://lines.svg"
+          width: parent.width
+          height: parent.height/2
+        }
+        Item {
+            id: name
+            width: 100
+            height: 100
+            Image {
+                anchors.top: parent.top
+                source: "file://logo.svg"
+                width: parent.width
+                height: parent.height
+            }
+        }
+
+      }
+    }
+  }
+}
