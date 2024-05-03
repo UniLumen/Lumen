@@ -10,13 +10,7 @@ ApplicationWindow {
     color: Constants.screenBackground
 
 
-    Item{
-        width:0.5*parent.width
-        height: 0.5*parent.height
-        anchors.centerIn: parent
-
-        CourseEditor{
-        }
+    CourseEditor{
     }
 
 

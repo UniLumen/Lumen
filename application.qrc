@@ -1,5 +1,7 @@
 <RCC>
-    <qresource prefix="/resources">
+    <qresource prefix="/">
         <file>resources/courseIcon.svg</file>
+        <file>resources/removeButton.png</file>
+        <file>resources/addButton.svg</file>
     </qresource>
 </RCC>

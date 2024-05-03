@@ -5,8 +5,6 @@ import QtQuick.Controls
 
 Item{
     id: root
-    signal removeCourse(int deletionIndex)
-    signal addCourse (string courseName, string year, string dept, string cH)
 
     anchors.fill: parent
 
@@ -41,19 +39,18 @@ Item{
 
             RoundButton{
                 id: removeButton
-                background: Rectangle{
-                    radius: 360
-                    color: Constants.cancelRed
+                background: Image{
+                    id: removeImage
+                    source: "qrc:/resources/removeButton.png"
                 }
                 width: parent.width/5
                 height: removeButton.width
 
                 anchors{
                     right: parent.right
-                    top: parent.top
                 }
 
-                onClicked: root.removeCourse(model.index)
+                onClicked: _courseModel.onRemoveCourse(model.index)
             }
         }
     }
@@ -175,17 +172,18 @@ Item{
 
             RoundButton{
                 id: addButton
-                background: Rectangle{
-                    radius: 360
-                    color: Constants.okGreen
+                background: Image{
+                    id: addImage
+                    source: "qrc:/resources/addButton.svg"
                 }
-                Layout.preferredWidth: parent.width*0.1
+
+                Layout.preferredWidth: parent.width*0.15
                 Layout.preferredHeight: addButton.width
                 radius: addButton.width/2
                 Layout.columnSpan: 2
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                onClicked: root.addCourse(subjectName.displayText, yearCombo.currentSelection, deptCombo.currentSelection, creditCombo.currentSelection )
+                onClicked: _courseModel.onAddCourse(subjectName.displayText, yearCombo.currentSelection, deptCombo.currentSelection, creditCombo.currentSelection )
             }
 
 
