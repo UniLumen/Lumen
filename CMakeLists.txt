@@ -67,6 +67,8 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/TitleWithUnderline.qml
         qml/EditorHomePageCard.qml
         qml/MoreInfoButton.qml
+        qml/EditorTabBar.qml
+        qml/LumenTabButton.qml
 )
 
 target_include_directories(${PROJECT_NAME}

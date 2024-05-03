@@ -10,5 +10,6 @@
         <file>images/instructor_icon.svg</file>
         <file>images/more_info_icon_black.svg</file>
         <file>images/more_info_icon_yellow.svg</file>
+        <file>qml/EditorTabBar.qml</file>
     </qresource>
 </RCC>
