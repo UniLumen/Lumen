@@ -8,7 +8,7 @@ import QtQuick.Dialogs
 ApplicationWindow {
     visible: true
     width:1000
-    height: 500
+    height: 600
 
     StackView {
         id: stackView
@@ -18,11 +18,11 @@ ApplicationWindow {
         Component {
             id: landPage
             Rectangle {
-                color: "#282D32"
+                color: Constants.backgroundDarkColor
                 anchors.fill: parent
                 Image {
                     anchors.bottom: parent.bottom
-                    source: "file://lines.svg"
+                    source: Constants.yellowLinesImagePath
                     width: parent.width
                     height: parent.height/2
                 }
@@ -32,7 +32,7 @@ ApplicationWindow {
                         margins: 20
                         top : parent.top
                     }
-                    source: "file://logo.svg"
+                    source: Constants.lumenLogoPath
                     width: parent.width/9
                     height: parent.height/15
 
@@ -48,74 +48,75 @@ ApplicationWindow {
                             RowLayout{
                                 Text {
                                     text: "Schedule "
-                                    font.family: "poppins"
+                                    font.family: Constants.mainFont
                                     font.bold: true
-                                    font.pixelSize: 50
-                                    color: "#FFFFFF"
+                                    font.pointSize: 50 * Qt.scaleFactor
+                                    color: Constants.mainFont
                                     anchors.horizontalCenter: parent
                                 }
                                 Text {
                                     text: "optimized!"
-                                    font.family: "poppins"
+                                    font.family: Constants.mainFont
                                     font.bold: true
-                                    font.pixelSize: 50
-                                    color: "#FCB80A"
+                                    font.pointSize: 50 * Qt.scaleFactor
+                                    color: Constants.yellowColor
                                     anchors.horizontalCenter: parent
                                 }
                             }
                             RowLayout{
                                 Text {
                                     text: "Brain power"
-                                    font.family: "poppins"
+                                    font.family: Constants.mainFont
                                     font.bold: true
-                                    font.pixelSize: 50
-                                    color: "#FFFFFF"
+                                    font.pointSize: 50 * Qt.scaleFactor
+                                    color: Constants.WhiteColor
                                     anchors.horizontalCenter: parent
                                 }
                                 Text {
                                     text: "maximized!"
-                                    font.family: "poppins"
+                                    font.family: Constants.mainFont
                                     font.bold: true
-                                    font.pixelSize: 50
-                                    color: "#FCB80A"
+                                    font.pointSize: 50 * Qt.scaleFactor
+                                    color: Constants.yellowColor
                                     anchors.horizontalCenter: parent
                                 }
                             }}
                         ColumnLayout{
                             Text {
                                 text: "Unleash your brain power."
-                                font.pixelSize: 20
-                                font.family: "poppins"
-                                color: "#FFFFFF"
+                                font.pointSize: 20 * Qt.scaleFactor
+                                font.family:Constants.mainFont
+                                color: Constants.mainFont
                                 anchors.horizontalCenter: parent
                             }
                             Text {
                                 text: "Build your ideal class schedule in minutes."
-                                font.pixelSize: 20
-                                font.family: "poppins"
-                                color: "#FFFFFF"
+                                font.pointSize: 20 * Qt.scaleFactor
+                                font.family: Constants.mainFont
+                                color:  Constants.WhiteColor
                                 anchors.horizontalCenter: parent
                             }
                         }
                         RowLayout{
                             spacing : 30
                             Button {
-                                text: "Enter as an editor  "
+                                id: editorButton
 
-                                background: Rectangle {
-                                    width: 140
-                                    height: 80
-                                    color: "#FFFFFF"
+                                hoverEnabled: true
+                                background: Rectangle {/*
+                                    width: parent.width
+                                    height: parent.height/1.5*/
+                                    color: editorButton.hovered ? Constants.yellowColor: Constants.backgroundDarkColor
                                     border.width: 0.5
                                     radius: 4
-                                    border.color: "#FFFFFF"
+                                    border.color:  Constants.WhiteColor
                                 }
                                 contentItem: Text {
-                                    text: parent.text
-                                    font.family: "poppins"
+                                    text: "Enter as an editor  "
+                                    font.family: Constants.mainFont
                                     anchors.centerIn: parent
-                                    font.pixelSize: 12
-                                    color: "#282D32"
+                                    font.pointSize: 14 * Qt.scaleFactor
+                                    color: Constants.whiteColor
                                 }
                                 onClicked: {
 
@@ -123,33 +124,22 @@ ApplicationWindow {
                             }
 
                             Button {
-                                text: " Enter as a user"
-
-                                background: Rectangle {
-                                    width: 140
-                                    height: 80
-                                    color: "#282D32"
+                                id: userButton
+                                background: Rectangle {/*
+                                    width: parent.width
+                                    height: parent.height/1.5*/
+                                    color: userButton.hovered ? Constants.yellowColor : Constants.whiteColor
                                     border.width: 0.5
-                                    border.color: "#FFFFFF"
+                                    border.color: Constants.mainFont
                                     radius: 4
-                                    MouseArea {
-                                                hoverEnabled: true
-                                                onEntered: {
-                                                  color: "#pink"
-                                                }
-                                                onExited: {
-                                                  color: "transparent"
-                                                }
-                                          }
                                 }
                                 contentItem: Text {
-                                    text: parent.text
-                                    font.pixelSize: 12
-                                    font.family: "poppins"
+                                    text: " Enter as a user"
+                                    font.pointSize: 14 * Qt.scaleFactor
+                                    font.family: Constants.mainFont
                                     anchors.centerIn: parent
-                                    color: "#FFFFFF"
+                                    color: Constants.backgroundDarkColor
                                 }
-
                                 onClicked: {
                                 }
                             }
@@ -160,8 +150,8 @@ ApplicationWindow {
                             right: parent.right
                             margins:20
                         }
-                        sourceSize: Qt.size(parent.width/2.3,parent.height/2.3)
-                        source: "file://man.svg"
+                        sourceSize: Qt.size(parent.width/2.7,parent.height/2.2)
+                        source: Constants.manPhotoPath
                     }
                 }
             }
