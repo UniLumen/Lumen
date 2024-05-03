@@ -34,31 +34,6 @@ Item {
             CreditHoursDisplay {
                 _value: 0.5
             }
-
-            ColumnLayout {
-                spacing: 2
-
-                Text {
-                    text: qsTr("Select Credit Hours Range")
-                    font.pixelSize: Constants.sizeHeader2
-                    font.bold: true
-                    wrapMode: Text.WordWrap
-                }
-
-                RadioButton {
-                    checked: true
-                    text: qsTr("14 Credit hours: GPA < 2")
-                    font.pixelSize: Constants.sizePrimaryText
-                }
-                RadioButton {
-                    text: qsTr("18 Credit hours: 2 <= GPA < 3")
-                    font.pixelSize: Constants.sizePrimaryText
-                }
-                RadioButton {
-                    text: qsTr("21 Credit hours: 3 <= GPA")
-                    font.pixelSize: Constants.sizePrimaryText
-                }
-            }
         }
     }
 }
