@@ -64,7 +64,6 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/EditorHomePage.qml
         qml/YellowLinesImage.qml
         qml/LumenLogo.qml
-        qml/MenuTab.qml
         qml/TitleWithUnderline.qml
         qml/EditorHomePageCard.qml
         qml/MoreInfoButton.qml
