@@ -14,7 +14,8 @@ Item{
     GridView{
         id: gView
         width: parent.width*3/5
-        height: parent.height*3/5
+        // height: parent.height*3/5
+        height: parent.height
         cellWidth: gView.width/4
         cellHeight: gView.cellWidth*1.5
         clip:true
@@ -61,12 +62,14 @@ Item{
     Rectangle{
         id: courseForm
         width: parent.width*1.5/5
-        height: parent.height*3/5
+        // height: parent.height*3/5
         color: "white"
         anchors{
-            verticalCenter: gView.verticalCenter
+            // verticalCenter: gView.verticalCenter
             left: gView.right
-            topMargin: 60
+            top: parent.top
+            bottom: parent.bottom
+            // topMargin: 60
         }
         radius: courseForm.width*0.07
 
