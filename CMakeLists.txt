@@ -22,7 +22,6 @@ qt_add_executable(${PROJECT_NAME}
     src/Course.h
     qml/CourseEditor.qml
     qml/CardTemplate.qml
-    resources.qrc
     src/CourseModel.h
     src/CourseModel.cpp)
 
@@ -30,10 +29,8 @@ qt_add_resources(${PROJECT_NAME} "configuration"
     PREFIX "/"
     FILES
         qtquickcontrols2.conf
-<<<<<<< HEAD
 )
 
-<<<<<<< HEAD
 set_source_files_properties(qml/Constants.qml
     PROPERTIES
         QT_QML_SINGLETON_TYPE true
@@ -46,29 +43,21 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
     QML_FILES
         qml/Main.qml
         qml/Constants.qml
-=======
->>>>>>> 8b0c76c (created template for cards and had a failed attempt at adding images)
+        qml/CardTemplate.qml
+        qml/CourseEditor.qml
+        qml/LabeledComboBox.qml
 )
 
 target_include_directories(${PROJECT_NAME}
     PRIVATE
         "./src"
 )
-
-=======
-target_include_directories(${PROJECT_NAME}
-    PRIVATE
-        "./src"
-)
-
->>>>>>> af28fad (Migrate from QtQuick Design Studio project to QtQuick project)
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
         Qt6::Core
         Qt6::Qml
         Qt6::Quick
-        Qt6::QuickControls2
+        # Qt6::QuickControls2
 )
 
-add_subdirectory(qml/)
 add_subdirectory(test/)
