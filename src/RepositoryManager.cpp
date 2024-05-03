@@ -62,12 +62,7 @@ namespace Lumen {
             writer["locations"] = writer.toJsonArray(locationRepo.getAll());
             writer["doctors"] = writer.toJsonArray(doctorRepo.getAll());
             writer["tas"] = writer.toJsonArray(taRepo.getAll());
-
-            QList<Course*> rawPointers;
-            const auto& courses = courseRepo.getAll();
-            std::transform(courses.constBegin(), courses.constEnd(), std::back_inserter(rawPointers),
-                           [](const QSharedPointer<Course>& sharedPtr) { return sharedPtr.data(); });
-            writer["courses"] = writer.toJsonArray(rawPointers);
+            writer["courses"] = writer.toJsonArray(courseRepo.getAll());
 
             f.write(QJsonDocument(writer.object()).toJson());
         }
