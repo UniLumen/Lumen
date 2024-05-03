@@ -7,6 +7,11 @@ QtObject {
     readonly property string appName: "Lumen"
     readonly property string poppinsFont: "Poppins"
     readonly property string editorWelcomeText: "Editor's POV"
+    readonly property string dashboardTabText: " Dashboard"
+    readonly property string locationsTabText: " Locations"
+    readonly property string instructorsTabtext: " Doctors/TAs"
+    readonly property string coursesTabText: " Courses"
+    readonly property string schedulesTabText: " Schedules"
     // Colors
     readonly property string darkBackgroundColor: "#282D32"
     readonly property string yellowColor: "#FCB80A"
@@ -17,8 +22,8 @@ QtObject {
     // Dimensions
     readonly property int editorWindowWidth: Screen.width - 100
     readonly property int editorWindowHeight: Screen.height - 100
-    readonly property int lumenLogoWidth: 200 // Original width divided by 4.5 and approximated
-    readonly property int lumenLogoHeight: 69 // Original height divided by 4.5 and approximated
+    readonly property int lumenLogoWidth: 188 // Original width divided by 4.8 and approximated
+    readonly property int lumenLogoHeight: 65 // Original height divided by 4.8 and approximated
     // Paths/Resources
     readonly property string yellowLinesImagePath: "qrc:/images/yellow_lines.svg"
     readonly property string lumenLogoPath: "qrc:/images/lumen_logo.svg"

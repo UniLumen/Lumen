@@ -12,6 +12,17 @@ Window {
 
     LumenLogo {id: lumenLogo}
 
+    EditorTabBar {
+        id: editorTabBar
+        anchors {
+            left: lumenLogo.right
+            right: parent.right
+            bottom: lumenLogo.bottom
+            leftMargin: 20
+            bottomMargin: -8
+        }
+    }
+
     TitleWithUnderline {
         id: titleWithUnderline
         title: Constants.editorWelcomeText
@@ -23,7 +34,8 @@ Window {
         }
     }
 
-    // Here I was unable to use constants for the iconPaths, QT doesn't allow this inside ListModel for some reason
+    // Here I was unable to use constants for anything, QT doesn't allow this inside ListModel for some reason
+    // Should try to find a fix for this
     ListModel{
         id: cardsModel
         ListElement {
