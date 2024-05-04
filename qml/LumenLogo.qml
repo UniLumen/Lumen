@@ -1,14 +1,15 @@
 import QtQuick
-
-Image{
-    id: lumenLogo
-    sourceSize: Qt.size(Constants.lumenLogoWidth, Constants.lumenLogoHeight)
-    anchors {
-        top: parent.top
-        left: parent.left
-        margins: 40
+Image {
+    width: parent.width/9
+    height: parent.height/15
+    anchors{
+        left:parent.left
+        margins: 20
+        top : parent.top
     }
     source: Constants.lumenLogoPath
-    smooth: true
-}
 
+    fillMode: Image.PreserveAspectFit
+    mipmap: true
+
+}

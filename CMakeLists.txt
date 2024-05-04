@@ -20,6 +20,9 @@ endif()
 qt_add_executable(${PROJECT_NAME}
     application.qrc
     src/Main.cpp
+    qml/LandPage.qml
+    qml/LumenLogo.qml
+    qml/YellowLinesImage.qml
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"
@@ -40,6 +43,9 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
     QML_FILES
         qml/Main.qml
         qml/Constants.qml
+        qml/LandPage.qml
+        qml/LumenLogo.qml
+        qml/YellowLinesImage.qml
 )
 
 target_include_directories(${PROJECT_NAME}
