@@ -5,15 +5,9 @@ import QtQuick.Layouts
 import QtQuick.Window
 import QtQuick.Dialogs
 
-Rectangle {
-
+Item {
     id: landPage
-    width: Constants.editorWindowWidth
-    height: Constants.editorWindowHeight
-    color: Constants.backgroundDarkColor
-    anchors.fill: parent
-    YellowLinesImage {id: yellowLinesImage}
-    LumenLogo {id: lumenLogo}
+
     RowLayout{
         anchors.fill: parent
         spacing: 10
