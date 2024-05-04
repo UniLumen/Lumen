@@ -107,7 +107,11 @@ Button {
                         weight: Font.Bold
                     }
                 }
+
+                PointingHandCursor{}
             }
        }
-   }
+    }
+
+    PointingHandCursor{}
 }

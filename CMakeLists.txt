@@ -69,6 +69,7 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/MoreInfoButton.qml
         qml/EditorTabBar.qml
         qml/LumenTabButton.qml
+        qml/PointingHandCursor.qml
 )
 
 target_include_directories(${PROJECT_NAME}
