@@ -21,4 +21,6 @@ TabButton {
         height: 35
         width: 33
     }
+
+    PointingHandCursor{}
 }

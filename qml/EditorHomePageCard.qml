@@ -35,4 +35,6 @@ Button {
             margins: 15
         }
     }
+
+    PointingHandCursor{}
 }
