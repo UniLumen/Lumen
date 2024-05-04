@@ -15,4 +15,3 @@ ApplicationWindow {
         source: "LandPage.qml"
     }
 }
-

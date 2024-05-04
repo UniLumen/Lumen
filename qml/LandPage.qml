@@ -23,117 +23,48 @@ Rectangle {
             spacing: 35
             ColumnLayout{
                 RowLayout{
-                    Text {
-                        text: "Schedule "
-                        font.family: constants.poppinsFont
-                        font.bold: true
-                        font.pointSize:35
-                        color: Constants.whiteColor
-                        anchors.horizontalCenter: parent
-                    }
-                    Text {
+                    TextLandPage { text: "Schedule "}
+                    TextLandPage {
                         text: "optimized!"
-                        font.family: Constants.poppinsFont
-                        font.bold: true
-                        font.pointSize:35
-                        color: Constants.yellowColor
-                        anchors.horizontalCenter: parent
+                        color:  Constants.yellowColor
                     }
                 }
                 RowLayout{
-                    Text {
-                        text: "Brain power"
-                        font.family: Constants.poppinsFont
-                        font.bold: true
-                        font.pointSize:35
-                        color: Constants.whiteColor
-                        anchors.horizontalCenter: parent
-                    }
-                    Text {
+                    TextLandPage { text: "Brain power"}
+                    TextLandPage {
                         text: "maximized!"
-                        font.family: Constants.poppinsFont
-                        font.bold: true
-                        font.pointSize: 35
-                        color: Constants.yellowColor
-                        anchors.horizontalCenter: parent
+                        color:  Constants.yellowColor
                     }
-                }}
+                }
+            }
             ColumnLayout{
-                Text {
+                TextLandPage {
                     text: "Unleash your brain power."
                     font.pointSize: 14
-                    font.family:Constants.poppinsFont
-                    font.weight: medium
-                    color: Constants.whiteColor
-                    anchors.horizontalCenter: parent
                 }
-                Text {
+                TextLandPage {
                     text: "Build your ideal class schedule in minutes."
                     font.pointSize: 14
-                    font.weight: medium
-                    font.family: Constants.poppinsFont
-                    color:  Constants.whiteColor
-                    anchors.horizontalCenter: parent
                 }
             }
             RowLayout{
                 spacing : 20
-                Button {
+                LandPageButton {
                     id: editorButton
-                    hoverEnabled: true
-                    background: Rectangle {
-                        width: 140
-                        implicitHeight: 34
-                        color: editorButton.hovered ? Constants.yellowColor : Constants.buttonColor
-                        border.width: 0.5
-                        border.color: Constants.backgroundDarkColor
-                        radius: 4
-                    }
-                    contentItem: Text {
-                        text: "Enter as an editor"
-                        font.family: Constants.poppinsFont
-                        anchors.centerIn: parent
-                        font.pointSize: 10
-                        color: Constants.backgroundDarkColor
-                    }
-                    onClicked: {
-
-                    }
+                    backgroundColor: editorButton.hovered ? Constants.yellowColor : Constants.buttonColor
+                    textContent:  "Enter as an editor"
+                    borderColor: Constants.backgroundDarkColor
+                    textColor: Constants.backgroundDarkColor
                 }
-
-                Button {
+                LandPageButton{
                     id: userButton
-                    background: Rectangle {
-                        width: 140
-                        implicitHeight: 30
-                        color: userButton.hovered ? Constants.yellowColor: Constants.backgroundDarkColor
-                        border.width: 0.5
-                        radius: 4
-                        border.color: Constants.buttonColor
-                    }
-                    contentItem: Text {
-                        text: "  Enter as a user"
-                        font.pointSize: 10
-                        font.family: Constants.poppinsFont
-                        anchors.centerIn: parent
-                        color: Constants.buttonColor
-
-                    }
-                    onClicked: {
-
-                    }
+                    backgroundColor: userButton.hovered ? Constants.yellowColor: Constants.backgroundDarkColor
+                    textContent: "  Enter as a user"
+                    borderColor: Constants.buttonColor
+                    textColor: Constants.buttonColor
                 }
             }
         }
-        Image {
-            anchors{
-                right: parent.right
-                margins:20
-            }
-            sourceSize: Qt.size(parent.width/2.3,parent.height/2.3)
-            fillMode: Image.PreserveAspectFit
-            mipmap: true
-            source: Constants.manPhotoPath
-        }
+        ManImage{id: manImage}
     }
 }
