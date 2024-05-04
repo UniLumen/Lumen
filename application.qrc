@@ -3,8 +3,5 @@
         <file>images/lines.svg</file>
         <file>images/logo.svg</file>
         <file>images/man.svg</file>
-        <file>qml/LandPage.qml</file>
-        <file>qml/LumenLogo.qml</file>
-        <file>qml/YellowLinesImage.qml</file>
     </qresource>
 </RCC>
