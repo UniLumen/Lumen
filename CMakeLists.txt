@@ -23,6 +23,10 @@ qt_add_executable(${PROJECT_NAME}
     qml/LandPage.qml
     qml/LumenLogo.qml
     qml/YellowLinesImage.qml
+    qml/LandPageButton.qml
+    qml/ManImage.qml
+    qml/TextLandPage.qml
+
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"
@@ -46,6 +50,9 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/LandPage.qml
         qml/LumenLogo.qml
         qml/YellowLinesImage.qml
+        qml/LandPageButton.qml
+        qml/ManImage.qml
+        qml/TextLandPage.qml
 )
 
 target_include_directories(${PROJECT_NAME}
