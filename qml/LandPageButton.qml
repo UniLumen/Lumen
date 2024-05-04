@@ -6,7 +6,6 @@ import QtQuick.Window
 import QtQuick.Dialogs
 
 Button {
-    id: userButton
     property alias backgroundColor: buttonRectangleBackground.color
     property alias textContent: buttonText.text
     property alias textColor: buttonText.color

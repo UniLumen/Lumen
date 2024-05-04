@@ -3,7 +3,7 @@ import QtQuick
 Text {
     font.family: constants.poppinsFont
     font.bold: true
-    font.pointSize:35
-    color: Constants.whiteColor
+    font.pointSize:50
+    color: Constants.whiteLandPageTextColor
     anchors.horizontalCenter: parent
 }
