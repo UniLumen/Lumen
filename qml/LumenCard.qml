@@ -15,63 +15,64 @@ Item {
         anchors.fill: parent
 
         ColumnLayout {
-            anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
-                margins: 8
+            anchors.fill: parent
+            anchors.margins: 8
+            spacing: 12
+
+            ColumnLayout {
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignTop
+
+                spacing: 32
+
+                Image {
+                    id: cIcon
+
+                    sourceSize: Constants.sizeNormal
+                    fillMode: Image.PreserveAspectFit
+                }
+
+                Text {
+                    id: cText
+
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+
+                    font.bold: true
+                    font.pixelSize: Constants.sizeHeader2
+                    wrapMode: Text.WordWrap
+                }
+
+                Text {
+                    id: cDescription
+
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+
+                    font.pixelSize: Constants.sizePrimaryText
+                    fontSizeMode: Text.Fit
+                    minimumPixelSize: Constants.sizeHeader6
+                    wrapMode: Text.WrapAnywhere
+                    verticalAlignment: Text.AlignBottom
+                }
             }
-            spacing: 32
 
             Image {
-                id: cIcon
+                id: cHelpText
 
-                sourceSize: Constants.sizeNormal
+                Layout.alignment: Qt.AlignBottom
+
+                source: Constants.iconInfo
+                sourceSize: Constants.sizeSmall
                 fillMode: Image.PreserveAspectFit
-            }
 
-            Text {
-                id: cText
-
-                Layout.fillWidth: true
-
-                font.bold: true
-                font.pixelSize: Constants.sizeHeader2
-                wrapMode: Text.WordWrap
-            }
-
-            Text {
-                id: cDescription
-
-                Layout.fillWidth: true
-                Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)
-
-                font.pixelSize: Constants.sizePrimaryText
-                minimumPixelSize: Constants.sizeHeader6
-                fontSizeMode: Text.Fit
-                wrapMode: Text.WordWrap
-            }
-        }
-
-        Image {
-            id: cHelpText
-
-            anchors {
-                bottom: parent.bottom
-                left: parent.left
-                margins: 8
-            }
-
-            source: Constants.iconInfo
-            sourceSize: Constants.sizeSmall
-            fillMode: Image.PreserveAspectFit
-
-            MouseArea {
-                anchors.fill: parent
-                onEntered: ToolTip.visible = true
-                onExited: ToolTip.visible = false
-                hoverEnabled: true
-                ToolTip.text: _helpText
+                MouseArea {
+                    anchors.fill: parent
+                    onEntered: ToolTip.visible = true
+                    onExited: ToolTip.visible = false
+                    hoverEnabled: true
+                    ToolTip.text: _helpText
+                }
             }
         }
     }
