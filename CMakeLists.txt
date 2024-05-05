@@ -20,13 +20,6 @@ endif()
 qt_add_executable(${PROJECT_NAME}
     application.qrc
     src/Main.cpp
-    qml/LandPage.qml
-    qml/LumenLogo.qml
-    qml/YellowLinesImage.qml
-    qml/LandPageButton.qml
-    qml/ManImage.qml
-    qml/TextLandPage.qml
-
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"
