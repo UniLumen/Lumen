@@ -20,6 +20,8 @@ endif()
 qt_add_executable(${PROJECT_NAME}
     application.qrc
     src/Main.cpp
+    src/schedule.h src/schedule.cpp
+    src/timeslot.h src/timeslot.cpp
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"
