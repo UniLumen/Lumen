@@ -12,8 +12,8 @@ Button {
     property alias borderColor: buttonRectangleBackground.border.color
     background: Rectangle {
         id: buttonRectangleBackground
-        width: 140
-        implicitHeight: 30
+        width: parent.width
+        height: parent.height/1.4
         border.width: 0.5
         radius: 4
     }

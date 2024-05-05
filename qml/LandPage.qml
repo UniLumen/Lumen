@@ -10,10 +10,10 @@ Item {
 
     RowLayout{
         anchors.fill: parent
-        spacing: 10
+        spacing: 5
         ColumnLayout {
-            anchors.left: parent.left
-            anchors.margins: 20
+            Layout.alignment: Qt.AlignLeft
+            Layout.margins: 20
             spacing: 35
             ColumnLayout{
                 RowLayout{
@@ -55,12 +55,16 @@ Item {
                 LandPageButton{
                     id: userButton
                     backgroundColor: userButton.hovered ? Constants.yellowLandPageColor: Constants.backgroundDarkColor
-                    textContent: "  Enter as a user"
+                    textContent: " Enter as a user "
                     borderColor: Constants.whiteLandPageButtonColor
                     textColor: Constants.whiteLandPageButtonColor
                 }
             }
         }
-        ManImage{id: manImage}
+        ManImage{
+            id: manImage
+            Layout.alignment: Qt.AlignCenter
+            Layout.margins:20
+        }
     }
 }

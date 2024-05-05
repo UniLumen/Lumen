@@ -1,9 +1,8 @@
 import QtQuick
 
 Text {
-    font.family: constants.poppinsFont
+    font.family: Constants.poppinsFont
     font.bold: true
-    font.pointSize:50
+    font.pointSize:40
     color: Constants.whiteLandPageTextColor
-    anchors.horizontalCenter: parent
 }
