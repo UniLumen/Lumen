@@ -1,9 +1,9 @@
 import QtQuick
 import QtQuick.Controls
-import lumen
 import QtQuick.Layouts
 import QtQuick.Window
 import QtQuick.Dialogs
+import Lumen
 
 ApplicationWindow {
     visible: true
