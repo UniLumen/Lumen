@@ -9,7 +9,7 @@ Item {
     property int _cardHeight: 270
     property int _cellMarginX: 15
     property int _cellMarginY: 25
-    property real _splitValue: 0.65
+    property real _splitValue: 0.5
 
     RowLayout {
         anchors.fill: parent
@@ -17,20 +17,29 @@ Item {
 
         // Courses
         ColumnLayout {
-            Layout.preferredWidth: parent.width * _splitValue
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.preferredWidth: 1 / _splitValue
+
             spacing: _headerSpacing
 
             Text {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)
+
                 text: qsTr("My Courses")
                 color: Constants.foreground
-                font.pixelSize: Constants.sizeHeader1
                 font.bold: true
+                font.pixelSize: Constants.sizeHeader1
+                minimumPixelSize: Constants.sizeHeader6
+                fontSizeMode: Text.Fit
                 wrapMode: Text.WordWrap
             }
 
             GridView {
                 Layout.fillHeight: true
-                implicitWidth: parent.width
+                Layout.fillWidth: true
 
                 cellWidth: _cardWidth + _cellMarginX
                 cellHeight: _cardHeight + _cellMarginY
@@ -39,6 +48,9 @@ Item {
 
                 model: 10
                 delegate: LumenCard {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+
                     _iconSource: Constants.iconCourse
                     _text: "Course Name"
                     _helpText: "CS50"
@@ -50,16 +62,26 @@ Item {
             }
         }
 
+
         // KPIs
         ColumnLayout {
-            Layout.preferredWidth: parent.width * (1 - _splitValue)
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.preferredWidth: 1
+
             spacing: _headerSpacing
 
             Text {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)
+
                 text: qsTr("Selection KPIs")
                 color: Constants.foreground
-                font.pixelSize: Constants.sizeHeader1
                 font.bold: true
+                font.pixelSize: Constants.sizeHeader1
+                minimumPixelSize: Constants.sizeHeader6
+                fontSizeMode: Text.Fit
                 wrapMode: Text.WordWrap
             }
 

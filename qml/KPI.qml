@@ -10,46 +10,54 @@ Item {
             left: parent.left
             right: parent.right
         }
-
-        height: cLayout.implicitHeight + 2 * cLayout.anchors.margins
+        implicitHeight: cLayout.implicitHeight + 2 * cLayout.anchors.margins
 
         ColumnLayout {
             id: cLayout
 
             anchors {
-                top: parent.top
-                left: parent.left
-                right: parent.right
+                fill: parent
                 margins: 8
             }
             spacing: 32
 
             Image {
                 Layout.alignment: Qt.AlignTop | Qt.AlignLeft
+
                 source: Constants.iconKpi
                 sourceSize: Constants.sizeNormal
                 fillMode: Image.PreserveAspectFit
             }
 
             CreditHoursDisplay {
-            //     _from: __courseModel.minCreditHours
-            //     _to: __courseModel.maxCreditHours
-            //     _value: __courseModel.creditHours
+                // _from: __courseModel.minCreditHours
+                // _to: __courseModel.maxCreditHours
+                // _value: __courseModel.creditHours
             }
 
             Text {
+                Layout.fillWidth: true
+
                 // text: __courseModel.errorFormated
                 // visible: __courseModel.errorFormated
-                font.pixelSize: Constants.sizePrimaryText
                 font.bold: true
+                font.pixelSize: Constants.sizePrimaryText
+                minimumPixelSize: Constants.sizeHeader6
+                fontSizeMode: Text.Fit
+                wrapMode: Text.WordWrap
                 color: Constants.alertRed
             }
 
             Text {
+                Layout.fillWidth: true
+
                 // text:  __courseModel.noteFormated
                 // visible: __courseModel.noteFormated && !(__courseModel.errorFormated)
-                font.pixelSize: Constants.sizePrimaryText
                 font.bold: true
+                font.pixelSize: Constants.sizePrimaryText
+                minimumPixelSize: Constants.sizeHeader6
+                fontSizeMode: Text.Fit
+                wrapMode: Text.WordWrap
                 color: Constants.accent
             }
         }

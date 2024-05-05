@@ -33,18 +33,23 @@ Item {
             Text {
                 id: cText
 
-                Layout.preferredWidth: parent.width
+                Layout.fillWidth: true
+
                 font.bold: true
                 font.pixelSize: Constants.sizeHeader2
-                wrapMode: Text.Wrap
+                wrapMode: Text.WordWrap
             }
 
             Text {
                 id: cDescription
 
-                Layout.preferredWidth: parent.width
+                Layout.fillWidth: true
+                Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)
+
                 font.pixelSize: Constants.sizePrimaryText
-                wrapMode: Text.Wrap
+                minimumPixelSize: Constants.sizeHeader6
+                fontSizeMode: Text.Fit
+                wrapMode: Text.WordWrap
             }
         }
 

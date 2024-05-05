@@ -11,9 +11,14 @@ ColumnLayout {
     spacing: 4
 
     Text {
+        Layout.fillWidth: true
+
         text: "Credit Hours"
-        font.pixelSize: Constants.sizeHeader2
         font.bold: true
+        font.pixelSize: Constants.sizeHeader2
+        minimumPixelSize: Constants.sizeHeader6
+        fontSizeMode: Text.Fit
+        wrapMode: Text.WordWrap
     }
 
     Rectangle {
@@ -21,9 +26,9 @@ ColumnLayout {
 
         Layout.alignment: Qt.AlignRight
         Layout.fillWidth: true
+        Layout.preferredHeight: 8
         Layout.bottomMargin: 14
 
-        height: 8
         radius: 100
         color: Constants.background
 
