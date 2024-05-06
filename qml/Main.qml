@@ -11,18 +11,16 @@ ApplicationWindow {
     height: Constants.editorWindowHeight
     color: Constants.backgroundDarkColor
 
+    header: LumenHeader {
+        anchors {
+            left: parent.left
+            right: parent.right
+        }
+        implicitHeight: 100
+    }
+
     background: Item {
         anchors.fill: parent
-
-        LumenLogo {
-            width: parent.width / 9
-            height: parent.height / 15
-            anchors{
-                left:parent.left
-                top : parent.top
-                margins: 20
-            }
-        }
 
         YellowLinesImage {
             width: parent.width
