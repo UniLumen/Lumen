@@ -3,5 +3,14 @@
         <file>images/lines.svg</file>
         <file>images/logo.svg</file>
         <file>images/man.svg</file>
+        <file>images/course_icon.svg</file>
+        <file>images/home_icon.svg</file>
+        <file>images/instructor_icon.svg</file>
+        <file>images/location_icon.svg</file>
+        <file>images/lumen_logo.svg</file>
+        <file>images/more_info_icon_black.svg</file>
+        <file>images/more_info_icon_yellow.svg</file>
+        <file>images/schedule_icon.svg</file>
+        <file>images/yellow_lines.svg</file>
     </qresource>
 </RCC>

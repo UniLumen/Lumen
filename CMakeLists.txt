@@ -22,6 +22,7 @@ qt_add_executable(${PROJECT_NAME}
     src/Main.cpp
     src/schedule.h src/schedule.cpp
     src/timeslot.h src/timeslot.cpp
+
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"
@@ -48,6 +49,10 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/LandPageButton.qml
         qml/ManImage.qml
         qml/TextLandPage.qml
+        qml/EditorSchedule.qml
+        qml/EditorTabBar.qml
+        qml/LumenTabButton.qml
+        qml/PointingHandCursor.qml
 )
 
 target_include_directories(${PROJECT_NAME}

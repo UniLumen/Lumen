@@ -14,16 +14,6 @@ ApplicationWindow {
     background: Item {
         anchors.fill: parent
 
-        LumenLogo {
-            width: parent.width / 9
-            height: parent.height / 15
-            anchors{
-                left:parent.left
-                top : parent.top
-                margins: 20
-            }
-        }
-
         YellowLinesImage {
             width: parent.width
             height: parent.height / 2
@@ -34,6 +24,6 @@ ApplicationWindow {
     Loader {
         id: mainLoader
         anchors.fill: parent;
-        source: "LandPage.qml"
+        source: "EditorSchedule.qml"
     }
 }
