@@ -1,14 +1,14 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Controls.Material
-
+import QtQuick.Layouts
 TabBar {
     id: editorTabBar
-
     background: Rectangle {
         color: "transparent"
     }
-
+    Layout.topMargin: 20
+    Layout.fillWidth: true
     // Sets the color of the default bottom highlight line that is in QT TabBar, I don't want this line so I set it's color to transparent
     // Check https://stackoverflow.com/questions/42460451/color-of-line-in-tabbar-qt-qml
     Material.accent: "transparent"

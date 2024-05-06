@@ -1,23 +1,29 @@
 import QtQuick
 import QtQuick.Layouts
 Item {
+    anchors.fill: parent
     ColumnLayout{
-        anchors.fill: parent
+        width: parent.width
+        spacing: 35
+        Layout.margins: 20
         RowLayout{
             id: tabBar
-            anchors.fill: parent
+            Layout.fillHeight: true
+            Layout.fillWidth: true
+            spacing: 35
+            Layout.margins: 20
             LumenLogo {
-                width: parent.width / 9
-                height: parent.height / 15
-                anchors{
-                    left:parent.left
-                    top : parent.top
-                    margins: 20
-                }
+
             }
             EditorTabBar{
 
             }
+        }
+        TextLandPage {
+            Layout.leftMargin: 40
+            text: "Schedules Directory"
+            font.pointSize: 30
+            font.bold: true
         }
     }
 }
