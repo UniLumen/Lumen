@@ -11,11 +11,13 @@ Button {
     property alias textColor: buttonText.color
     property alias borderColor: buttonRectangleBackground.border.color
 
+    topPadding: 16
+    leftPadding: 24
+
     background: Rectangle {
         id: buttonRectangleBackground
 
-        width: parent.width
-        height: parent.height/1.4
+        anchors.fill: parent
         border.width: 0.5
         radius: 4
     }
