@@ -149,7 +149,7 @@ Item{
                     }
 
                     CheckBox{
-                        id:sectionCheckBox
+                        id:tutorialCheckBox
                         text: "Section"
                         Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
                     }
@@ -170,7 +170,9 @@ Item{
                 Layout.columnSpan: 2
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                onClicked: _courseModel.onAddCourse(subjectName.displayText, yearCombo.currentSelection, deptCombo.currentSelection, creditCombo.currentSelection )
+                onClicked: _courseModel.onAddCourse(subjectName.displayText, yearCombo.currentSelection, deptCombo.currentSelection,
+                                                    creditCombo.currentSelection,
+                                                    labCheckBox.checkState == Qt.Checked, tutorialCheckBox.checkState == Qt.Checked )
             }
 
 
