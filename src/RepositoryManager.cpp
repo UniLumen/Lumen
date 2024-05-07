@@ -1,7 +1,6 @@
 #include "RepositoryManager.h"
 
 #include "JsonReader.h"
-#include "JsonWriter.h"
 
 namespace Lumen {
     QSharedPointer<RepositoryManager> RepositoryManager::s_instance(nullptr);
@@ -22,23 +21,12 @@ namespace Lumen {
         Q_ASSERT(root.contains("tas"));
         Q_ASSERT(root.contains("courses"));
 
-        JsonReader reader(root);
+        JsonReader reader;
 
-        reader.fromJsonArray<Location>(root.value("locations").toArray(), [&](Location* loc){
-            locationRepo.insert(loc);
-        });
-
-        reader.fromJsonArray<Doctor>(root.value("doctors").toArray(), [&](Doctor* doc) {
-            doctorRepo.insert(doc);
-        });
-
-        reader.fromJsonArray<TA>(root.value("tas").toArray(), [&](TA* ta){
-            taRepo.insert(ta);
-        });
-
-        reader.fromJsonArray<Course>(root.value("courses").toArray(), [&](Course* course) {
-            courseRepo.insert(course);
-        });
+        locationRepo.fromJson(reader, root["locations"]);
+        doctorRepo.fromJson(reader, root["doctors"]);
+        taRepo.fromJson(reader, root["tas"]);
+        courseRepo.fromJson(reader, root["courses"]);
     }
 
     void RepositoryManager::loadFromDisk(const QString& file) {
@@ -57,14 +45,14 @@ namespace Lumen {
         if (!f.open(QIODevice::WriteOnly)) {
             qCritical() << "Error writing to" << file << ":" << f.errorString();
         } else {
-            JsonWriter writer;
+            QJsonObject json;
 
-            writer["locations"] = writer.toJsonArray(locationRepo.getAll());
-            writer["doctors"] = writer.toJsonArray(doctorRepo.getAll());
-            writer["tas"] = writer.toJsonArray(taRepo.getAll());
-            writer["courses"] = writer.toJsonArray(courseRepo.getAll());
+            json["locations"] = locationRepo.toJson();
+            json["doctors"] = doctorRepo.toJson();
+            json["tas"] = taRepo.toJson();
+            json["courses"] = courseRepo.toJson();
 
-            f.write(QJsonDocument(writer.object()).toJson());
+            f.write(QJsonDocument(json).toJson());
         }
     }
 }
