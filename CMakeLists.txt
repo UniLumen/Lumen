@@ -48,6 +48,9 @@ qt_add_executable(${PROJECT_NAME}
     src/InstructorModel.h
     src/InstructorModel.cpp
     src/Instructor.h
+    src/Location.h
+    src/LocationModel.h
+    src/LocationModel.cpp
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"
