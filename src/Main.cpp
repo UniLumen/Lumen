@@ -10,6 +10,7 @@
 #include "Views/CourseListView.h"
 #include "CourseModel.h"
 #include "InstructorModel.h"
+#include "LocationModel.h"
 
 
 int main(int argc, char* argv[]) {
@@ -20,10 +21,11 @@ int main(int argc, char* argv[]) {
     const QUrl url(u"qrc:/qt/qml/Lumen/qml/Main.qml"_qs);
     CourseModel courseModel;
     InstructorModel instructorModel;
+    LocationModel locationModel;
 
     context->setContextProperty("_courseModel", &courseModel);
     context->setContextProperty("_instructorModel", &instructorModel);
-
+    context->setContextProperty("_locationModel", &locationModel);
 
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreated, &app,
