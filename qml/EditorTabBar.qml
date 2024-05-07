@@ -18,7 +18,6 @@ TabBar {
     // So for now I will leave it like this
 
     LumenTabButton {
-        // Space is added as a hacky way to add a margin between icon and text
         text: Constants.textDashboardTab
         icon.source: Constants.iconHome
     }
