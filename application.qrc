@@ -12,5 +12,7 @@
         <file>images/more_info_icon_yellow.svg</file>
         <file>images/schedule_icon.svg</file>
         <file>images/yellow_lines.svg</file>
+        <file>images/addButton.svg</file>
+        <file>images/removeButton.png</file>
     </qresource>
 </RCC>

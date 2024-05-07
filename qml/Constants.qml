@@ -39,4 +39,6 @@ QtObject {
     readonly property string instructorIconPath: "qrc:/images/instructor_icon.svg"
     readonly property string coursesIconPath: "qrc:/images/course_icon.svg"
     readonly property string scheduleIconPath: "qrc:/images/schedule_icon.svg"
+    readonly property string addButtonPath: "qrc:/images/addButton.svg"
+    readonly property string removeButtonPath: "qrc:/images/removeButton.png"
 }
