@@ -2,16 +2,15 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QDebug>
-<<<<<<< HEAD
+#include <QString>
 
 #include "Controllers/UserConfController.h"
 #include "RepositoryManager.h"
 #include "UserConf.h"
 #include "Views/CourseListView.h"
-=======
-#include <QString>
->>>>>>> cf0f305 (added the ability to add courses + transition)
 #include "CourseModel.h"
+#include "InstructorModel.h"
+
 
 int main(int argc, char* argv[]) {
 
@@ -20,7 +19,10 @@ int main(int argc, char* argv[]) {
     QQmlContext* context = engine.rootContext();
     const QUrl url(u"qrc:/qt/qml/Lumen/qml/Main.qml"_qs);
     CourseModel courseModel;
+    InstructorModel instructorModel;
+
     context->setContextProperty("_courseModel", &courseModel);
+    context->setContextProperty("_instructorModel", &instructorModel);
 
 
     QObject::connect(
@@ -59,7 +61,6 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
-<<<<<<< HEAD
     QObject* courseEditorItem = engine.rootObjects()[0]->children()[1]; //I have no idea why this works
     QObject::connect(courseEditorItem, SIGNAL(removeCourse(int)), &courseModel, SLOT(onRemoveCourse(int)));
     QObject::connect(courseEditorItem, SIGNAL(addCourse(QString,QString,QString,QString)), &courseModel, SLOT(onAddCourse(QString,QString,QString,QString)));
@@ -71,8 +72,4 @@ int main(int argc, char* argv[]) {
     userConf.saveToDisk("user.json");
 
     return retCode;
-=======
-
-    return app.exec();
->>>>>>> 6928b20 (added icons, c++ clots are now called from qml)
 }

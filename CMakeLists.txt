@@ -47,7 +47,9 @@ qt_add_executable(${PROJECT_NAME}
     src/Course.h
     src/CourseModel.h
     src/CourseModel.cpp
-)
+    src/InstructorModel.h
+    src/InstructorModel.cpp
+    src/Instructor.h)
 
 qt_add_resources(${PROJECT_NAME} "configuration"
     PREFIX "/"
@@ -89,6 +91,7 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/CourseEditor.qml
         qml/CardTemplate.qml
         qml/LabeledComboBox.qml
+        qml/InstructorEditor.qml
 )
 
 target_include_directories(${PROJECT_NAME}
