@@ -60,7 +60,7 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/LandPage.qml
         qml/LandPageButton.qml
         qml/ManImage.qml
-        qml/TextLandPage.qml
+        qml/LandPageText.qml
         qml/EditorHomePage.qml
         qml/YellowLinesImage.qml
         qml/LumenLogo.qml

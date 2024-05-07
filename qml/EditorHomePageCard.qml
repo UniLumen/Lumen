@@ -9,7 +9,7 @@ Button {
     text: model.title
 
     background: Rectangle {
-        color: homePageCard.hovered && !moreInfoButton.hovered ? Constants.yellowColor : Constants.whiteColor
+        color: homePageCard.hovered && !moreInfoButton.hovered ? Constants.colorYellowMain : Constants.colorWhitePure
         implicitWidth: 380
         implicitHeight: 420
         radius: 25
@@ -17,7 +17,7 @@ Button {
 
     font {
         pixelSize: 35
-        family: Constants.mainFont
+        family: Constants.fontPoppins
         weight: Font.Bold
     }
 

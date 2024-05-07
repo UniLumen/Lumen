@@ -13,13 +13,13 @@ Button {
 
     font {
         pixelSize: 15
-        family: Constants.mainFont
+        family: Constants.fontPoppins
         weight: Font.Light
     }
 
     icon {
-        source: Constants.moreInfoIconBlackPath
-        color: hovered ? Constants.yellowColor : Constants.blackColor
+        source: Constants.iconInfoBlack
+        color: hovered ? Constants.colorYellowMain : Constants.colorBlackPure
     }
 
     Popup {
@@ -41,7 +41,7 @@ Button {
 
             Image {
                 id: infoIcon
-                source: Constants.moreInfoIconYellowPath
+                source: Constants.iconInfoYellow
                 anchors {
                     top: infoPopup.top
                     horizontalCenter: infoText.horizontalCenter
@@ -55,7 +55,7 @@ Button {
                text: infoPopup.infoText
                font {
                    pixelSize: 20
-                   family: Constants.mainFont
+                   family: Constants.fontPoppins
                    weight: Font.DemiBold
                }
                verticalAlignment: Text.AlignVCenter
@@ -94,16 +94,16 @@ Button {
                 onClicked: infoPopup.close()
 
                 background: Rectangle {
-                   color: closeButton.hovered ? Constants.yellowHoverColor : Constants.yellowColor
+                   color: closeButton.hovered ? Constants.colorYellowEditorPageHover : Constants.colorYellowMain
                    radius: 15
                 }
 
                 contentItem: Text{
                     text: "Close"
-                    color: Constants.whiteColor
+                    color: Constants.colorWhitePure
                     anchors.centerIn: parent
                     font {
-                        family: Constants.mainFont
+                        family: Constants.fontPoppins
                         weight: Font.Bold
                     }
                 }
