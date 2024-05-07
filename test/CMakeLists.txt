@@ -31,6 +31,7 @@ set (MAIN_SOURCE
 
 qt_add_executable(${PROJECT_NAME} ${MAIN_SOURCE}
     JsonSerializationTest.cpp
+    RepositoryTest.cpp
 )
 
 target_include_directories(${PROJECT_NAME} PRIVATE
