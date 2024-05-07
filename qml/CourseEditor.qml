@@ -95,19 +95,6 @@ Item{
                     anchors.fill: parent
                     font.pixelSize: parent.height*0.7
                     leftPadding: 0.05*parent.width
-
-
-                    cursorDelegate: Rectangle{
-                        width: 1
-                        height: parent.font.pixelSize
-                        color: "black"
-
-
-                        anchors{
-                            top: parent.top
-                            bottom: parent.bottom
-                        }
-                    }
                 }
             }
 
