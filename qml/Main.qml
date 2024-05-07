@@ -10,7 +10,7 @@ ApplicationWindow {
     color: Constants.screenBackground
 
 
-    CourseEditor{
+    LocationEditor{
     }
 
 
