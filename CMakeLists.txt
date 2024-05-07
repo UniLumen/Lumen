@@ -1,31 +1,22 @@
 cmake_minimum_required(VERSION 3.21.1)
 
-<<<<<<< HEAD
 project(lumen LANGUAGES CXX)
 
 # Set C++17 Standard
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
-=======
-project(lumenApp LANGUAGES CXX)
->>>>>>> af28fad (Migrate from QtQuick Design Studio project to QtQuick project)
 
 # AUTOMOC must be set to ON (DO NOT CHANGE!!!)
 set(CMAKE_AUTOMOC ON)
 # Auto-embed resources in the target binary
 set(CMAKE_AUTORCC ON)
 
-<<<<<<< HEAD
 find_package(Qt6 6.3 REQUIRED COMPONENTS Core Qml Quick)
-=======
-find_package(Qt6 6.2 REQUIRED COMPONENTS Core Qml Quick)
->>>>>>> af28fad (Migrate from QtQuick Design Studio project to QtQuick project)
 
 if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
     qt_standard_project_setup()
 endif()
 
-<<<<<<< HEAD
 qt_add_executable(${PROJECT_NAME}
     application.qrc
     src/Main.cpp
@@ -54,10 +45,10 @@ qt_add_executable(${PROJECT_NAME}
     src/Models/CourseAttendance.cpp
     src/Controllers/UserConfController.h
     src/Controllers/UserConfController.cpp
+    src/InstructorModel.h
+    src/InstructorModel.cpp
+    src/Instructor.h
 )
-=======
-qt_add_executable(${PROJECT_NAME} src/Main.cpp)
->>>>>>> af28fad (Migrate from QtQuick Design Studio project to QtQuick project)
 
 qt_add_resources(${PROJECT_NAME} "configuration"
     PREFIX "/"
@@ -65,7 +56,6 @@ qt_add_resources(${PROJECT_NAME} "configuration"
         qtquickcontrols2.conf
 )
 
-<<<<<<< HEAD
 set_source_files_properties(qml/Constants.qml
     PROPERTIES
         QT_QML_SINGLETON_TYPE true
@@ -97,6 +87,7 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/KPI.qml
         qml/LumenCard.qml
         qml/UserTabBar.qml
+        qml/CourseEditor.qml
 )
 
 target_include_directories(${PROJECT_NAME}
@@ -104,13 +95,6 @@ target_include_directories(${PROJECT_NAME}
         "./src"
 )
 
-=======
-target_include_directories(${PROJECT_NAME}
-    PRIVATE
-        "./src"
-)
-
->>>>>>> af28fad (Migrate from QtQuick Design Studio project to QtQuick project)
 target_link_libraries(${PROJECT_NAME}
     PRIVATE
         Qt6::Core
@@ -118,5 +102,4 @@ target_link_libraries(${PROJECT_NAME}
         Qt6::Quick
 )
 
-add_subdirectory(qml/)
 add_subdirectory(test/)
