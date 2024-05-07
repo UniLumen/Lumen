@@ -2,45 +2,37 @@
 
 #include <QtCore>
 
-#include "JsonReader.h"
-#include "JsonWriter.h"
+#include "JsonSerializable.h"
 
 namespace Lumen {
-    struct Location {
-        QString name;
-        QString detailedDescription;
+    class Location : public JsonSerializable {
+    public:
+        Location();
+        Location(const QString& name, const QString& description);
+        Location(const QUuid& id, const QString& name, const QString& description);
+
+        QUuid id() const;
+        QString name() const;
+        QString description() const;
+
+        void setName(const QString& name);
+        void setDescription(const QString& description);
+
+        QJsonValue toJson() const override;
+        void fromJson(JsonReader& reader, const QJsonValue& json) override;
 
         inline bool operator==(const Location& other) const {
-            return name == other.name && detailedDescription == other.detailedDescription;
+            return m_name == other.m_name && m_description == other.m_description;
         }
 
         inline bool operator!=(const Location& other) const {
             return !(*this == other);
         }
+
+    private:
+        QUuid m_id;
+        QString m_name;
+        QString m_description;
     };
-
-    static JsonWriter& operator<<(JsonWriter& writer, const Location* data) {
-        writer.includeMetaData(data);
-
-        writer["name"] = data->name;
-        writer["detailedDescription"] = data->detailedDescription;
-
-        return writer;
-    }
-
-    static JsonReader& operator>>(JsonReader& reader, Location* data) {
-        Q_ASSERT(reader.isObject());
-
-        QJsonObject obj = reader.toObject();
-
-        Q_ASSERT(obj.contains("name"));
-        Q_ASSERT(obj.contains("detailedDescription"));
-
-        reader.parseObject(data);
-
-        data->name = obj.value("name").toString();
-        data->detailedDescription = obj.value("detailedDescription").toString();
-
-        return reader;
-    }
 }
+

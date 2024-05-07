@@ -20,19 +20,21 @@ endif()
 qt_add_executable(${PROJECT_NAME}
     application.qrc
     src/Main.cpp
-    src/JsonReader.h
-    src/JsonReader.inl
-    src/JsonReader.cpp
-    src/JsonWriter.h
-    src/JsonWriter.inl
-    src/JsonWriter.cpp
     src/Models/Location.h
+    src/Models/Location.cpp
     src/Models/Doctor.h
+    src/Models/Doctor.cpp
     src/Models/TA.h
+    src/Models/TA.cpp
     src/Models/Course.h
+    src/Models/Course.cpp
+    src/Models/Lecture.h
+    src/Models/Lecture.cpp
+    src/Models/Section.h
+    src/Models/Section.cpp
     src/Models/Models.h
-    src/Repository.h 
-    src/Repository.inl
+    src/JsonSerializable.h
+    src/JsonReader.h
     src/RepositoryManager.h
     src/RepositoryManager.cpp
 )
