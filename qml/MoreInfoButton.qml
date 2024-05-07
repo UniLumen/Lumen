@@ -3,6 +3,9 @@ import QtQuick.Controls
 
 Button {
     id: moreInfoButton
+
+    property alias infoPopupText: infoPopup.infoTextContent
+
     hoverEnabled: true
 
     onClicked: infoPopup.open()
@@ -24,6 +27,9 @@ Button {
 
     Popup {
         id: infoPopup
+
+        property string infoTextContent;
+
         // This sets the parent of the pop-up always as the main screen being displayed
         parent: Overlay.overlay
         anchors.centerIn: parent
@@ -31,7 +37,6 @@ Button {
         modal: true
         focus: true
         closePolicy: Popup.NoAutoClose
-        property string infoText: model.infoText
 
         contentItem: Item{
             implicitHeight: infoText.height + infoIcon.height + seperatorLine.height +
@@ -52,7 +57,7 @@ Button {
 
             Text {
                id: infoText
-               text: infoPopup.infoText
+               text: infoPopup.infoTextContent
                font {
                    pixelSize: 20
                    family: Constants.fontPoppins

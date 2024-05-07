@@ -4,9 +4,10 @@ import QtQuick.Controls
 Button {
     id: homePageCard
 
+    property alias infoText: moreInfoButton.infoPopupText
+
     display: AbstractButton.TextUnderIcon
     hoverEnabled: true
-    text: model.title
 
     background: Rectangle {
         color: homePageCard.hovered && !moreInfoButton.hovered ? Constants.colorYellowMain : Constants.colorWhitePure
@@ -24,7 +25,6 @@ Button {
     icon {
         height: 94
         width: 73
-        source: model.iconPath
     }
 
     MoreInfoButton {

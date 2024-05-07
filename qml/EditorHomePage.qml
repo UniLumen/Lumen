@@ -4,8 +4,8 @@ import QtQuick.Layouts
 
 Item {
     id: editorHomePage
-    width: Constants.widthDefault
-    height: Constants.heightDefault
+    implicitWidth: Constants.widthDefault
+    implicitHeight: Constants.heightDefault
 
     LumenLogo {
         id: lumenLogo
@@ -75,7 +75,11 @@ Item {
 
         Repeater {
             model: cardsModel
-            delegate: EditorHomePageCard {}
+            delegate: EditorHomePageCard {
+                text: model.title
+                icon.source: model.iconPath
+                infoText: model.infoText
+            }
         }
     }
 }
