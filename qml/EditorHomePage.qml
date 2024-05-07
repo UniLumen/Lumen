@@ -2,15 +2,14 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-Rectangle {
+Item {
     id: editorHomePage
-    width: Constants.editorWindowWidth
-    height: Constants.editorWindowHeight
-    color: Constants.darkBackgroundColor
+    width: Constants.widthDefault
+    height: Constants.heightDefault
 
-    YellowLinesImage {id: yellowLinesImage}
-
-    LumenLogo {id: lumenLogo}
+    LumenLogo {
+        id: lumenLogo
+    }
 
     EditorTabBar {
         id: editorTabBar
@@ -25,7 +24,7 @@ Rectangle {
 
     TitleWithUnderline {
         id: titleWithUnderline
-        title: Constants.editorWelcomeText
+        title: Constants.textEditorPageTitle
         anchors{
             top: lumenLogo.bottom
             topMargin: 100
@@ -46,12 +45,12 @@ Rectangle {
         ListElement {
             title: "Add Doctors/TAs"
             iconPath: "qrc:/images/instructor_icon.svg"
-            infoText: "Here you can input all the\nDoctors and TAs available\nat your university"
+            infoText: "Here you can input all the\ndoctors and TAs available\nat your university"
         }
         ListElement {
             title: "Add Courses"
             iconPath: "qrc:/images/course_icon.svg"
-            infoText: "Here you can input all the\nCourses available\nat your university"
+            infoText: "Here you can input all the\ncourses available\nat your university"
         }
         ListElement {
             title: "Add Schedules"

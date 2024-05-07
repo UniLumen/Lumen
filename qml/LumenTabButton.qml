@@ -6,18 +6,18 @@ TabButton {
 
     // Sets the color of the text
     // when button is NOT clicked
-    Material.foreground: Constants.whiteColor
+    Material.foreground: Constants.colorWhitePure
     // when button is clicked
-    Material.accent: Constants.yellowColor
+    Material.accent: Constants.colorYellowMain
     font {
         pixelSize: 30
-        family: Constants.mainFont
+        family: Constants.fontPoppins
         weight: Font.Thin
     }
 
     icon {
-        Material.foreground: Constants.whiteColor
-        Material.accent: Constants.yellowColor
+        Material.foreground: Constants.colorWhitePure
+        Material.accent: Constants.colorYellowMain
         height: 35
         width: 33
     }

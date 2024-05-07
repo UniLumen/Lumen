@@ -8,6 +8,8 @@ import Lumen
 Item {
     id: landPage
 
+    LumenLogo {}
+
     RowLayout {
         anchors.fill: parent
         spacing: 5
@@ -19,36 +21,33 @@ Item {
 
             ColumnLayout{
                 RowLayout{
-                    TextLandPage {
+                    LandPageText {
                         text: "Schedule "
                     }
-
-                    TextLandPage {
+                    LandPageText {
                         text: "optimized!"
-                        color:  Constants.yellowLandPageColor
+                        color:  Constants.colorYellowMain
                     }
                 }
 
                 RowLayout{
-                    TextLandPage {
+                    LandPageText {
                         text: "Brain power"
                     }
-
-                    TextLandPage {
+                    LandPageText {
                         text: "maximized!"
-                        color:  Constants.yellowLandPageColor
+                        color:  Constants.colorYellowMain
                     }
                 }
             }
 
             ColumnLayout{
-                TextLandPage {
+                LandPageText {
                     text: "Unleash your brain power."
                     font.pointSize: 20
                     font.bold: false
                 }
-
-                TextLandPage {
+                LandPageText {
                     text: "Build your ideal class schedule in minutes."
                     font.pointSize: 20
                     font.bold: false
@@ -59,21 +58,21 @@ Item {
                 spacing : 20
 
                 LandPageButton {
-                    id: editorButton
-
-                    backgroundColor: editorButton.hovered ? Constants.yellowLandPageColor : Constants.whiteLandPageButtonColor
-                    textContent:  "Enter as an editor"
-                    borderColor: Constants.backgroundDarkColor
-                    textColor: Constants.backgroundDarkColor
+                    id: userButton
+                    backgroundColor: userButton.hovered ? Constants.colorYellowMain : Constants.colorWhiteLandPageButton
+                    textContent:  "Enter as a user"
+                    borderColor: Constants.colorBackground
+                    textColor: Constants.colorBackground
                 }
 
                 LandPageButton{
-                    id: userButton
+                    id: editorButton
+                    backgroundColor: editorButton.hovered ? Constants.colorYellowMain : Constants.colorBackground
+                    textContent: " Enter as an editor "
+                    borderColor: editorButton.hovered ? Constants.colorBackground : Constants.colorWhiteLandPageButton
+                    textColor: editorButton.hovered ? Constants.colorBlackPure : Constants.colorWhiteLandPageButton
 
-                    backgroundColor: userButton.hovered ? Constants.yellowLandPageColor: Constants.backgroundDarkColor
-                    textContent: " Enter as a user "
-                    borderColor: Constants.whiteLandPageButtonColor
-                    textColor: Constants.whiteLandPageButtonColor
+                    onClicked: mainLoader.source = "EditorHomePage.qml"
                 }
             }
         }
@@ -82,7 +81,7 @@ Item {
             id: manImage
 
             Layout.alignment: Qt.AlignCenter
-            Layout.margins:20
+            Layout.margins: 20
         }
     }
 }

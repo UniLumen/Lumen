@@ -19,27 +19,27 @@ TabBar {
 
     LumenTabButton {
         // Space is added as a hacky way to add a margin between icon and text
-        text: Constants.dashboardTabText
-        icon.source: Constants.homePageIconPath
+        text: Constants.textDashboardTab
+        icon.source: Constants.iconHome
     }
 
     LumenTabButton {
-        text: Constants.locationsTabText
-        icon.source: Constants.locationIconPath
+        text: Constants.textLocationsTab
+        icon.source: Constants.iconLocation
     }
 
     LumenTabButton {
-        text: Constants.instructorsTabtext
-        icon.source: Constants.instructorIconPath
+        text: Constants.textInstructorsTab
+        icon.source: Constants.iconInstructor
     }
 
     LumenTabButton {
-        text: Constants.coursesTabText
-        icon.source: Constants.coursesIconPath
+        text: Constants.textCoursesTab
+        icon.source: Constants.iconCourse
     }
 
     LumenTabButton {
-        text: Constants.schedulesTabText
-        icon.source: Constants.scheduleIconPath
+        text: Constants.textSchedulesTab
+        icon.source: Constants.iconSchedule
     }
 }

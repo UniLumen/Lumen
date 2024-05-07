@@ -7,11 +7,11 @@ Item {
     Text {
         id: titleText
         font {
-            family: Constants.mainFont
+            family: Constants.fontPoppins
             pixelSize: 45
             weight: Font.ExtraBold
         }
-        color: Constants.whiteColor
+        color: Constants.colorWhitePure
         anchors {
             left: parent.left
             top: parent.top
@@ -22,7 +22,7 @@ Item {
         height: titleText.height / 4
         width: titleText.width / 4
         radius: 8
-        color: Constants.yellowColor
+        color: Constants.colorYellowMain
         anchors {
             top: titleText.bottom
             topMargin: 10
