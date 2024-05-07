@@ -5,6 +5,8 @@
 #include <QDebug>
 #include <QString>
 #include "CourseModel.h"
+#include "InstructorModel.h"
+
 
 int main(int argc, char* argv[]) {
 
@@ -15,7 +17,10 @@ int main(int argc, char* argv[]) {
     QQmlContext *context = engine.rootContext();
 
     CourseModel courseModel;
+    InstructorModel instructorModel;
+
     context->setContextProperty("_courseModel", &courseModel);
+    context->setContextProperty("_instructorModel", &instructorModel);
 
 
     QObject::connect(
