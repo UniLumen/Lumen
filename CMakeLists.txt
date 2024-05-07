@@ -95,6 +95,7 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/CardTemplate.qml
         qml/LabeledComboBox.qml
         qml/InstructorEditor.qml
+        qml/LocationEditor.qml
 )
 
 target_include_directories(${PROJECT_NAME}
