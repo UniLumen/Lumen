@@ -24,7 +24,7 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 public slots:
-    void onAddCourse(QString name, QString year, QString dept, QString credits);
+    void onAddCourse(QString name, QString year, QString dept, QString credits, bool hasLab, bool hasTutorial);
     void onRemoveCourse(int index);
 
 

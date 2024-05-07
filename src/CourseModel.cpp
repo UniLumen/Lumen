@@ -6,11 +6,11 @@ CourseModel::CourseModel(QObject *parent):
     //TO DO: should have constructor load data from JSON file
     //for now I will add dummy data to the vector
 
-    Course c1("ds", 3, 2,"general");
-    Course c2("algo", 3, 2,"general");
-    Course c3("OOP", 3, 2,"general");
-    Course c4("suiii", 3, 2,"general");
-    Course c5("suiii2", 3, 2,"general");
+    Course c1("ds", 3, 2,"general", 0 , 1);
+    Course c2("algo", 3, 2,"general", 0 , 1);
+    Course c3("OOP", 3, 2,"general", 0 , 1);
+    Course c4("suiii", 3, 2,"general", 0 , 1);
+    Course c5("suiii2", 3, 2,"general", 0 , 1);
 
 
     m_data.push_back(c1);
@@ -64,11 +64,11 @@ void CourseModel::onRemoveCourse(int index){
     endRemoveRows();
 }
 
-void CourseModel::onAddCourse(QString name, QString year, QString dept, QString credits){
+void CourseModel::onAddCourse(QString name, QString year, QString dept, QString credits, bool hasLab, bool hasTutorial){
     beginInsertRows(QModelIndex(),m_data.size(), m_data.size());
-    m_data.push_back(Course(name, credits.toInt(), year.toInt(), dept));
+    m_data.push_back(Course(name, credits.toInt(), year.toInt(), dept, hasLab, hasTutorial));
     endInsertRows();
-    qDebug() << "adding subject: " + name + " " + year + " " + dept + " " + credits;
+    qDebug() << "adding subject: " + name + " " + year + " " + dept + " " + credits + " hasLab: "  + QString::number(hasLab) + "hasTutorial: " + QString::number(hasTutorial);
 
 }
 
