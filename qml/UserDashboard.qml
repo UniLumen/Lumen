@@ -10,6 +10,7 @@ Item {
     property int _cellMarginX: 15
     property int _cellMarginY: 25
     property real _splitValue: 0.5
+    property bool _editMode: false
 
     RowLayout {
         anchors.fill: parent
@@ -29,7 +30,7 @@ Item {
                 Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)
 
                 text: qsTr("My Courses")
-                color: Constants.foreground
+                color: Constants.colorWhitePure
                 font.bold: true
                 font.pixelSize: Constants.sizeHeader1
                 minimumPixelSize: Constants.sizeHeader6
@@ -46,22 +47,25 @@ Item {
 
                 clip: true
 
-                model: 10
+                model: __userModel
                 delegate: LumenCard {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
                     _iconSource: Constants.iconCourse
-                    _text: "Course Name"
-                    _helpText: "CS50"
-                    _description: "Course hours: " + 3
+                    _text: model.title
+                    _helpText: model.code
+                    _description: "Course hours: " + model.creditHours
+
+                    onDeleteInvoked: {
+                        __userModel.removeCourseRequest(model.index)
+                    }
 
                     width: _cardWidth
                     height: _cardHeight
                 }
             }
         }
-
 
         // KPIs
         ColumnLayout {
@@ -71,21 +75,36 @@ Item {
 
             spacing: _headerSpacing
 
-            Text {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)
+            RowLayout {
+                Text {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)
 
-                text: qsTr("Selection KPIs")
-                color: Constants.foreground
-                font.bold: true
-                font.pixelSize: Constants.sizeHeader1
-                minimumPixelSize: Constants.sizeHeader6
-                fontSizeMode: Text.Fit
-                wrapMode: Text.WordWrap
+                    text: qsTr("Selection KPIs")
+                    color: Constants.colorWhitePure
+                    font.bold: true
+                    font.pixelSize: Constants.sizeHeader1
+                    minimumPixelSize: Constants.sizeHeader6
+                    fontSizeMode: Text.Fit
+                    wrapMode: Text.WordWrap
+                }
+
+                Button {
+                    icon {
+                        source: Constants.iconEdit
+                        color: down ? Constants.colorYellowMain : Constants.colorWhitePure
+                    }
+
+                    flat: true
+                    background: null
+                    onClicked: _editMode = !_editMode
+                }
             }
 
             KPI {
+                id: kpi
+
                 Layout.fillHeight: true
                 Layout.fillWidth: true
             }

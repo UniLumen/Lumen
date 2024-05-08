@@ -10,6 +10,8 @@ Item {
     property alias _text: cText.text
     property alias _description: cDescription.text
     property string _helpText: ""
+    property int _modelIndex: -1
+    signal deleteInvoked
 
     LumenRectangle {
         anchors.fill: parent
@@ -25,11 +27,40 @@ Item {
 
                 spacing: 32
 
-                Image {
-                    id: cIcon
+                RowLayout {
+                    Layout.fillWidth: true
 
-                    sourceSize: Constants.sizeNormal
-                    fillMode: Image.PreserveAspectFit
+                    Image {
+                        id: cIcon
+
+                        sourceSize: Constants.sizeNormal
+                        fillMode: Image.PreserveAspectFit
+                    }
+
+                    Item {
+                        Layout.fillWidth: true
+                    }
+
+                    Button {
+                        id: cDelete
+
+                        Layout.preferredHeight: cIcon.height
+
+                        // Stupid Matrial Style likes to add extra padding!
+                        // This is bad
+                        contentItem: Image {
+                            anchors.top: parent.top
+                            anchors.bottom: parent.bottom
+                            anchors.right: parent.right
+
+                            source: Constants.iconRemove
+                            fillMode: Image.PreserveAspectFit
+                        }
+
+                        background: null
+                        onClicked: deleteInvoked()
+                        visible: _editMode
+                    }
                 }
 
                 Text {
@@ -62,7 +93,7 @@ Item {
 
                 Layout.alignment: Qt.AlignBottom
 
-                source: Constants.iconInfo
+                source: Constants.iconInfoBlack
                 sourceSize: Constants.sizeSmall
                 fillMode: Image.PreserveAspectFit
 

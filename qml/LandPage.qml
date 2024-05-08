@@ -63,6 +63,8 @@ Item {
                     textContent:  "Enter as a user"
                     borderColor: Constants.colorBackground
                     textColor: Constants.colorBackground
+
+                    onClicked: mainLoader.source = "UserDashboard.qml"
                 }
 
                 LandPageButton{

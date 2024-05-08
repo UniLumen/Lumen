@@ -37,6 +37,10 @@ qt_add_executable(${PROJECT_NAME}
     src/JsonReader.h
     src/RepositoryManager.h
     src/RepositoryManager.cpp
+    src/Views/CourseListView.h
+    src/Views/CourseListView.cpp
+    src/UserConf.h
+    src/UserConf.cpp
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"

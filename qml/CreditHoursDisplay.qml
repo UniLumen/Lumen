@@ -30,7 +30,7 @@ ColumnLayout {
         Layout.bottomMargin: 14
 
         radius: 100
-        color: Constants.background
+        color: Constants.colorBackground
 
         Text {
             anchors {
@@ -63,7 +63,7 @@ ColumnLayout {
             height: parent.height
             radius: parent.radius
             width: parent.width * Math.max(0, (_value - _from) / (_to - _from))
-            color: (_value >= _from && _value <= _to) ? Constants.accent : Constants.alertRed
+            color: (_value >= _from && _value <= _to) ? Constants.colorYellowMain : Constants.colorRed
 
             Text {
                 anchors {

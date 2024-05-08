@@ -3,9 +3,9 @@ import QtQuick.Layouts
 import QtQuick.Controls
 
 Item {
-    LumenRectangle {
-        id: root
+    id: root
 
+    LumenRectangle {
         anchors {
             left: parent.left
             right: parent.right
@@ -30,35 +30,86 @@ Item {
             }
 
             CreditHoursDisplay {
-                // _from: __courseModel.minCreditHours
-                // _to: __courseModel.maxCreditHours
-                // _value: __courseModel.creditHours
+                _from: __userModel.minCreditHours
+                _to: __userModel.maxCreditHours
+                _value: __userModel.creditHours
             }
 
             Text {
                 Layout.fillWidth: true
 
-                // text: __courseModel.errorFormated
-                // visible: __courseModel.errorFormated
+                text: __userModel.error
+                visible: __userModel.error
                 font.bold: true
                 font.pixelSize: Constants.sizePrimaryText
                 minimumPixelSize: Constants.sizeHeader6
                 fontSizeMode: Text.Fit
                 wrapMode: Text.WordWrap
-                color: Constants.alertRed
+                color: Constants.colorRed
             }
 
             Text {
                 Layout.fillWidth: true
 
-                // text:  __courseModel.noteFormated
-                // visible: __courseModel.noteFormated && !(__courseModel.errorFormated)
+                text:  __userModel.note
+                visible: __userModel.note && !(__userModel.error)
                 font.bold: true
                 font.pixelSize: Constants.sizePrimaryText
                 minimumPixelSize: Constants.sizeHeader6
                 fontSizeMode: Text.Fit
                 wrapMode: Text.WordWrap
-                color: Constants.accent
+                color: Constants.colorYellowMain
+            }
+
+            ColumnLayout {
+                Layout.fillWidth: true
+                spacing: 4
+
+                Text {
+                    Layout.fillWidth: true
+
+                    text: "Course Name"
+                    font.bold: true
+                    font.pixelSize: Constants.sizeHeader2
+                    minimumPixelSize: Constants.sizeHeader6
+                    fontSizeMode: Text.Fit
+                    wrapMode: Text.WordWrap
+
+                    visible: _editMode
+                }
+
+                ComboBox {
+                    id: cComboBox
+
+                    model:  __courseModel
+                    textRole: "title"
+                    valueRole: "id"
+                    visible: _editMode
+                }
+            }
+
+            Button {
+                Layout.fillHeight: true
+                Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+                padding: 10;
+                visible: _editMode
+
+                contentItem: Text {
+                    text: "Add Course"
+                    font.bold: true
+                    font.pixelSize: Constants.sizePrimaryText
+                    minimumPixelSize: Constants.sizeHeader6
+                    fontSizeMode: Text.Fit
+                    wrapMode: Text.WordWrap
+                }
+
+                background: LumenRectangle {
+                    color: Constants.colorYellowMain
+                }
+
+                onClicked: {
+                    __userModel.addCourseRequest(cComboBox.currentValue)
+                }
             }
         }
     }

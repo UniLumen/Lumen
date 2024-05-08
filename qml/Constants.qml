@@ -20,6 +20,7 @@ QtObject {
     readonly property string colorWhitePure: "#FFFFFF"
     readonly property string colorBlackPure: "#000000"
     readonly property string colorWhiteLandPageButton: "#D9D9D9"
+    readonly property color colorRed: "#9C2321"
     // Dimensions
     readonly property int widthDefault: Screen.width - 100
     readonly property int heightDefault: Screen.height - 100
@@ -35,6 +36,8 @@ QtObject {
     readonly property string iconCourse: "qrc:/images/course_icon.svg"
     readonly property string iconSchedule: "qrc:/images/schedule_icon.svg"
     readonly property url iconKpi: "qrc:/images/icon_kpi.svg"
+    readonly property url iconEdit: "qrc:/images/icon_edit.svg"
+    readonly property url iconRemove: "qrc:/images/icon_remove.svg"
 
     readonly property int sizeHeader1: 32
     readonly property int sizeHeader2: 24
