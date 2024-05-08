@@ -59,27 +59,30 @@ Item {
         }
     }
 
-    GridLayout {
+    GridView {
         id: cardsGrid
-        rows: 1
-        columns: 4
-        columnSpacing: 20
+
+        cellWidth: 440
+        cellHeight: 440
+        width: cellWidth * 4
+        height: cellHeight
 
         anchors {
             left: parent.left
-            leftMargin: 40
+            leftMargin: 60
             right: parent.right
             top: titleWithUnderline.bottom
             topMargin: 150
         }
 
-        Repeater {
-            model: cardsModel
-            delegate: EditorHomePageCard {
-                text: model.title
-                icon.source: model.iconPath
-                infoText: model.infoText
-            }
+        model: cardsModel
+
+        delegate: EditorHomePageCard {
+            text: model.title
+            icon.source: model.iconPath
+            infoText: model.infoText
         }
+
+        clip: true
     }
 }

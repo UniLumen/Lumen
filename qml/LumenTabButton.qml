@@ -5,10 +5,11 @@ TabButton {
     id: lumenTabButton
 
     // Sets the color of the text
-    // when button is NOT clicked
+    // When button is NOT clicked
     Material.foreground: Constants.colorWhitePure
-    // when button is clicked
+    // When button is clicked
     Material.accent: Constants.colorYellowMain
+
     font {
         pixelSize: 30
         family: Constants.fontPoppins
