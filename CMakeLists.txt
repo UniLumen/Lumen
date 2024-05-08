@@ -61,6 +61,8 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/LandPageButton.qml
         qml/ManImage.qml
         qml/TextLandPage.qml
+        qml/TableRow.qml
+        qml/TestTable.qml
 )
 
 target_include_directories(${PROJECT_NAME}
