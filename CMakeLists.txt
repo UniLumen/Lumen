@@ -20,9 +20,25 @@ endif()
 qt_add_executable(${PROJECT_NAME}
     application.qrc
     src/Main.cpp
-    src/schedule.h src/schedule.cpp
-    src/timeslot.h src/timeslot.cpp
-
+    src/schedule.h
+    src/schedule.cpp
+    src/timeslot.h
+    src/timeslot.cpp
+    src/JsonReader.h
+    src/JsonReader.inl
+    src/JsonReader.cpp
+    src/JsonWriter.h
+    src/JsonWriter.inl
+    src/JsonWriter.cpp
+    src/Models/Location.h
+    src/Models/Doctor.h
+    src/Models/TA.h
+    src/Models/Course.h
+    src/Models/Models.h
+    src/Repository.h 
+    src/Repository.inl
+    src/RepositoryManager.h
+    src/RepositoryManager.cpp
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"
@@ -56,6 +72,8 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/SchedulesTabs.qml
         qml/ScheduleTabButton.qml
         qml/Temp.qml
+        qml/TableRow.qml
+        qml/TestTable.qml
 )
 
 target_include_directories(${PROJECT_NAME}
