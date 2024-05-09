@@ -17,6 +17,9 @@ Item{
             anchors.fill: parent
             onPressed: {
                 timeSlots.numOfModels = timeSlots.numOfModels + 7
+                console.log(model.index)
+                if(model.index)
+                    console.log("sat")
             }
         }
     }
