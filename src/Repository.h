@@ -5,7 +5,7 @@
 #include "JsonSerializable.h"
 
 namespace Lumen {
-    template <typename V>
+    template <typename K, typename V>
     class Repository : public JsonSerializable {
     public:
         Repository() = default;
@@ -14,13 +14,17 @@ namespace Lumen {
             m_dataMap.clear();
         }
 
-        virtual void insert(V* value);
+        virtual void insert(const K& key, V* value);
         template <typename... Args>
-        V* insert(Args... args);
+        V* insert(const K& key, Args... args);
 
         virtual QList<V*> getAll();
-        virtual bool contains(V* value);
-        virtual size_t remove(V* value);
+        virtual V* get(const K& key);
+        virtual bool contains(const K& key);
+        virtual size_t remove(const K& key);
+
+        template <typename Predicate>
+        size_t removeIf(Predicate pred);
 
         QJsonValue toJson() const override {
             QJsonArray arr;
@@ -34,16 +38,15 @@ namespace Lumen {
             Q_ASSERT(json.isArray());
 
             QJsonArray arr = json.toArray();
-            m_dataMap.reserve(arr.count());
             for (auto v : arr) {
                 V* vPtr = new V();
                 vPtr->fromJson(reader, v);
-                m_dataMap.insert(vPtr);
+                m_dataMap.insert(vPtr->id(), vPtr);
             }
         }
 
     private:
-        QSet<V*> m_dataMap;
+        QMap<K, V*> m_dataMap;
     };
 }
 

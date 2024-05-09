@@ -20,10 +20,10 @@ namespace Lumen {
         void saveToDisk(const QString& file);
 
     public:
-        Repository<Location> locationRepo;
-        Repository<Doctor> doctorRepo;
-        Repository<TA> taRepo;
-        Repository<Course> courseRepo;
+        Repository<QUuid, Location> locationRepo;
+        Repository<QUuid, Doctor> doctorRepo;
+        Repository<QUuid, TA> taRepo;
+        Repository<QUuid, Course> courseRepo;
 
     private:
         RepositoryManager() = default;
