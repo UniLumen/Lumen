@@ -12,14 +12,24 @@
 namespace Lumen {
     class Course : public JsonSerializable {
     public:
+        enum CourseComponents {
+            LectureComponent = 1 << 0,
+            LabComponent = 1 << 1,
+            TutorialComponent = 1 << 2
+        };
+
         Course();
-        Course(const QString& name, const QString& code, int creditHours);
-        Course(const QUuid& id, const QString& name, const QString& code, int creditHours);
+        Course(const QString& name, const QString& code, int creditHours, unsigned int courseComponents = LectureComponent);
+        Course(const QUuid& id, const QString& name, const QString& code, int creditHours,
+               unsigned int courseComponents = LectureComponent);
 
         QUuid id() const;
         QString name() const;
         QString code() const;
         int creditHours() const;
+        bool hasLecture() const;
+        bool hasLab() const;
+        bool hasTutorial() const;
         QList<Lecture> lectures() const;
         QList<Section> sections() const;
         QList<const Doctor*> doctors() const;
@@ -27,6 +37,7 @@ namespace Lumen {
         void setName(const QString& name);
         void setCode(const QString& code);
         bool setCreditHours(int creditHours);
+        void setCourseComponents(unsigned int components);
 
         QJsonValue toJson() const override;
         void fromJson(JsonReader& reader, const QJsonValue& json) override;
@@ -47,6 +58,7 @@ namespace Lumen {
         QString m_name;
         QString m_code;
         int m_creditHours;
+        unsigned int m_courseComponents;
         QVector<Lecture> m_lectures;
         QVector<Section> m_sections;
         QVector<const Doctor*> m_doctors;
