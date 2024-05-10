@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 Item{
     id: schedule
@@ -8,18 +9,58 @@ Item{
     height: timeSlots.height
     Rectangle {
         id: daySlot
-        color: "green"
+        color: "white"
         border.width: 1
+        border.color: "#828282"
         width: parent.width / 8
         height: timeSlotHeight * Math.ceil(timeSlots.numOfModels / 7) //* timeSlots.rows
         anchors.left: parent.left
         MouseArea {
             anchors.fill: parent
             onPressed: {
-                timeSlots.numOfModels = timeSlots.numOfModels + 7
                 console.log(model.index)
                 if(model.index)
                     console.log("sat")
+            }
+        }
+        Text {
+            id: dayText
+            text: model.name
+            font.pixelSize: model.fontSize
+            font.bold: true
+            anchors{
+                horizontalCenter: parent.horizontalCenter
+                verticalCenter: parent.verticalCenter
+            }
+        }
+        Row{
+            spacing: 5
+            width: 70
+            height: 30
+            anchors{
+                top: dayText.bottom
+                topMargin: 5
+                horizontalCenter: parent.horizontalCenter
+            }
+            Image {
+                source: Constants.addButtonPath
+                width: 30
+                height: 30
+                MouseArea{
+                    anchors.fill: parent
+                    onPressed: timeSlots.numOfModels = timeSlots.numOfModels + 7
+                }
+            }
+            Image {
+                source: Constants.removeButtonPath
+                width: 30
+                height: 30
+                MouseArea{
+                    anchors.fill: parent
+                    onPressed:{
+                        if(timeSlots.numOfModels > 7)
+                            timeSlots.numOfModels = timeSlots.numOfModels - 7}
+                }
             }
         }
     }
@@ -46,7 +87,7 @@ Item{
                     anchors.fill: parent
                     onPressed: {
                         console.log(model.index % 7)
-                        timeSlots.numOfModels = timeSlots.numOfModels - 7
+                        console.log(timeSlots.numOfModels)
                     }
                 }
             }

@@ -73,7 +73,9 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/ScheduleTabButton.qml
         qml/Temp.qml
         qml/TableRow.qml
-        qml/TestTable.qml
+        qml/TableSchedule.qml
+        qml/FixedRow.qml
+        qml/TestWholeTable.qml
 )
 
 target_include_directories(${PROJECT_NAME}
