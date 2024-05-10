@@ -1,29 +1,45 @@
 #include "UserConf.h"
 
-#include "RepositoryManager.h"
+#include "JsonReader.h"
+#include "Models/CourseAttendance.h"
 
 namespace Lumen {
 
-    QList<const Course*> UserConf::courses() {
-        return m_course.values();
+    UserConf::~UserConf() {
+        for (auto& ca : m_attendances) {
+            emit courseAttendanceRemoved(ca);
+        }
+        qDeleteAll(m_attendances);
     }
 
-    void UserConf::addCourse(const Course* course) {
-        if (m_course.contains(course)) {
+    QList<const CourseAttendance*> UserConf::courseAttendances() {
+        return m_attendances.values();
+    }
+
+    void UserConf::addCourseAttendance(const CourseAttendance* ca) {
+        // This is bad
+        for (auto& c : m_attendances) {
+            if (*c == *ca) {
                 return;
+            }
         }
 
-        m_course.insert(course);
-        emit courseAdded(course);
-    }
-
-    void UserConf::removeCourse(const Course* course) {
-        if (!m_course.contains(course)) {
+        if (m_attendances.contains(ca)) {
             return;
         }
 
-        m_course.remove(course);
-        emit courseRemoved(course);
+        m_attendances.insert(ca);
+        emit courseAttendanceAdded(ca);
+    }
+
+    void UserConf::removeCourseAttendance(const CourseAttendance* ca) {
+        if (!m_attendances.contains(ca)) {
+            return;
+        }
+
+        m_attendances.remove(ca);
+        emit courseAttendanceRemoved(ca);
+        delete ca;
     }
 
     void UserConf::loadFromMemory(const QByteArray& data) {
@@ -31,11 +47,13 @@ namespace Lumen {
 
         Q_ASSERT(root.contains("courses"));
 
+        JsonReader reader;
         QJsonArray arr = root.value("courses").toArray();
         for (const auto& v : arr) {
-            QUuid id = QUuid::fromString(v.toString());
-            Course* course = RepositoryManager::instance().courseRepo.get(id);
-            addCourse(course);
+            CourseAttendance* ca = new CourseAttendance();
+
+            ca->fromJson(reader, v);
+            addCourseAttendance(ca);
         }
     }
 
@@ -58,8 +76,8 @@ namespace Lumen {
             QJsonObject json;
 
             QJsonArray arr;
-            for (const auto& c : m_course) {
-                arr.push_back(c->id().toString());
+            for (const auto& a : m_attendances) {
+                arr.push_back(a->toJson());
             }
             json["courses"] = arr;
 

@@ -2,7 +2,7 @@
 
 CourseListView::CourseListView(QObject* parent) : QAbstractListModel(parent) {}
 
-CourseListView::CourseListView(const QList<Course*>& courses, QObject* parent) : QAbstractListModel(parent) {
+CourseListView::CourseListView(const QList<ICourse*>& courses, QObject* parent) : QAbstractListModel(parent) {
     for (const auto& c : courses) {
         m_courses.push_back(c);
     }
@@ -10,7 +10,7 @@ CourseListView::CourseListView(const QList<Course*>& courses, QObject* parent) :
     validate();
 }
 
-CourseListView::CourseListView(const QList<const Course*>& courses, QObject* parent)
+CourseListView::CourseListView(const QList<const ICourse*>& courses, QObject* parent)
     : QAbstractListModel(parent), m_courses(courses) {
     validate();
 }
@@ -34,7 +34,7 @@ QVariant CourseListView::data(const QModelIndex& index, int role) const {
         return QVariant();
     }
 
-    const Course* course = m_courses.at(index.row());
+    const ICourse* course = m_courses.at(index.row());
     switch (role) {
         case IdRole:
             return course->id();
@@ -44,6 +44,12 @@ QVariant CourseListView::data(const QModelIndex& index, int role) const {
             return course->code();
         case CreditHours:
             return course->creditHours();
+        case hasLecture:
+            return course->hasLecture();
+        case hasLab:
+            return course->hasLab();
+        case hasTutorial:
+            return course->hasTutorial();
     }
 
     return QVariant();
@@ -54,13 +60,16 @@ QHash<int, QByteArray> CourseListView::roleNames() const {
         {     IdRole,          "id"},
         {  TitleRole,       "title"},
         {   CodeRole,        "code"},
-        {CreditHours, "creditHours"}
+        {CreditHours, "creditHours"},
+        { hasLecture,  "hasLecture"},
+        {     hasLab,      "hasLab"},
+        {hasTutorial, "hasTutorial"}
     };
 
     return mapping;
 }
 
-void CourseListView::setCourses(const QList<Course*>& courses) {
+void CourseListView::setCourses(const QList<const ICourse*>& courses) {
     beginResetModel();
     m_courses.clear();
     for (const auto& c : courses) {
@@ -86,7 +95,7 @@ void CourseListView::setMaxCreditHours(int maxCreditHours) {
     emit creditHoursChanged();
 }
 
-void CourseListView::addCourse(const Course* course) {
+void CourseListView::addCourse(const ICourse* course) {
     int index = m_courses.count();
 
     beginInsertRows(QModelIndex(), index, index);
@@ -97,12 +106,12 @@ void CourseListView::addCourse(const Course* course) {
     validate();
 }
 
-const Course* CourseListView::removeCourse(int index) {
+const ICourse* CourseListView::removeCourse(int index) {
     if (index < 0 || index >= m_courses.count()) {
         return nullptr;
     }
 
-    const Course* course = m_courses.at(index);
+    const ICourse* course = m_courses.at(index);
 
     beginRemoveRows(QModelIndex(), index, index);
     m_courses.removeAt(index);
@@ -114,7 +123,7 @@ const Course* CourseListView::removeCourse(int index) {
     return course;
 }
 
-const Course* CourseListView::removeCourse(const Course* course) {
+const ICourse* CourseListView::removeCourse(const ICourse* course) {
     int index = m_courses.indexOf(course);
     return removeCourse(index);
 }

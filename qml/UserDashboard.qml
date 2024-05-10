@@ -77,7 +77,10 @@ Item {
                     _iconSource: Constants.iconCourse
                     _text: model.title
                     _helpText: model.code
-                    _description: "Course hours: " + model.creditHours
+                    _description: "Course hours: " + model.creditHours +
+                                  "\nAttend Lecture: " + model.hasLecture +
+                                  "\nAttend Lab: " + model.hasLab +
+                                  "\nAttend Tutorial: " + model.hasTutorial
 
                     onDeleteInvoked: {
                         __userModel.removeCourseRequest(model.index)

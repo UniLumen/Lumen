@@ -41,6 +41,10 @@ qt_add_executable(${PROJECT_NAME}
     src/Views/CourseListView.cpp
     src/UserConf.h
     src/UserConf.cpp
+    src/Models/CourseAttendance.h
+    src/Models/CourseAttendance.cpp
+    src/Controllers/UserConfController.h
+    src/Controllers/UserConfController.cpp
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"

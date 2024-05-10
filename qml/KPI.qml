@@ -87,7 +87,26 @@ Item {
                     model:  __courseModel
                     textRole: "title"
                     valueRole: "id"
-                    visible: _editMode                    
+                    visible: _editMode
+                }
+
+                RowLayout {
+                    Layout.fillWidth: true
+
+                    CheckBox {
+                        id: cLectureCheckBox
+                        text: qsTr("Attend Lectures")
+                    }
+                    CheckBox {
+                        id: cLabCheckBox
+                        text: qsTr("Attend Lab")
+                    }
+                    CheckBox {
+                        id: cTutorialCheckBox
+                        text: qsTr("Attend Tutorial")
+                    }
+
+                    visible: _editMode
                 }
             }
 
@@ -112,7 +131,7 @@ Item {
                 }
 
                 onClicked: {
-                    __userModel.addCourseRequest(cComboBox.currentValue)
+                    __userModel.addCourseAttendanceRequest(cComboBox.currentValue, cLectureCheckBox.checked, cLabCheckBox.checked, cTutorialCheckBox.checked)
                 }
             }
         }

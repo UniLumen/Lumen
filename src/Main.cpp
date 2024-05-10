@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 
+#include "Controllers/UserConfController.h"
 #include "RepositoryManager.h"
 #include "UserConf.h"
 #include "Views/CourseListView.h"
@@ -27,21 +28,15 @@ int main(int argc, char* argv[]) {
     Lumen::UserConf userConf;
     userConf.loadFromDisk("user.json");
 
-    CourseListView coursesView(repoManager.courseRepo.getAll());
-    CourseListView userView(userConf.courses());
-
-    QObject::connect(&userConf, &UserConf::courseAdded, &userView, &CourseListView::addCourse);
-    QObject::connect(&userConf, &UserConf::courseRemoved, &userView, qOverload<const Course*>(&CourseListView::removeCourse));
-    QObject::connect(&userView, &CourseListView::removeCourseRequest, &userConf, [&](int index) {
-        // CAUTION: userView.removeCourse is invoked twice
-
-        const Course* removedCourse = userView.removeCourse(index);
-        userConf.removeCourse(removedCourse);
+    QList<Course*> allCourses = repoManager.courseRepo.getAll();
+    QVector<const ICourse*> courses;
+    std::transform(allCourses.constBegin(), allCourses.constEnd(), std::back_inserter(courses), [](Course* c) {
+        return static_cast<const ICourse*>(c);
     });
-    QObject::connect(&userView, &CourseListView::addCourseRequest, &userConf, [&](const QUuid& id) {
-        Course* course = RepositoryManager::instance().courseRepo.get(id);
-        userConf.addCourse(course);
-    });
+
+    CourseListView coursesView(courses);
+    CourseListView userView;
+    UserConfController userController(&userConf, &userView);
 
     userView.setMinCreditHours(12);
     userView.setMaxCreditHours(21);

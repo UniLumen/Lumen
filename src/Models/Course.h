@@ -5,12 +5,13 @@
 
 #include "JsonSerializable.h"
 
+#include "ICourse.h"
 #include "Doctor.h"
 #include "Lecture.h"
 #include "Section.h"
 
 namespace Lumen {
-    class Course : public JsonSerializable {
+    class Course : public ICourse, public JsonSerializable {
     public:
         enum CourseComponents {
             LectureComponent = 1 << 0,
@@ -23,21 +24,21 @@ namespace Lumen {
         Course(const QUuid& id, const QString& name, const QString& code, int creditHours,
                unsigned int courseComponents = LectureComponent);
 
-        QUuid id() const;
-        QString name() const;
-        QString code() const;
-        int creditHours() const;
-        bool hasLecture() const;
-        bool hasLab() const;
-        bool hasTutorial() const;
-        QList<Lecture> lectures() const;
-        QList<Section> sections() const;
-        QList<const Doctor*> doctors() const;
+        QUuid id() const override;
+        QString name() const override;
+        QString code() const override;
+        int creditHours() const override;
+        bool hasLecture() const override;
+        bool hasLab() const override;
+        bool hasTutorial() const override;
+        QList<Lecture> lectures() const override;
+        QList<Section> sections() const override;
+        QList<const Doctor*> doctors() const override;
 
-        void setName(const QString& name);
-        void setCode(const QString& code);
-        bool setCreditHours(int creditHours);
-        void setCourseComponents(unsigned int components);
+        void setName(const QString& name) override;
+        void setCode(const QString& code) override;
+        bool setCreditHours(int creditHours) override;
+        void setCourseComponents(unsigned int components) override;
 
         QJsonValue toJson() const override;
         void fromJson(JsonReader& reader, const QJsonValue& json) override;
@@ -57,8 +58,8 @@ namespace Lumen {
         QUuid m_id;
         QString m_name;
         QString m_code;
-        int m_creditHours;
-        unsigned int m_courseComponents;
+        int m_creditHours = 0;
+        unsigned int m_courseComponents = 0;
         QVector<Lecture> m_lectures;
         QVector<Section> m_sections;
         QVector<const Doctor*> m_doctors;
