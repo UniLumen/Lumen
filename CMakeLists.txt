@@ -79,6 +79,7 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/CreditHoursDisplay.qml
         qml/KPI.qml
         qml/LumenCard.qml
+        qml/UserTabBar.qml
 )
 
 target_include_directories(${PROJECT_NAME}

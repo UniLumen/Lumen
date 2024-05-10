@@ -12,8 +12,30 @@ Item {
     property real _splitValue: 0.5
     property bool _editMode: false
 
+    LumenLogo {
+        id: lumenLogo
+    }
+
+    UserTabBar {
+        id: tabBar
+        anchors {
+            left: lumenLogo.right
+            right: parent.right
+            bottom: lumenLogo.bottom
+            leftMargin: 20
+            bottomMargin: -8
+        }
+    }
+
     RowLayout {
-        anchors.fill: parent
+        anchors {
+            top:  lumenLogo.bottom
+            bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+            topMargin: 32
+        }
+
         spacing: 0
 
         // Courses
@@ -24,7 +46,7 @@ Item {
 
             spacing: _headerSpacing
 
-            Text {
+            TitleWithUnderline {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)
@@ -76,7 +98,7 @@ Item {
             spacing: _headerSpacing
 
             RowLayout {
-                Text {
+                TitleWithUnderline {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
                     Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)

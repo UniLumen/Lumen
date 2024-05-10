@@ -21,6 +21,7 @@ QtObject {
     readonly property string colorBlackPure: "#000000"
     readonly property string colorWhiteLandPageButton: "#D9D9D9"
     readonly property color colorRed: "#9C2321"
+    readonly property color colorGray: "#808080"
     // Dimensions
     readonly property int widthDefault: Screen.width - 100
     readonly property int heightDefault: Screen.height - 100

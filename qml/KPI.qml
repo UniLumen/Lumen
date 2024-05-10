@@ -81,16 +81,20 @@ Item {
                 ComboBox {
                     id: cComboBox
 
+                    Layout.preferredWidth: parent.width / 1.5
+                    Layout.preferredHeight: contentItem.height
+
                     model:  __courseModel
                     textRole: "title"
                     valueRole: "id"
-                    visible: _editMode
+                    visible: _editMode                    
                 }
             }
 
             Button {
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignBottom | Qt.AlignRight
+
                 padding: 10;
                 visible: _editMode
 
