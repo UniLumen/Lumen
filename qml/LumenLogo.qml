@@ -9,8 +9,8 @@ Image {
     }
 
     source: Constants.imageLumenLogo
+    sourceSize: Constants.tRes128x128
     fillMode: Image.PreserveAspectFit
-    mipmap: true
 
     MouseArea {
         onClicked: mainLoader.source = "LandPage.qml"
