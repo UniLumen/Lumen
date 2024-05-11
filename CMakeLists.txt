@@ -76,6 +76,7 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/TableSchedule.qml
         qml/FixedRow.qml
         qml/TestWholeTable.qml
+        qml/TestCompoBix.qml
 )
 
 target_include_directories(${PROJECT_NAME}

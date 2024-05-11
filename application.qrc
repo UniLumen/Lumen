@@ -16,5 +16,6 @@
         <file>images/removeButton.png</file>
         <file>qml/FixedRow.qml</file>
         <file>qml/TestWholeTable.qml</file>
+        <file>qml/TestCompoBix.qml</file>
     </qresource>
 </RCC>
