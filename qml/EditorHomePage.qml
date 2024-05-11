@@ -24,7 +24,7 @@ Item {
 
     TitleWithUnderline {
         id: titleWithUnderline
-        title: Constants.textEditorPageTitle
+        text: Constants.textEditorPageTitle
         anchors{
             top: lumenLogo.bottom
             topMargin: 100
