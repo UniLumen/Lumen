@@ -16,7 +16,6 @@ Item {
 
         ColumnLayout {
             Layout.alignment: Qt.AlignLeft
-            Layout.margins: 20
             spacing: 35
 
             ColumnLayout{

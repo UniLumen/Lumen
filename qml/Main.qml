@@ -26,7 +26,11 @@ ApplicationWindow {
 
     Loader {
         id: mainLoader
-        anchors.fill: parent;
+
+        anchors {
+            fill: parent
+            margins: 32
+        }
         source: "LandPage.qml"
     }
 }

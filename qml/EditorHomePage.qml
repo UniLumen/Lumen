@@ -29,7 +29,6 @@ Item {
             top: lumenLogo.bottom
             topMargin: 100
             left: lumenLogo.left
-            leftMargin: 30
         }
     }
 
@@ -59,28 +58,27 @@ Item {
         }
     }
 
-    GridView {
+    RowLayout {
         id: cardsGrid
-
-        cellWidth: 440
-        cellHeight: 440
-        width: cellWidth * 4
-        height: cellHeight
 
         anchors {
             left: parent.left
-            leftMargin: 60
             right: parent.right
             top: titleWithUnderline.bottom
             topMargin: 150
         }
+        spacing: 64
 
-        model: cardsModel
+        Repeater {
+            model: cardsModel
+            delegate: EditorHomePageCard {
+                Layout.fillWidth: true
+                Layout.preferredHeight: 440
 
-        delegate: EditorHomePageCard {
-            text: model.title
-            icon.source: model.iconPath
-            infoText: model.infoText
+                text: model.title
+                icon.source: model.iconPath
+                infoText: model.infoText
+            }
         }
 
         clip: true

@@ -6,7 +6,6 @@ Image {
     anchors{
         left: parent.left
         top : parent.top
-        margins: 20
     }
 
     source: Constants.imageLumenLogo
