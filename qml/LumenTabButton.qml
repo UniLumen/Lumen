@@ -17,8 +17,6 @@ TabButton {
     }
 
     icon {
-        Material.foreground: Constants.colorWhitePure
-        Material.accent: Constants.colorYellowMain
         height: 35
         width: 33
     }
