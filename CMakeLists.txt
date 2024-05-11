@@ -45,6 +45,8 @@ qt_add_executable(${PROJECT_NAME}
     src/Models/CourseAttendance.cpp
     src/Controllers/UserConfController.h
     src/Controllers/UserConfController.cpp
+    src/Network/HttpClient.h
+    src/Network/HttpClient.cpp
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"
