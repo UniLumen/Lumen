@@ -77,10 +77,14 @@ Item {
                     _iconSource: Constants.iconCourse
                     _text: model.title
                     _helpText: model.code
-                    _description: "Course hours: " + model.creditHours +
-                                  "\nAttend Lecture: " + model.hasLecture +
-                                  "\nAttend Lab: " + model.hasLab +
-                                  "\nAttend Tutorial: " + model.hasTutorial
+                    _description: "Course hours: " + model.creditHours
+
+                    _checkBox0.text: "Lab"
+                    _checkBox0.checked: model.hasLab
+                    _checkBox1.text: "Tutorial"
+                    _checkBox1.checked: model.hasTutorial
+                    _checkBox2.text: "Lecture"
+                    _checkBox2.checked: model.hasLecture
 
                     onDeleteInvoked: {
                         __userModel.removeCourseRequest(model.index)

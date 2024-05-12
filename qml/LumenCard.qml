@@ -11,6 +11,10 @@ Item {
     property alias _description: cDescription.text
     property string _helpText: ""
     property int _modelIndex: -1
+    property alias _checkBox0: cCheckBox0
+    property alias _checkBox1: cCheckBox1
+    property alias _checkBox2: cCheckBox2
+
     signal deleteInvoked
 
     LumenRectangle {
@@ -25,7 +29,7 @@ Item {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignTop
 
-                spacing: 32
+                spacing: 0
 
                 RowLayout {
                     Layout.fillWidth: true
@@ -85,6 +89,51 @@ Item {
                     minimumPixelSize: Constants.sizeHeader6
                     wrapMode: Text.WrapAnywhere
                     verticalAlignment: Text.AlignBottom
+                }
+
+                GridLayout {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+
+                    columns: 2
+                    columnSpacing: 0
+                    rowSpacing: 0
+
+                    CheckBox {
+                        id: cCheckBox0
+
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 20
+                        padding: 0
+
+                        visible: text
+                        checkable: false
+                        hoverEnabled: false
+                        enabled: false
+                    }
+                    CheckBox {
+                        id: cCheckBox1
+
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 20
+                        padding: 0
+
+                        visible: text
+                        checkable: false
+                        enabled: false
+                        hoverEnabled: false
+                    }
+                    CheckBox {
+                        id: cCheckBox2
+
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: 20
+                        padding: 0
+
+                        visible: text
+                        checkable: false
+                        enabled: false
+                    }
                 }
             }
 

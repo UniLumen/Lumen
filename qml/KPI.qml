@@ -95,15 +95,15 @@ Item {
 
                     CheckBox {
                         id: cLectureCheckBox
-                        text: qsTr("Attend Lectures")
+                        text: qsTr("Lectures")
                     }
                     CheckBox {
                         id: cLabCheckBox
-                        text: qsTr("Attend Lab")
+                        text: qsTr("Lab")
                     }
                     CheckBox {
                         id: cTutorialCheckBox
-                        text: qsTr("Attend Tutorial")
+                        text: qsTr("Tutorial")
                     }
 
                     visible: _editMode
