@@ -1,6 +1,8 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
+#include <QFont>
+#include <QFontDatabase>
 
 #include "Controllers/UserConfController.h"
 #include "RepositoryManager.h"
