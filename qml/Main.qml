@@ -24,6 +24,6 @@ ApplicationWindow {
     Loader {
         id: mainLoader
         anchors.fill: parent;
-        source: "TestCompoBix.qml"
+        source: "EditorSchedule.qml"
     }
 }

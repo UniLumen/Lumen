@@ -10,7 +10,7 @@ TabBar {
     }
     Material.accent: Constants.yellowColor
     Repeater {
-        model: []
+        model: ["Year1G1","Year1G2","Year2G1","Year2G2",]
 
         ScheduleTabButton {
             text: modelData
