@@ -117,15 +117,7 @@ Item {
                 padding: 10;
                 visible: _editMode
 
-                contentItem: Text {
-                    text: "Add Course"
-                    font.bold: true
-                    font.pixelSize: Constants.sizePrimaryText
-                    minimumPixelSize: Constants.sizeHeader6
-                    fontSizeMode: Text.Fit
-                    wrapMode: Text.WordWrap
-                }
-
+                text: qsTr("Add Course")
                 background: LumenRectangle {
                     color: Constants.colorYellowMain
                 }
