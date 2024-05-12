@@ -29,7 +29,7 @@ Item {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignTop
 
-                spacing: 0
+                spacing: 16
 
                 RowLayout {
                     Layout.fillWidth: true
@@ -67,72 +67,75 @@ Item {
                     }
                 }
 
-                Text {
-                    id: cText
-
+                ColumnLayout {
                     Layout.fillWidth: true
-                    Layout.fillHeight: true
 
-                    font.bold: true
-                    font.pixelSize: Constants.sizeHeader2
-                    wrapMode: Text.WordWrap
-                }
-
-                Text {
-                    id: cDescription
-
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-
-                    font.pixelSize: Constants.sizePrimaryText
-                    fontSizeMode: Text.Fit
-                    minimumPixelSize: Constants.sizeHeader6
-                    wrapMode: Text.WrapAnywhere
-                    verticalAlignment: Text.AlignBottom
-                }
-
-                GridLayout {
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-
-                    columns: 2
-                    columnSpacing: 0
-                    rowSpacing: 0
-
-                    CheckBox {
-                        id: cCheckBox0
+                    Text {
+                        id: cText
 
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 20
-                        padding: 0
+                        Layout.fillHeight: true
 
-                        visible: text
-                        checkable: false
-                        hoverEnabled: false
-                        enabled: false
+                        font.bold: true
+                        font.pixelSize: Constants.sizeHeader2
+                        wrapMode: Text.WordWrap
                     }
-                    CheckBox {
-                        id: cCheckBox1
+                    Text {
+                        id: cDescription
 
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 20
-                        padding: 0
+                        Layout.fillHeight: true
 
-                        visible: text
-                        checkable: false
-                        enabled: false
-                        hoverEnabled: false
+                        font.pixelSize: Constants.sizePrimaryText
+                        fontSizeMode: Text.Fit
+                        minimumPixelSize: Constants.sizeHeader6
+                        wrapMode: Text.WrapAnywhere
+                        verticalAlignment: Text.AlignBottom
                     }
-                    CheckBox {
-                        id: cCheckBox2
 
+                    GridLayout {
                         Layout.fillWidth: true
-                        Layout.preferredHeight: 20
-                        padding: 0
+                        Layout.fillHeight: true
 
-                        visible: text
-                        checkable: false
-                        enabled: false
+                        columns: 2
+                        columnSpacing: 0
+                        rowSpacing: 0
+
+                        CheckBox {
+                            id: cCheckBox0
+
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+                            padding: 0
+
+                            visible: text
+                            checkable: false
+                            hoverEnabled: false
+                            enabled: false
+                        }
+                        CheckBox {
+                            id: cCheckBox1
+
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+                            padding: 0
+
+                            visible: text
+                            checkable: false
+                            enabled: false
+                            hoverEnabled: false
+                        }
+                        CheckBox {
+                            id: cCheckBox2
+
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: 20
+                            padding: 0
+
+                            visible: text
+                            checkable: false
+                            enabled: false
+                        }
                     }
                 }
             }
