@@ -13,20 +13,20 @@ Item{
         border.width: 1
         border.color: "#828282"
         width: parent.width / 8
-        height: timeSlotHeight * Math.ceil(timeSlots.numOfModels / 7) //* timeSlots.rows
+        height: timeSlotHeight * Math.ceil(_testtest.rows * 1.0 / 7.0) //* timeSlots.rows
         anchors.left: parent.left
-        MouseArea {
+        MouseArea{
             anchors.fill: parent
-            onPressed: {
-                console.log(model.index)
-                if(model.index)
-                    console.log("sat")
+            onPressed:{
+                if(_testtest.rows > 7)
+                    console.log("dayumn")
+                _testtest.addRow()
             }
         }
         Text {
             id: dayText
-            text: model.name
-            font.pixelSize: model.fontSize
+            text: "model.name"
+            font.pixelSize: 20
             font.bold: true
             anchors{
                 horizontalCenter: parent.horizontalCenter
@@ -43,51 +43,52 @@ Item{
                 horizontalCenter: parent.horizontalCenter
             }
             Image {
-                source: Constants.addButtonPath
+                source: "qrc:/images/addButton.svg"
                 width: 30
                 height: 30
                 MouseArea{
                     anchors.fill: parent
-                    onPressed: timeSlots.numOfModels = timeSlots.numOfModels + 7
+                    // onPressed: _testtest.onAddRow()
                 }
             }
             Image {
-                source: Constants.removeButtonPath
+                source: "qrc:/images/removeButton.svg"
                 width: 30
                 height: 30
-                MouseArea{
-                    anchors.fill: parent
-                    onPressed:{
-                        if(timeSlots.numOfModels > 7)
-                            timeSlots.numOfModels = timeSlots.numOfModels - 7}
-                }
             }
         }
     }
     GridLayout{
         id: timeSlots
-        property int numOfModels: 14
+        // property alias timeSlotss: _testtest
+        // property int numOfModels: _testtest.rowCount
         columnSpacing: 0
         rowSpacing: 0
-        clip: true
+        // clip: true
         columns: 7
         width: schedule.width - daySlot.width
         height: daySlot.height
         anchors.left: daySlot.right
         Repeater {
             id: timeSlotRepeater
-            model: timeSlots.numOfModels
+            model: _testtest
             delegate: Rectangle {
                 width: timeSlots.width / 7
                 height: timeSlotHeight
                 color: "white"
                 border.color: "black"
                 border.width: 1
+                Text{
+                    id: name
+                    text: model.place
+                    font.pixelSize: 20
+                }
                 MouseArea {
                     anchors.fill: parent
                     onPressed: {
                         console.log(model.index % 7)
-                        console.log(timeSlots.numOfModels)
+                        console.log(_testtest.rows)
+                        _testtest.editSelectedCell(model.index, "okii")
                     }
                 }
             }

@@ -1,3 +1,3 @@
 #include "timeslot.h"
 
-TimeSlot::TimeSlot() {}
+imeSlot::TimeSlot() {}

@@ -23,7 +23,6 @@ qt_add_executable(${PROJECT_NAME}
     src/schedule.h
     src/schedule.cpp
     src/timeslot.h
-    src/timeslot.cpp
     src/JsonReader.h
     src/JsonReader.inl
     src/JsonReader.cpp
@@ -39,6 +38,10 @@ qt_add_executable(${PROJECT_NAME}
     src/Repository.inl
     src/RepositoryManager.h
     src/RepositoryManager.cpp
+    src/timeslotmodel.h
+    src/timeslotmodel.cpp
+    src/timeslotmodel.h
+    src/timeslotmodel.cpp
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"

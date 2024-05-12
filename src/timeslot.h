@@ -2,28 +2,29 @@
 #define TIMESLOT_H
 
 #include <QString>
+#include <list>
 
-class TimeSlot {
+class TimeSlot
+{
 public:
-    TimeSlot();
-    TimeSlot(QString day, QString place, QString timePeriods, short int sectionNum, short int groupNum, QString type);
+    enum class TimePeriod {
+        Period_8_10,
+        Period_10_12,
+        Period_12_2,
+        Period_2_4,
+        Period_4_6,
+        Period_6_8
+    };
 
-    // Getter methods for all attributes
-    QString getDay();
-    QString getPlace();
-    QStringList getTimePeriods(); // Returns a list of time periods
-    short int getSectionNum();
-    short int getGroupNum();
-    QString getType();
-    QString getPrimaryInstructor();
-    QString getSecondaryInstructor();
+    TimeSlot(const QString &place):
+        place(place){};
+    TimeSlot(const QString &day, const QString &place, int &timePeriod, const std::list<int> &sectionNumbers, const QString &type, const QString &primaryInstructor, const QString &secondaryInstructor):
+        day(day), place(place), timePeriod(static_cast<TimePeriod>(timePeriod)), sectionNumbers(sectionNumbers), type(type), primaryInstructor(primaryInstructor), secondaryInstructor(secondaryInstructor){};
 
-private:
     QString day;
     QString place;
-    QString timePeriods; // List of strings representing time periods (e.g., "10:00-12:00", "13:00-14:00")
-    short int sectionNum;
-    short int groupNum;
+    TimePeriod timePeriod;
+    std::list<int> sectionNumbers;
     QString type;
     QString primaryInstructor;
     QString secondaryInstructor;
