@@ -6,7 +6,9 @@ import QtQuick.Dialogs
 import Lumen
 
 ApplicationWindow {
-    // This is very important, the window doesn't show up without it
+    minimumWidth: 1280
+    minimumHeight: 720
+
     visible: true
     width: Constants.widthDefault
     height: Constants.heightDefault

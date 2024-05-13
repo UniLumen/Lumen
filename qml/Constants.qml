@@ -5,6 +5,7 @@ import QtQuick
 QtObject {
     // Text
     readonly property string appName: "Lumen"
+
     readonly property string fontPoppins: "Poppins"
     readonly property string textEditorPageTitle: "Editor's POV"
     readonly property string textDashboardTab: " Dashboard"
@@ -19,6 +20,8 @@ QtObject {
     readonly property string colorWhitePure: "#FFFFFF"
     readonly property string colorBlackPure: "#000000"
     readonly property string colorWhiteLandPageButton: "#D9D9D9"
+    readonly property color colorRed: "#9C2321"
+    readonly property color colorGray: "#808080"
     // Dimensions
     readonly property int widthDefault: Screen.width - 100
     readonly property int heightDefault: Screen.height - 100
@@ -33,4 +36,22 @@ QtObject {
     readonly property string iconInstructor: "qrc:/images/instructor_icon.svg"
     readonly property string iconCourse: "qrc:/images/course_icon.svg"
     readonly property string iconSchedule: "qrc:/images/schedule_icon.svg"
+    readonly property url iconKpi: "qrc:/images/icon_kpi.svg"
+    readonly property url iconEdit: "qrc:/images/icon_edit.svg"
+    readonly property url iconRemove: "qrc:/images/icon_remove.svg"
+
+    readonly property int sizeHeader1: 32
+    readonly property int sizeHeader2: 24
+    readonly property int sizeHeader3: 18
+    readonly property int sizeHeader4: 16
+    readonly property int sizeHeader5: 14
+    readonly property int sizeHeader6: 10
+
+    readonly property int sizePrimaryText: 16
+    readonly property int sizeSecondaryText: 14
+
+    readonly property size sizeHuge: Qt.size(64, 64)
+    readonly property size sizeLarge: Qt.size(32, 32)
+    readonly property size sizeNormal: Qt.size(24, 24)
+    readonly property size sizeSmall: Qt.size(16, 16)
 }

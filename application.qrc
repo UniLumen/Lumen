@@ -10,5 +10,8 @@
         <file>images/instructor_icon.svg</file>
         <file>images/more_info_icon_black.svg</file>
         <file>images/more_info_icon_yellow.svg</file>
+        <file>images/icon_kpi.svg</file>
+        <file>images/icon_edit.svg</file>
+        <file>images/icon_remove.svg</file>
     </qresource>
 </RCC>

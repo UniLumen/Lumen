@@ -37,6 +37,14 @@ qt_add_executable(${PROJECT_NAME}
     src/JsonReader.h
     src/RepositoryManager.h
     src/RepositoryManager.cpp
+    src/Views/CourseListView.h
+    src/Views/CourseListView.cpp
+    src/UserConf.h
+    src/UserConf.cpp
+    src/Models/CourseAttendance.h
+    src/Models/CourseAttendance.cpp
+    src/Controllers/UserConfController.h
+    src/Controllers/UserConfController.cpp
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"
@@ -70,6 +78,12 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/EditorTabBar.qml
         qml/LumenTabButton.qml
         qml/PointingHandCursor.qml
+        qml/LumenRectangle.qml
+        qml/UserDashboard.qml
+        qml/CreditHoursDisplay.qml
+        qml/KPI.qml
+        qml/LumenCard.qml
+        qml/UserTabBar.qml
 )
 
 target_include_directories(${PROJECT_NAME}

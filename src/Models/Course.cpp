@@ -3,11 +3,11 @@
 namespace Lumen {
     Course::Course() : m_id(QUuid::createUuid()) {}
 
-    Course::Course(const QString& name, const QString& code, int creditHours)
-        : m_name(name), m_code(code), m_creditHours(creditHours) {}
+    Course::Course(const QString& name, const QString& code, int creditHours, unsigned int courseComponents)
+        : m_name(name), m_code(code), m_creditHours(creditHours), m_courseComponents(courseComponents) {}
 
-    Course::Course(const QUuid& id, const QString& name, const QString& code, int creditHours)
-        : m_id(id), m_name(name), m_code(code), m_creditHours(creditHours) {}
+    Course::Course(const QUuid& id, const QString& name, const QString& code, int creditHours, unsigned int courseComponents)
+        : m_id(id), m_name(name), m_code(code), m_creditHours(creditHours), m_courseComponents(courseComponents) {}
 
     QUuid Course::id() const {
         return m_id;
@@ -23,6 +23,18 @@ namespace Lumen {
 
     int Course::creditHours() const {
         return m_creditHours;
+    }
+
+    bool Course::hasLecture() const {
+        return (m_courseComponents & LectureComponent);
+    }
+
+    bool Course::hasLab() const {
+        return (m_courseComponents & LabComponent);
+    }
+
+    bool Course::hasTutorial() const {
+        return (m_courseComponents & TutorialComponent);
     }
 
     QList<Lecture> Course::lectures() const {
@@ -54,6 +66,10 @@ namespace Lumen {
         return true;
     }
 
+    void Course::setCourseComponents(unsigned int components) {
+        m_courseComponents = components;
+    }
+
     QJsonValue Course::toJson() const {
         QJsonObject json;
 
@@ -61,6 +77,9 @@ namespace Lumen {
         json["name"] = m_name;
         json["code"] = m_code;
         json["creditHours"] = m_creditHours;
+        json["hasLecture"] = hasLecture();
+        json["hasLab"] = hasLab();
+        json["hasTutorial"] = hasTutorial();
 
         {
             QJsonArray lecs;
@@ -101,11 +120,24 @@ namespace Lumen {
         Q_ASSERT(obj.contains("lectures"));
         Q_ASSERT(obj.contains("sections"));
         Q_ASSERT(obj.contains("doctors"));
+        Q_ASSERT(obj.contains("hasLecture"));
+        Q_ASSERT(obj.contains("hasLab"));
+        Q_ASSERT(obj.contains("hasTutorial"));
 
         m_id = QUuid::fromString(obj.value("id").toString());
         m_name = obj.value("name").toString();
         m_code = obj.value("code").toString();
         m_creditHours = obj.value("creditHours").toInt();
+
+        if (obj.value("hasLecture").toBool()) {
+            m_courseComponents |= LectureComponent;
+        }
+        if (obj.value("hasLab").toBool()) {
+            m_courseComponents |= LabComponent;
+        }
+        if (obj.value("hasTutorial").toBool()) {
+            m_courseComponents |= TutorialComponent;
+        }
 
         {
             QJsonArray lecs = json["lectures"].toArray();
