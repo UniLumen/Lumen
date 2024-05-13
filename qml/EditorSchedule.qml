@@ -13,6 +13,10 @@ Item {
             Layout.fillWidth: true
             spacing: 35
             Layout.margins: 20
+            LumenLogo{
+
+            }
+
             EditorTabBar{
 
             }
@@ -39,6 +43,15 @@ Item {
             Layout.fillHeight: true
 
             currentIndex: tabbar.currentIndex
+            TableSchedule{
+                //anchors.fill: parent
+            }
+            TableSchedule{
+               //anchors.fill: parent
+            }
+            TableSchedule{
+               //anchors.fill: parent
+            }
             TableSchedule{
                 //anchors.fill: parent
             }

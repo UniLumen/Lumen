@@ -14,8 +14,5 @@
         <file>images/yellow_lines.svg</file>
         <file>images/addButton.svg</file>
         <file>images/removeButton.png</file>
-        <file>qml/FixedRow.qml</file>
-        <file>qml/TestWholeTable.qml</file>
-        <file>qml/TestCompoBix.qml</file>
     </qresource>
 </RCC>

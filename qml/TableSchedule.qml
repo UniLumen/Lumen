@@ -8,7 +8,7 @@ Item{
     //     id: aha
     // }
     id: tableSchedule
-    property double tableScheduleWidth: 1200
+    property double tableScheduleWidth: Constants.editorWindowWidth
     property double tableScheduleHeight: 540
     ListModel{
         id: daySlotProperties

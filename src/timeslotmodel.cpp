@@ -116,22 +116,22 @@ void TimeSlotModel::editSelectedCell(int index,const int &day,const int &section
         return;
     }
     beginResetModel();
-    dayGrid.at(m_currentDay).at(index).day = day;
-    dayGrid.at(m_currentDay).at(index).place = dayGrid.at(m_currentDay).at(index - (index % 7)).place;
-    dayGrid.at(m_currentDay).at(index).sectionNumbers = sectionNum;
-    dayGrid.at(m_currentDay).at(index).type = type;
-    dayGrid.at(m_currentDay).at(index).primaryInstructor = primaryInstructor;
-    dayGrid.at(m_currentDay).at(index).secondaryInstructor = secondaryInstructor;
-    dayGrid.at(m_currentDay).at(index).course = course;
-    dayGrid.at(m_currentDay).at(index).displayText = displayText;
+    dayGrid[m_currentDay][index].day = day;
+    dayGrid[m_currentDay][index].place = dayGrid[m_currentDay][index - (index % 7)].place;
+    dayGrid[m_currentDay][index].sectionNumbers = sectionNum;
+    dayGrid[m_currentDay][index].type = type;
+    dayGrid[m_currentDay][index].primaryInstructor = primaryInstructor;
+    dayGrid[m_currentDay][index].secondaryInstructor = secondaryInstructor;
+    dayGrid[m_currentDay][index].course = course;
+    dayGrid[m_currentDay][index].displayText = displayText;
     switch(index % 7)
     {
-        case 1: dayGrid.at(m_currentDay).at(index).timePeriod = 8;break;
-        case 2: dayGrid.at(m_currentDay).at(index).timePeriod = 10;break;
-        case 3: dayGrid.at(m_currentDay).at(index).timePeriod = 12;break;
-        case 4: dayGrid.at(m_currentDay).at(index).timePeriod = 2;break;
-        case 5: dayGrid.at(m_currentDay).at(index).timePeriod = 4;break;
-        case 6: dayGrid.at(m_currentDay).at(index).timePeriod = 6;break;
+        case 1: dayGrid[m_currentDay][index].timePeriod = 8;break;
+        case 2: dayGrid[m_currentDay][index].timePeriod = 10;break;
+        case 3: dayGrid[m_currentDay][index].timePeriod = 12;break;
+        case 4: dayGrid[m_currentDay][index].timePeriod = 2;break;
+        case 5: dayGrid[m_currentDay][index].timePeriod = 4;break;
+        case 6: dayGrid[m_currentDay][index].timePeriod = 6;break;
     }
 
     endResetModel();

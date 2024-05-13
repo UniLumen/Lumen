@@ -55,8 +55,8 @@ Item{
                 MouseArea{
                     anchors.fill: parent
                     onPressed:{
-                        if(_testtest.rows >= 7)
-                            _testtest.addRow("newPlace")}
+                        addPlacePopup.open()
+                    }
                 }
             }
             Image {
@@ -101,14 +101,18 @@ Item{
                 }
                 Text{
                     id: name
+                    width: parent.width * 0.75
+                    height: parent.height * 0.75
                     text: model.displayText
-                    font.pointSize: 15
-                    wrapMode: Text.WrapAnywhere
-                    clip: true
+                    font.pointSize: 12
                     anchors{
                         horizontalCenter: parent.horizontalCenter
                         verticalCenter: parent.verticalCenter
                     }
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    wrapMode: Text.WordWrap
+                    clip: true
                 }
                 MouseArea {
                     anchors.fill: parent
@@ -117,8 +121,8 @@ Item{
                         //console.log(model.index % 7)
                         //console.log(_testtest.rows)
                         //_testtest.editSelectedCell(model.index, "okii")
-                        infoPopup.slotIndex = model.index
-                        infoPopup.open();
+                        addTimeSlotPopup.slotIndex = model.index
+                        addTimeSlotPopup.open();
                     }
 
                 }
@@ -126,7 +130,7 @@ Item{
         }
     }
     Popup {
-        id: infoPopup
+        id: addTimeSlotPopup
         property int slotIndex
         // This sets the parent of the pop-up always as the main screen being displayed
         parent: Overlay.overlay
@@ -179,8 +183,15 @@ Item{
                 }
                 LabeledComboBox{
                     comboBoxModel: ["beshoy","Salsabil"]
-                    comboBoxLabel: "Instructor"
+                    comboBoxLabel: "P.Instructor"
                     id: doctorCB
+                    Layout.preferredWidth: 400
+                    Layout.preferredHeight: mainBody.height/16
+                }
+                LabeledComboBox{
+                    comboBoxModel: ["beshoy","Salsabil"]
+                    comboBoxLabel: "S.Instructor"
+                    id: doctor2CB
                     Layout.preferredWidth: 400
                     Layout.preferredHeight: mainBody.height/16
                 }
@@ -200,7 +211,7 @@ Item{
                         id: closeButton
                         hoverEnabled: true
 
-                        onClicked: infoPopup.close()
+                        onClicked: addTimeSlotPopup.close()
 
                         background: Rectangle {
                             color: closeButton.hovered ? Constants.yellowHoverColor : Constants.yellowColor
@@ -229,14 +240,125 @@ Item{
                         hoverEnabled: true
 
                         onClicked: {
-                            _testtest.editSelectedCell(infoPopup.slotIndex,day,sectionNumCB.currentSelection,courseTypeCB.currentSelection,doctorCB.currentSelection,doctorCB.currentSelection,courseCB.currentSelection
-                                                       ,courseCB.currentSelection + "\n" + courseTypeCB.currentSelection + "(" + sectionNumCB.currentSelection + ")"
-                                                       + "\n" + doctorCB.currentSelection + "\n" + doctorCB.currentSelection)
-                            infoPopup.close()
+                            _testtest.editSelectedCell(addTimeSlotPopup.slotIndex,day,sectionNumCB.currentSelection,courseTypeCB.currentSelection,doctorCB.currentSelection,doctorCB.currentSelection,courseCB.currentSelection
+                                                       ,courseCB.currentSelection + " " + courseTypeCB.currentSelection + "(" + sectionNumCB.currentSelection + ")"
+                                                       + " " + doctorCB.currentSelection + " " + doctor2CB.currentSelection)
+                            addTimeSlotPopup.close()
                         }
 
                         background: Rectangle {
                             color: saveButton.hovered ? Constants.yellowHoverColor : Constants.yellowColor
+                            radius: 15
+                        }
+
+                        contentItem: Text{
+                            text: "Save"
+                            color: Constants.whiteColor
+                            anchors.centerIn: parent
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            font {
+                                pixelSize: 25
+                                family: Constants.mainFont
+                                weight: Font.Bold
+                            }
+                        }
+
+                        PointingHandCursor{}
+                    }
+                }
+
+            }
+        }
+    }
+    Popup {
+        id: addPlacePopup
+        property int slotIndex
+        // This sets the parent of the pop-up always as the main screen being displayed
+        parent: Overlay.overlay
+        // Creates the window dimming effect and disables anything behind the popup to be pressed
+        modal: true
+        focus: true
+        closePolicy: Popup.NoAutoClose
+        anchors.centerIn: parent
+        contentItem: Item{
+            id: mainBodyPlace
+            implicitHeight: 600
+            implicitWidth: 600
+            anchors.centerIn: parent
+            //body of the pop-up
+            ColumnLayout{
+                anchors.centerIn: parent
+                spacing:35
+                Text {
+                    Layout.preferredWidth: 400
+                    text: "Enter new time slot info!"
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
+                    font {
+                        pixelSize: 45
+                        family: Constants.mainFont
+                        weight: Font.DemiBold
+                    }
+                }
+
+                Rectangle {
+                    color: "grey"
+                    width: parent.width
+                    height: 1
+                }
+                LabeledComboBox{
+                    comboBoxModel: ["Class 7","Fahmy","Said"]
+                    comboBoxLabel: "Course"
+                    id: placesCB
+                    Layout.preferredWidth: 400
+                    Layout.preferredHeight: mainBody.height/16
+                }
+                RowLayout{
+                    Layout.preferredWidth: 200
+                    Layout.preferredHeight: mainBody.height/12
+                    Button {
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        id: closeButtonPlace
+                        hoverEnabled: true
+
+                        onClicked: addPlacePopup.close()
+
+                        background: Rectangle {
+                            color: closeButtonPlace.hovered ? Constants.yellowHoverColor : Constants.yellowColor
+                            radius: 15
+                        }
+
+                        contentItem: Text{
+                            text: "Close"
+                            color: Constants.whiteColor
+                            anchors.centerIn: parent
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            font {
+                                pixelSize: 25
+                                family: Constants.mainFont
+                                weight: Font.Bold
+                            }
+                        }
+
+                        PointingHandCursor{}
+                    }
+                    Button {
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
+                        id: saveButtonPlace
+                        hoverEnabled: true
+
+                        onClicked: {
+                            if(_testtest.rows >= 7)
+                                _testtest.addRow(placesCB.currentSelection)
+                            addPlacePopup.close()
+                        }
+
+                        background: Rectangle {
+                            color: saveButtonPlace.hovered ? Constants.yellowHoverColor : Constants.yellowColor
                             radius: 15
                         }
 

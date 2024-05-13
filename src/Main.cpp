@@ -6,6 +6,19 @@
 // #include "timeslot.h"
 
 #include "timeslotmodel.h"
+TimeSlotModel test;
+void cleanup() {
+    QString testt = "hi";
+    qDebug()<<testt;
+    qDebug()<<test.dayGrid[0].size();
+    for(int i = 1; i < test.dayGrid[0].size();i++)
+    {
+        qDebug()<<test.dayGrid[0][i].day;
+        qDebug()<<test.dayGrid[0][i].timePeriod;
+        qDebug()<<test.dayGrid[0][i].place;
+        qDebug()<<test.dayGrid[0][i].course;
+    }
+}
 int main(int argc, char* argv[]) {
     QGuiApplication app(argc, argv);
     // TimeSlot a(5);
@@ -15,8 +28,8 @@ int main(int argc, char* argv[]) {
     QQmlApplicationEngine engine;
     const QUrl url(u"qrc:/qt/qml/Lumen/qml/Main.qml"_qs);
     QQmlContext *context = engine.rootContext();
-    TimeSlotModel test;
     qmlRegisterType<TimeSlotModel>("Time", 1, 0, "TimeSlot");
+    QObject::connect(&app, &QCoreApplication::aboutToQuit, &cleanup);
     // context->setContextProperty("_testtest", &test);
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreated, &app,
@@ -27,7 +40,6 @@ int main(int argc, char* argv[]) {
         },
         Qt::QueuedConnection);
     engine.load(url);
-
     if (engine.rootObjects().isEmpty()) {
         return -1;
     }
@@ -39,6 +51,7 @@ int main(int argc, char* argv[]) {
     int retCode = app.exec();
 
     repoManager.saveToDisk("db.json");
+
 
     return retCode;
 }
