@@ -33,12 +33,13 @@ Item {
         delegate: CardTemplate{
             cardTitle: model.name
             content1: "Email: " + model.email
+            iconPath: "qrc:/images/instructor_icon.svg"
 
             RoundButton{
                 id: removeButton
                 background: Image{
                     id: removeImage
-                    source: "qrc:/resources/removeButton.png"
+                    source: "qrc:/images/icon_remove.svg"
                 }
                 width: parent.width/5
                 height: removeButton.width
@@ -124,11 +125,18 @@ Item {
                 }
             }
 
+            CheckBox{
+                id:isDoc
+                text: "Check this box if the instructor is a professor"
+                font.pixelSize: parent.width*0.03
+                Layout.alignment: Qt.AlignLeft
+            }
+
             RoundButton{
                 id: addButton
                 background: Image{
                     id: addImage
-                    source: "qrc:/resources/addButton.svg"
+                    source: "qrc:/images/addButton.svg"
                 }
 
                 Layout.preferredWidth: parent.width*0.15
@@ -137,7 +145,7 @@ Item {
                 Layout.columnSpan: 2
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                onClicked: _instructorModel.onAddInstructor(instructorName.displayText, instructorEmail.displayText)
+                onClicked: _instructorModel.onAddInstructor(instructorName.displayText, instructorEmail.displayText, isDoc.checkState == Qt.Checked)
             }
         }
     }

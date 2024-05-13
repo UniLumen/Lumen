@@ -3,23 +3,23 @@
 #include <QtCore>
 
 #include "Location.h"
-#include "TA.h"
+#include "Instructor.h"
 
 namespace Lumen {
     class Section : public JsonSerializable {
     public:
         Section() = default;
-        Section(int number, const QDateTime& dateTime, const Location* location, const TA* ta);
+        Section(int number, const QDateTime& dateTime, const Location* location, const Instructor* ta);
 
         int number() const;
         QDateTime dateTime() const;
         const Location* location() const;
-        const TA* ta() const;
+        const Instructor* ta() const;
 
         bool setNumber(int number);
         void setDateTime(const QDateTime& dateTime);
         void setLocation(const Location* location);
-        void setTa(const TA* ta);
+        void setTa(const Instructor* ta);
 
         QJsonValue toJson() const override;
         void fromJson(JsonReader& reader, const QJsonValue& json) override;
@@ -37,7 +37,7 @@ namespace Lumen {
         int m_number;
         QDateTime m_dateTime;
         const Location* m_location;
-        const TA* m_ta;
+        const Instructor* m_ta;
     };
 }
 

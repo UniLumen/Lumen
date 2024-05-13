@@ -4,10 +4,13 @@ namespace Lumen {
     Course::Course() : m_id(QUuid::createUuid()) {}
 
     Course::Course(const QString& name, const QString& code, int creditHours, unsigned int courseComponents)
-        : m_name(name), m_code(code), m_creditHours(creditHours), m_courseComponents(courseComponents) {}
+        : m_id(QUuid::createUuid()), m_name(name), m_code(code), m_creditHours(creditHours), m_courseComponents(courseComponents) {}
 
     Course::Course(const QUuid& id, const QString& name, const QString& code, int creditHours, unsigned int courseComponents)
         : m_id(id), m_name(name), m_code(code), m_creditHours(creditHours), m_courseComponents(courseComponents) {}
+
+    Course::Course(const QString& name, int year,const QString& dept, int creditHours, unsigned int courseComponents)
+        : m_id(QUuid::createUuid()), m_name(name), m_year(year), m_dept(dept), m_creditHours(creditHours), m_courseComponents(courseComponents){}
 
     QUuid Course::id() const {
         return m_id;
@@ -15,6 +18,14 @@ namespace Lumen {
 
     QString Course::name() const {
         return m_name;
+    }
+
+    int Course::yearOfStudy() const{
+        return m_year;
+    }
+
+    QString Course::department() const{
+        return m_dept;
     }
 
     QString Course::code() const {
@@ -45,7 +56,7 @@ namespace Lumen {
         return m_sections;
     }
 
-    QList<const Doctor*> Course::doctors() const {
+    QList<const Instructor*> Course::doctors() const {
         return m_doctors;
     }
 
@@ -77,6 +88,8 @@ namespace Lumen {
         json["name"] = m_name;
         json["code"] = m_code;
         json["creditHours"] = m_creditHours;
+        json["yearOfStudy"] = m_year;
+        json["dept"] = m_dept;
         json["hasLecture"] = hasLecture();
         json["hasLab"] = hasLab();
         json["hasTutorial"] = hasTutorial();
@@ -117,6 +130,8 @@ namespace Lumen {
         Q_ASSERT(obj.contains("name"));
         Q_ASSERT(obj.contains("code"));
         Q_ASSERT(obj.contains("creditHours"));
+        Q_ASSERT(obj.contains("yearOfStudy"));
+        Q_ASSERT(obj.contains("dept"));
         Q_ASSERT(obj.contains("lectures"));
         Q_ASSERT(obj.contains("sections"));
         Q_ASSERT(obj.contains("doctors"));
@@ -128,6 +143,8 @@ namespace Lumen {
         m_name = obj.value("name").toString();
         m_code = obj.value("code").toString();
         m_creditHours = obj.value("creditHours").toInt();
+        m_year = obj.value("yearOfStudy").toInt();
+        m_dept = obj.value("dept").toString();
 
         if (obj.value("hasLecture").toBool()) {
             m_courseComponents |= LectureComponent;
@@ -165,7 +182,7 @@ namespace Lumen {
             for (const auto& doc : docs) {
                 QUuid doctorId(doc.toString());
                 Q_ASSERT(reader.contains(doctorId));
-                m_doctors.push_back(reader.get<Doctor>(doctorId));
+                m_doctors.push_back(reader.get<Instructor>(doctorId));
             }
         }
     }

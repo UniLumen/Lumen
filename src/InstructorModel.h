@@ -1,9 +1,9 @@
 #ifndef INSTRUCTORMODEL_H
 #define INSTRUCTORMODEL_H
 
-#include <vector>
 #include <QAbstractListModel>
-#include "Instructor.h"
+#include "Models/Instructor.h"
+#include "RepositoryManager.h"
 
 class InstructorModel : public QAbstractListModel
 {
@@ -20,11 +20,15 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 public slots:
-    void onAddInstructor(QString name, QString email);
+    void onAddInstructor(QString name, QString email, bool isDoc);
     void onRemoveInstructor(int index);
 
+signals:
+    void emailVerificationDone(bool isValidEmail);
+
 private:
-    std::vector<Instructor> m_data;
+    QList<Lumen::Instructor*> m_data;
+    Lumen::RepositoryManager& repoManager = Lumen::RepositoryManager::instance();
 };
 
 #endif // INSTRUCTORMODEL_H
