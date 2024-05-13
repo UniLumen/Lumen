@@ -10,18 +10,6 @@
 int main(int argc, char* argv[]) {
     QGuiApplication app(argc, argv);
 
-    QQmlApplicationEngine engine;
-    QQmlContext* context = engine.rootContext();
-    const QUrl url(u"qrc:/qt/qml/Lumen/qml/Main.qml"_qs);
-    QObject::connect(
-        &engine, &QQmlApplicationEngine::objectCreated, &app,
-        [url](QObject* obj, const QUrl& objUrl) {
-            if (!obj && url == objUrl) {
-                QCoreApplication::exit(-1);
-            }
-        },
-        Qt::QueuedConnection);
-
     Lumen::RepositoryManager& repoManager = Lumen::RepositoryManager::instance();
     repoManager.loadFromDisk("db.json");
 
@@ -36,10 +24,22 @@ int main(int argc, char* argv[]) {
 
     CourseListView coursesView(courses);
     CourseListView userView;
-    UserConfController userController(&userConf, &userView);
-
     userView.setMinCreditHours(12);
     userView.setMaxCreditHours(21);
+
+    UserConfController userController(&userConf, &userView);
+
+    QQmlApplicationEngine engine;
+    QQmlContext* context = engine.rootContext();
+    const QUrl url(u"qrc:/qt/qml/Lumen/qml/Main.qml"_qs);
+    QObject::connect(
+        &engine, &QQmlApplicationEngine::objectCreated, &app,
+        [url](QObject* obj, const QUrl& objUrl) {
+            if (!obj && url == objUrl) {
+                QCoreApplication::exit(-1);
+            }
+        },
+        Qt::QueuedConnection);
 
     context->setContextProperty("__courseModel", &coursesView);
     context->setContextProperty("__userModel", &userView);
