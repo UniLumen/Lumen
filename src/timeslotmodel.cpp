@@ -2,6 +2,7 @@
 #include <QDebug>
 // #include "QAbstractListModel"
 
+std::unordered_map<int, std::vector<TimeSlot>> TimeSlotModel::dataSet;
 
 TimeSlotModel::TimeSlotModel(QObject *parent):
     QAbstractListModel(parent){
@@ -133,8 +134,10 @@ void TimeSlotModel::editSelectedCell(int index,const int &day,const int &section
         case 5: dayGrid[m_currentDay][index].timePeriod = 4;break;
         case 6: dayGrid[m_currentDay][index].timePeriod = 6;break;
     }
-
     endResetModel();
+    TimeSlotModel::dataSet[m_currentDay].push_back(dayGrid[m_currentDay][index]);
+    TimeSlot ti = dayGrid[m_currentDay][index];
+    qDebug() << ti.timePeriod << ' ' << ti.course << ' ' << ti.day << ' ' << ti.place;
 }
 
 void TimeSlotModel::addRow(const QString &place){

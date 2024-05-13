@@ -30,8 +30,7 @@ public:
         DisplayText
     };
 
-    std::unordered_map<int, std::vector<TimeSlot>> dayGrid;
-
+    static std::unordered_map<int, std::vector<TimeSlot>> dataSet;
     explicit TimeSlotModel(QObject *parent = nullptr);
 
     int rowCount(const QModelIndex &parent) const override;
@@ -56,6 +55,7 @@ signals:
 
 private:
     int m_currentDay;
+    std::unordered_map<int, std::vector<TimeSlot>> dayGrid;
 };
 
 #endif // TIMESLOTMODEL_H

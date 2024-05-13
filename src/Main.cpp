@@ -6,17 +6,17 @@
 // #include "timeslot.h"
 
 #include "timeslotmodel.h"
-TimeSlotModel test;
+// TimeSlotModel test;
 void cleanup() {
     QString testt = "hi";
     qDebug()<<testt;
-    qDebug()<<test.dayGrid[0].size();
-    for(int i = 1; i < test.dayGrid[0].size();i++)
+    // qDebug()<<test.dayGrid[0].size();
+    for(int i = 0; i < TimeSlotModel::dataSet[0].size();i++)
     {
-        qDebug()<<test.dayGrid[0][i].day;
-        qDebug()<<test.dayGrid[0][i].timePeriod;
-        qDebug()<<test.dayGrid[0][i].place;
-        qDebug()<<test.dayGrid[0][i].course;
+        qDebug()<<TimeSlotModel::dataSet[0][i].day;
+        qDebug()<<TimeSlotModel::dataSet[0][i].timePeriod;
+        qDebug()<<TimeSlotModel::dataSet[0][i].place;
+        qDebug()<<TimeSlotModel::dataSet[0][i].course;
     }
 }
 int main(int argc, char* argv[]) {
