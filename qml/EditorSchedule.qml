@@ -32,48 +32,37 @@ Item {
                 font.pointSize: 30
                 font.bold: true
             }
-            RoundButton{
-                id: addButton
-                background: Image{
-                    id: addImage
-                    source: Constants.addButtonPath
-                }
-                Layout.preferredWidth: parent.width*0.15
-                Layout.preferredHeight: addButton.width
-                radius: addButton.width/2
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            AddTimeSlot{
 
-                onClicked:{
-
-                    tabbar.addItem(tabButton.createObject(tabbar))
-                    var object = newPage.createObject(layout)
-                    console.log(tabbar.currentIndex)
-                }
             }
         }
         SchedulesTabs{
             id: tabbar
         }
-        Component {
-            id: tabButton
-            ScheduleTabButton { text: "TabButton" }
-        }
-        Component {
-            id: newPage
-            ScheduleTabButton {
-                text: "Page"
-                background: Rectangle{
-                    color: Qt.rgba(Math.random(),Math.random(),Math.random(),1);
-                }
-                Layout.preferredHeight: 300
-                Layout.fillWidth: true
-            }
-        }
         StackLayout{
             id: layout
             Layout.fillWidth: true
-            height: 500
+            Layout.fillHeight: true
+
             currentIndex: tabbar.currentIndex
+            TableSchedule{
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+            TableSchedule{
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+            TableSchedule{
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+            TableSchedule{
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+            }
+
+
         }
     }
 }

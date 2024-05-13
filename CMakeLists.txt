@@ -78,6 +78,8 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/FixedRow.qml
         qml/TestWholeTable.qml
         qml/TestCompoBix.qml
+        qml/AddTimeSlot.qml
+        qml/LabeledComboBox.qml
 )
 
 target_include_directories(${PROJECT_NAME}
