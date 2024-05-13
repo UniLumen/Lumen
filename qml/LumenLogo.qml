@@ -9,7 +9,7 @@ Image {
     }
 
     source: Constants.imageLumenLogo
-    sourceSize: Constants.tRes128x128
+    sourceSize: Constants.res128x128
     fillMode: Image.PreserveAspectFit
 
     MouseArea {

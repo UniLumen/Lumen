@@ -51,7 +51,7 @@ Item {
                 Layout.fillHeight: true
                 Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)
 
-                text: qsTr("My Courses")
+                text: qsTr("Courses I Want to Attend")
                 color: Constants.colorWhitePure
                 font.bold: true
                 font.pixelSize: Constants.sizeHeader1
@@ -110,7 +110,7 @@ Item {
                     Layout.fillHeight: true
                     Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)
 
-                    text: qsTr("Selection KPIs")
+                    text: qsTr("Add a Course")
                     color: Constants.colorWhitePure
                     font.bold: true
                     font.pixelSize: Constants.sizeHeader1

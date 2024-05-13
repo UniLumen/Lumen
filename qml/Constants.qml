@@ -55,5 +55,5 @@ QtObject {
     readonly property size sizeNormal: Qt.size(24, 24)
     readonly property size sizeSmall: Qt.size(16, 16)
 
-    readonly property size tRes128x128: Qt.size(128, 128)
+    readonly property size res128x128: Qt.size(128, 128)
 }
