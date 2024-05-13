@@ -8,14 +8,18 @@ namespace Lumen {
     class Location : public JsonSerializable {
     public:
         Location();
-        Location(const QString& name, const QString& description);
-        Location(const QUuid& id, const QString& name, const QString& description);
+        Location(const QString& name, const QString& building, int floor, const QString& description);
+        Location(const QUuid& id, const QString& name, const QString& building,int floor, const QString& description);
 
         QUuid id() const;
         QString name() const;
+        QString building() const;
+        int floor() const;
         QString description() const;
 
         void setName(const QString& name);
+        void setBuilding(const QString& building);
+        void setFloor(const QString& floor);
         void setDescription(const QString& description);
 
         QJsonValue toJson() const override;
@@ -32,6 +36,8 @@ namespace Lumen {
     private:
         QUuid m_id;
         QString m_name;
+        QString m_building;
+        int m_floor;
         QString m_description;
     };
 }

@@ -51,7 +51,7 @@ namespace Lumen {
         return m_course->sections();
     }
 
-    QList<const Doctor*> CourseAttendance::doctors() const {
+    QList<const Instructor*> CourseAttendance::doctors() const {
         Q_ASSERT(m_course);
         return m_course->doctors();
     }

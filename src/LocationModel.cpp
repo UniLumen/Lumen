@@ -1,15 +1,8 @@
 #include "LocationModel.h"
-
+using namespace Lumen;
 LocationModel::LocationModel(QObject *parent):
     QAbstractListModel(parent){
-
-    Location l1 ("said abdelwahab", "FCIS", 3, "description");
-    Location l2 ("said abdelwahab", "FCIS", 3, "description");
-    Location l3 ("said abdelwahab", "FCIS", 3, "description");
-
-    m_data.push_back(l1);
-    m_data.push_back(l2);
-    m_data.push_back(l3);
+    m_data = repoManager.locationRepo.getAll();
 }
 
 int LocationModel::rowCount(const QModelIndex &parent) const{
@@ -25,12 +18,12 @@ QVariant LocationModel::data(const QModelIndex &index, int role) const{
         return QVariant();
     }
 
-    const Location &data = m_data.at(index.row());
+    const Location* data = m_data.at(index.row());
 
     switch(role){
-    case Roles::Name: return data.name;
-    case Roles::Floor: return data.floor;
-    case Roles::Building: return data.building;
+    case Roles::Name: return data->name();
+    case Roles::Floor: return data->floor();
+    case Roles::Building: return data->building();
     default: return QVariant();
     }
 }
@@ -47,6 +40,7 @@ QHash<int, QByteArray> LocationModel::roleNames() const{
 
 void LocationModel::onRemoveLocation(int index){
     beginRemoveRows(QModelIndex(), index,index);
+    repoManager.locationRepo.remove(m_data[index]->id());
     m_data.erase(m_data.begin()+index);
     qDebug() << "onRemove Location called on index: " + std::to_string(index);
     endRemoveRows();
@@ -54,7 +48,9 @@ void LocationModel::onRemoveLocation(int index){
 
 void LocationModel::onAddLocation(QString name, QString building, QString floor, QString description){
     beginInsertRows(QModelIndex(),m_data.size(), m_data.size());
-    m_data.push_back(Location(name, building, floor.toInt(), description));
+    Location* p_newLocation = new Location(name, building,floor.toInt(),description);
+    repoManager.locationRepo.insert(p_newLocation->id(), p_newLocation);
+    m_data.push_back(p_newLocation);
     endInsertRows();
     qDebug() << "adding location: " + name + " " + building + " " + floor + " " + description;
 

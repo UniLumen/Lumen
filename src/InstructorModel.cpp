@@ -1,16 +1,20 @@
 #include "InstructorModel.h"
 
+using namespace Lumen;
 InstructorModel::InstructorModel(QObject *parent):
     QAbstractListModel(parent){
-    //TO DO: should load data from JSON
+    const QList<Instructor*>& doctors= repoManager.doctorRepo.getAll();
+    const QList<Instructor*>& tas= repoManager.taRepo.getAll();
 
-    Instructor i1 ("potato", "potato@gmai.com");
-    Instructor i2 ("tomato", "tomato@gmai.com");
-    Instructor i3 ("momento", "momento@gmai.com");
+    m_data.reserve(doctors.size() + tas.size());
 
-    m_data.push_back(i1);
-    m_data.push_back(i2);
-    m_data.push_back(i3);
+    for(const auto& doctor : doctors){
+        m_data.push_back(doctor);
+    }
+
+    for(const auto& ta : tas){
+        m_data.push_back(ta);
+    }
 
 }
 
@@ -27,11 +31,11 @@ QVariant InstructorModel::data(const QModelIndex &index, int role) const{
         return QVariant();
     }
 
-    const Instructor &data = m_data.at(index.row());
+    const Instructor* data = m_data.at(index.row());
 
     switch(role){
-    case Roles::Name: return data.name;
-    case Roles::Email: return data.email;
+    case Roles::Name: return data->name();
+    case Roles::Email: return data->email();
     default: return QVariant();
     }
 }
@@ -47,15 +51,29 @@ QHash<int, QByteArray> InstructorModel::roleNames() const{
 
 void InstructorModel::onRemoveInstructor(int index){
     beginRemoveRows(QModelIndex(), index,index);
+    if(m_data[index]->isDoc()){
+        repoManager.doctorRepo.remove(m_data[index]->id());
+    }else{
+        repoManager.taRepo.remove(m_data[index]->id());
+    }
     m_data.erase(m_data.begin()+index);
     qDebug() << "onRemove instructor called on index: " + std::to_string(index);
     endRemoveRows();
 }
 
-void InstructorModel::onAddInstructor(QString name, QString email){
+void InstructorModel::onAddInstructor(QString name, QString email, bool isDoc){
     beginInsertRows(QModelIndex(),m_data.size(), m_data.size());
-    m_data.push_back(Instructor(name, email));
+    Instructor* p_newInstructor = new Instructor(name, email, isDoc);
+    if(!p_newInstructor->setEmail(email)){
+        emit emailVerificationDone(p_newInstructor->setEmail(email));
+    }
+    if(isDoc){
+        repoManager.doctorRepo.insert(p_newInstructor->id(), p_newInstructor);
+    }else{
+        repoManager.taRepo.insert(p_newInstructor->id(), p_newInstructor);
+    }
+    m_data.push_back(p_newInstructor);
     endInsertRows();
-    qDebug() << "adding instructor: " + name + " " + email;
+    qDebug() << "adding instructor: " + name + " " + email + " ";
 
 }

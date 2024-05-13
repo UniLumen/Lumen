@@ -1,7 +1,7 @@
 #include "Section.h"
 
 namespace Lumen {
-    Section::Section(int number, const QDateTime& dateTime, const Location* location, const TA* ta)
+    Section::Section(int number, const QDateTime& dateTime, const Location* location, const Instructor* ta)
         : m_number(number), m_dateTime(dateTime), m_location(location), m_ta(ta) {}
 
     int Section::number() const {
@@ -16,7 +16,7 @@ namespace Lumen {
         return m_location;
     }
 
-    const TA* Section::ta() const {
+    const Instructor* Section::ta() const {
         return m_ta;
     }
 
@@ -37,7 +37,7 @@ namespace Lumen {
         m_location = location;
     }
 
-    void Section::setTa(const TA* ta) {
+    void Section::setTa(const Instructor* ta) {
         m_ta = ta;
     }
 
@@ -75,7 +75,7 @@ namespace Lumen {
             QUuid taId(obj.value("taId").toString());
             Q_ASSERT(reader.contains(taId));
             if (reader.contains(taId)) {
-                m_ta = reader.get<TA>(taId);
+                m_ta = reader.get<Instructor>(taId);
             }
         }
     }

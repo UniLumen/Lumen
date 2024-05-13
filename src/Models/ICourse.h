@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Doctor.h"
+#include "Instructor.h"
 #include "Lecture.h"
 #include "Section.h"
 
@@ -16,7 +16,7 @@ namespace Lumen {
         virtual bool hasTutorial() const = 0;
         virtual QList<Lecture> lectures() const = 0;
         virtual QList<Section> sections() const = 0;
-        virtual QList<const Doctor*> doctors() const = 0;
+        virtual QList<const Instructor*> doctors() const = 0;
 
         virtual void setName(const QString& name) = 0;
         virtual void setCode(const QString& code) = 0;
