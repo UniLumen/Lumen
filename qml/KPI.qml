@@ -95,7 +95,7 @@ Item {
 
                     CheckBox {
                         id: cLectureCheckBox
-                        text: qsTr("Lectures")
+                        text: qsTr("Lecture")
                     }
                     CheckBox {
                         id: cLabCheckBox
