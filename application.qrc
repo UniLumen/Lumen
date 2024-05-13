@@ -13,8 +13,6 @@
         <file>images/icon_kpi.svg</file>
         <file>images/icon_edit.svg</file>
         <file>images/icon_remove.svg</file>
-        <file>resources/courseIcon.svg</file>
-        <file>resources/removeButton.png</file>
-        <file>resources/addButton.svg</file>
+        <file>images/addButton.svg</file>
     </qresource>
 </RCC>

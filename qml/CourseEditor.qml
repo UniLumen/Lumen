@@ -36,12 +36,13 @@ Item{
             content1: "Credit Hours:" + model.creditHours
             content2: "Year Of Study: " + model.YearOfStudy
             content3: "Offering Departmnet: " + model.dept
+            iconPath: "qrc:/images/course_icon.svg"
 
             RoundButton{
                 id: removeButton
                 background: Image{
                     id: removeImage
-                    source: "qrc:/resources/removeButton.png"
+                    source: "qrc:/images/icon_remove.svg"
                 }
                 width: parent.width/5
                 height: removeButton.width
@@ -161,7 +162,7 @@ Item{
                 id: addButton
                 background: Image{
                     id: addImage
-                    source: "qrc:/resources/addButton.svg"
+                    source: "qrc:/images/addButton.svg"
                 }
 
                 Layout.preferredWidth: parent.width*0.15

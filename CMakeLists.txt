@@ -21,10 +21,6 @@ qt_add_executable(${PROJECT_NAME}
     src/Main.cpp
     src/Models/Location.h
     src/Models/Location.cpp
-    src/Models/Doctor.h
-    src/Models/Doctor.cpp
-    src/Models/TA.h
-    src/Models/TA.cpp
     src/Models/Course.h
     src/Models/Course.cpp
     src/Models/Lecture.h
@@ -44,15 +40,15 @@ qt_add_executable(${PROJECT_NAME}
     src/Models/CourseAttendance.cpp
     src/Controllers/UserConfController.h
     src/Controllers/UserConfController.cpp
-    src/Course.h
     src/CourseModel.h
     src/CourseModel.cpp
     src/InstructorModel.h
     src/InstructorModel.cpp
-    src/Instructor.h
-    src/Location.h
     src/LocationModel.h
-    src/LocationModel.cpp)
+    src/LocationModel.cpp
+    src/Models/Instructor.h
+    src/Models/Instructor.cpp
+)
 
 qt_add_resources(${PROJECT_NAME} "configuration"
     PREFIX "/"
@@ -107,7 +103,6 @@ target_link_libraries(${PROJECT_NAME}
         Qt6::Core
         Qt6::Qml
         Qt6::Quick
-        # Qt6::QuickControls2
 )
 
 add_subdirectory(test/)

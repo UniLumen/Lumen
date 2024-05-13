@@ -1,9 +1,9 @@
 #ifndef LOCATIONMODEL_H
 #define LOCATIONMODEL_H
 
-#include <vector>
 #include <QAbstractListModel>
-#include "Location.h"
+#include "Models/Location.h"
+#include "RepositoryManager.h"
 
 class LocationModel : public QAbstractListModel
 {
@@ -25,6 +25,7 @@ public slots:
     void onRemoveLocation(int index);
 
 private:
-    std::vector<Location> m_data;
+    QList<Lumen::Location*> m_data;
+    Lumen::RepositoryManager& repoManager = Lumen::RepositoryManager::instance();
 };
 #endif // LOCATIONMODEL_H

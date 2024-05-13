@@ -19,13 +19,6 @@ int main(int argc, char* argv[]) {
     QQmlApplicationEngine engine;
     QQmlContext* context = engine.rootContext();
     const QUrl url(u"qrc:/qt/qml/Lumen/qml/Main.qml"_qs);
-    CourseModel courseModel;
-    InstructorModel instructorModel;
-    LocationModel locationModel;
-
-    context->setContextProperty("_courseModel", &courseModel);
-    context->setContextProperty("_instructorModel", &instructorModel);
-    context->setContextProperty("_locationModel", &locationModel);
 
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreated, &app,
@@ -58,15 +51,18 @@ int main(int argc, char* argv[]) {
     context->setContextProperty("__courseModel", &coursesView);
     context->setContextProperty("__userModel", &userView);
 
+    CourseModel courseModel;
+    InstructorModel instructorModel;
+    LocationModel locationModel;
+
+    context->setContextProperty("_courseModel", &courseModel);
+    context->setContextProperty("_instructorModel", &instructorModel);
+    context->setContextProperty("_locationModel", &locationModel);
+
     engine.load(url);
     if (engine.rootObjects().isEmpty()) {
         return -1;
     }
-
-    QObject* courseEditorItem = engine.rootObjects()[0]->children()[1]; //I have no idea why this works
-    QObject::connect(courseEditorItem, SIGNAL(removeCourse(int)), &courseModel, SLOT(onRemoveCourse(int)));
-    QObject::connect(courseEditorItem, SIGNAL(addCourse(QString,QString,QString,QString)), &courseModel, SLOT(onAddCourse(QString,QString,QString,QString)));
-
 
     int retCode = app.exec();
 

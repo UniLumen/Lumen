@@ -20,7 +20,7 @@ namespace Lumen {
         bool hasTutorial() const override;
         QList<Lecture> lectures() const override;
         QList<Section> sections() const override;
-        QList<const Doctor*> doctors() const override;
+        QList<const Instructor*> doctors() const override;
 
         void setName(const QString& name) override;
         void setCode(const QString& code) override;

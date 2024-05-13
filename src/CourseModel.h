@@ -1,10 +1,10 @@
 #ifndef COURSEMODEL_H
 #define COURSEMODEL_H
 
-#include <vector>
 #include <QAbstractListModel>
 #include <QString>
-#include "Course.h"
+#include "Models/Course.h"
+#include "RepositoryManager.h"
 
 
 class CourseModel : public QAbstractListModel
@@ -29,7 +29,8 @@ public slots:
 
 
 private:
-    std::vector<Course> m_data;
+    QList<Lumen::Course*> m_data;
+    Lumen::RepositoryManager& repoManager = Lumen::RepositoryManager::instance();
 };
 
 #endif // COURSEMODEL_H

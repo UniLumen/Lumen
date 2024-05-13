@@ -34,7 +34,7 @@ Rectangle{
 
         Image {
             id: cardIcon
-            source: "qrc:/resources/courseIcon.svg"
+            source: iconPath
             height:parent.height/10
             width:cardIcon.height
             anchors{
