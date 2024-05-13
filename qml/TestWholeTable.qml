@@ -5,9 +5,10 @@ import QtQuick.Window
 import QtQuick.Dialogs
 
 ApplicationWindow {
-    height: 800
-    width: 1600
+    height: 1080
+    width: 1920
     TableSchedule{
-
+        // tableScheduleWidth: parent.width * 0.75
+        // tableScheduleHeight: parent.height * 0.75
     }
 }

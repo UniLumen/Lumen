@@ -1,47 +1,55 @@
 #ifndef TIMESLOTMODEL_H
 #define TIMESLOTMODEL_H
-#include <vector>
-#include <QAbstractListModel>
+
 #include <QObject>
+#include <QAbstractListModel>
 #include <QString>
+#include <vector>
+#include <unordered_map>
+
+#include <QList>
+#include <QtGlobal>
 #include "timeslot.h"
-#include <QVector>
-// #include <QtCore>
-// #include <QQmlListElement>
+
 class TimeSlotModel : public QAbstractListModel
 {
     Q_OBJECT
     Q_PROPERTY(double rows READ getRows NOTIFY rowCountChanged);
-    Q_PROPERTY(int currentDay  READ getDay WRITE setDay NOTIFY dayChanged);
+    Q_PROPERTY(int currentDay  READ getCurrentDay WRITE setCurrentDay NOTIFY currentDayChanged);
+
 public:
-    enum Roles{
+    enum Roles {
         Place = Qt::UserRole,
         Day,
-        timePeriod,
+        TimePeriod,
         SectionNumbers,
         Type,
         PrimaryInstructor,
         SecondaryInstructor
     };
-    // void setData(const int &day);
-    void setDay(const int &day);
-    int getDay();
+
     explicit TimeSlotModel(QObject *parent = nullptr);
-    int rowCount(const QModelIndex& parent) const override;
-    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
+
+    int rowCount(const QModelIndex &parent) const override;
+    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
+
     double getRows() const;
+    int getCurrentDay() const;
+    void setCurrentDay(const int &day);
 
 public slots:
     void editSelectedCell(int indexInGrid, QString lmao);
-    void addRow();
+    void addRow(const QString &place);
+    void removeRow();
+
 signals:
     void rowCountChanged();
-    void dayChanged();
+    void currentDayChanged();
+
 private:
-    std::vector<TimeSlot> timeSlot_data;
-    std::vector<TimeSlot> timeSlot_data_sun;
-    int currentDay;
+    std::unordered_map<int, std::vector<TimeSlot>> dayGrid;
+    int m_currentDay;
 };
 
 #endif // TIMESLOTMODEL_H

@@ -56,7 +56,7 @@ Item{
                     anchors.fill: parent
                     onPressed:{
                         if(_testtest.rows >= 7)
-                            _testtest.addRow()}
+                            _testtest.addRow("newPlace")}
                 }
             }
             Image {
@@ -65,7 +65,10 @@ Item{
                 height: 30
                 MouseArea{
                     anchors.fill: parent
-                    // onPressed:{
+                    onPressed:{
+                        if(_testtest.rows > 7)
+                            _testtest.removeRow()
+                    }
                 }
             }
         }
@@ -100,6 +103,10 @@ Item{
                     id: name
                     text: model.place
                     font.pixelSize: 20
+                    anchors{
+                        horizontalCenter: parent.horizontalCenter
+                        verticalCenter: parent.verticalCenter
+                    }
                 }
                 MouseArea {
                     anchors.fill: parent

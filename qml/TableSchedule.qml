@@ -40,6 +40,7 @@ Item{
         anchors.top: fixedRow.bottom
         model: daySlotProperties
         clip: true
+        cacheBuffer: 8000
         delegate:TableRow{
             scheduleWidth: tableScheduleWidth
             timeSlotHeight: tableScheduleHeight / 6
