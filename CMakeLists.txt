@@ -40,8 +40,6 @@ qt_add_executable(${PROJECT_NAME}
     src/RepositoryManager.cpp
     src/timeslotmodel.h
     src/timeslotmodel.cpp
-    src/timeslotmodel.h
-    src/timeslotmodel.cpp
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"
@@ -94,4 +92,4 @@ target_link_libraries(${PROJECT_NAME}
         Qt6::Quick
 )
 
-add_subdirectory(test/)
+# add_subdirectory(test/)

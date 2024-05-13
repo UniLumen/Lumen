@@ -4,6 +4,7 @@
 #include <QQmlContext>
 #include "RepositoryManager.h"
 // #include "timeslot.h"
+
 #include "timeslotmodel.h"
 int main(int argc, char* argv[]) {
     QGuiApplication app(argc, argv);
@@ -12,10 +13,11 @@ int main(int argc, char* argv[]) {
     //     qDebug() << "ohhhhhhhh yeaaaaaaaaaaaah";
     // qDebug() << static_cast<int>(a.timePeriod);
     QQmlApplicationEngine engine;
-    const QUrl url(u"qrc:/qt/qml/Lumen/qml/TableRow.qml"_qs);
+    const QUrl url(u"qrc:/qt/qml/Lumen/qml/Main.qml"_qs);
     QQmlContext *context = engine.rootContext();
     TimeSlotModel test;
-    context->setContextProperty("_testtest", &test);
+    qmlRegisterType<TimeSlotModel>("Time", 1, 0, "TimeSlot");
+    // context->setContextProperty("_testtest", &test);
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreated, &app,
         [url](QObject* obj, const QUrl& objUrl) {
