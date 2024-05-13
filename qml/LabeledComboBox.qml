@@ -28,7 +28,7 @@ Item {
                 Text {
                     id: combotxt
                     text: comboBoxLabel
-                    font.pointSize: 0.09*parent.width
+                    font.pointSize: 15
                     anchors.centerIn: parent
                 }
             }
@@ -51,7 +51,7 @@ Item {
 
                 contentItem: Text{
                     text: parent.currentText
-                    font.pointSize: 0.04*comboRect.width
+                    font.pointSize: 15
                     verticalAlignment: Text.AlignVCenter;
                     horizontalAlignment: Text.AlignLeft;
                 }

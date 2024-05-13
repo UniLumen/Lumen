@@ -13,9 +13,6 @@ Item {
             Layout.fillWidth: true
             spacing: 35
             Layout.margins: 20
-            LumenLogo {
-
-            }
             EditorTabBar{
 
             }
@@ -32,9 +29,6 @@ Item {
                 font.pointSize: 30
                 font.bold: true
             }
-            AddTimeSlot{
-
-            }
         }
         SchedulesTabs{
             id: tabbar
@@ -46,20 +40,7 @@ Item {
 
             currentIndex: tabbar.currentIndex
             TableSchedule{
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-            }
-            TableSchedule{
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-            }
-            TableSchedule{
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-            }
-            TableSchedule{
-                Layout.fillWidth: true
-                Layout.fillHeight: true
+                //anchors.fill: parent
             }
 
 

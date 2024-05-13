@@ -25,7 +25,9 @@ public:
         SectionNumbers,
         Type,
         PrimaryInstructor,
-        SecondaryInstructor
+        SecondaryInstructor,
+        Course,
+        DisplayText
     };
 
     explicit TimeSlotModel(QObject *parent = nullptr);
@@ -39,7 +41,10 @@ public:
     void setCurrentDay(const int &day);
 
 public slots:
-    void editSelectedCell(int indexInGrid, QString lmao);
+    void editSelectedCell(int indexInGrid,const int &day,const int &sectionNum,const QString &type,const QString &primaryInstructor
+                          ,const QString &secondaryInstructor
+                          ,const QString &course
+                          ,const QString &displayText);
     void addRow(const QString &place);
     void removeRow();
 

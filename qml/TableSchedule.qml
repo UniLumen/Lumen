@@ -21,10 +21,7 @@ Item{
     }
     width: tableScheduleWidth
     height: tableScheduleHeight
-    anchors{
-        horizontalCenter: parent.horizontalCenter
-        verticalCenter: parent.verticalCenter
-    }
+    Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
     FixedRow{
         id: fixedRow
         scheduleEntryWidth: parent.width

@@ -79,6 +79,8 @@ QVariant TimeSlotModel::data(const QModelIndex& index, int role) const{
         case Roles::TimePeriod: return static_cast<int>(timeSlot.timePeriod);
         case Roles::SecondaryInstructor: return timeSlot.secondaryInstructor;
         case Roles::Type: return timeSlot.type;
+        case Roles::Course: return timeSlot.course;
+        case Roles::DisplayText: return timeSlot.displayText;
         default: return QVariant();
     }
     return QVariant();
@@ -92,7 +94,9 @@ QHash<int, QByteArray> TimeSlotModel::roleNames() const{
         {Roles::SectionNumbers, "sectionNumbers"},
         {Roles::TimePeriod, "timePeriod"},
         {Roles::SecondaryInstructor, "secondaryInstructor"},
-        {Roles::Type, "type"}
+        {Roles::Type, "type"},
+        {Roles::Course, "course"},
+        {Roles::DisplayText,"displayText"}
     };
     return mapping;
 }
@@ -103,12 +107,33 @@ QHash<int, QByteArray> TimeSlotModel::roleNames() const{
 //     return flags;
 // }
 
-void TimeSlotModel::editSelectedCell(int index, QString lmao){
+void TimeSlotModel::editSelectedCell(int index,const int &day,const int &sectionNum,const QString &type
+                                     ,const QString &primaryInstructor
+                                     ,const QString &secondaryInstructor
+                                     ,const QString &course
+                                     ,const QString &displayText){
     if ((index % 7) < 1){
         return;
     }
     beginResetModel();
-    dayGrid.at(m_currentDay).at(index).place = lmao;
+    dayGrid.at(m_currentDay).at(index).day = day;
+    dayGrid.at(m_currentDay).at(index).place = dayGrid.at(m_currentDay).at(index - (index % 7)).place;
+    dayGrid.at(m_currentDay).at(index).sectionNumbers = sectionNum;
+    dayGrid.at(m_currentDay).at(index).type = type;
+    dayGrid.at(m_currentDay).at(index).primaryInstructor = primaryInstructor;
+    dayGrid.at(m_currentDay).at(index).secondaryInstructor = secondaryInstructor;
+    dayGrid.at(m_currentDay).at(index).course = course;
+    dayGrid.at(m_currentDay).at(index).displayText = displayText;
+    switch(index % 7)
+    {
+        case 1: dayGrid.at(m_currentDay).at(index).timePeriod = 8;break;
+        case 2: dayGrid.at(m_currentDay).at(index).timePeriod = 10;break;
+        case 3: dayGrid.at(m_currentDay).at(index).timePeriod = 12;break;
+        case 4: dayGrid.at(m_currentDay).at(index).timePeriod = 2;break;
+        case 5: dayGrid.at(m_currentDay).at(index).timePeriod = 4;break;
+        case 6: dayGrid.at(m_currentDay).at(index).timePeriod = 6;break;
+    }
+
     endResetModel();
 }
 
