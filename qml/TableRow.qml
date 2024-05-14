@@ -7,7 +7,12 @@ Item{
     property double scheduleWidth: 1200
     property double timeSlotHeight: 100
     property int day
-    property TimeSlot currentSchedule
+    property int selectedTable
+    TimeSlot{
+        id: _testtest
+        currentDay: schedule.day
+        currentTable: selectedTable
+    }
     width: scheduleWidth
     height: timeSlots.height
     Rectangle {
@@ -16,7 +21,7 @@ Item{
         border.width: 1
         border.color: "#828282"
         width: parent.width / 8
-        height: timeSlotHeight * Math.ceil(currentSchedule.rows / 7) //* timeSlots.rows
+        height: timeSlotHeight * Math.ceil(_testtest.rows / 7) //* timeSlots.rows
         anchors.left: parent.left
         MouseArea {
             anchors.fill: parent
@@ -63,8 +68,8 @@ Item{
                 MouseArea{
                     anchors.fill: parent
                     onPressed:{
-                        if(currentSchedule.rows > 7)
-                            currentSchedule.removeRow()
+                        if(_testtest.rows > 7)
+                            _testtest.removeRow()
                     }
                 }
             }
@@ -82,7 +87,7 @@ Item{
         anchors.left: daySlot.right
         Repeater {
             id: timeSlotRepeater
-            model: currentSchedule
+            model: _testtest
             delegate: Rectangle {
                 width: timeSlots.width / 7
                 height: timeSlotHeight
@@ -93,7 +98,7 @@ Item{
                     anchors.fill: parent
                     onPressed: {
                         console.log(model.index % 7)
-                        console.log(currentSchedule.rows)
+                        console.log(_testtest.rows)
                     }
                 }
                 Text{
@@ -131,12 +136,12 @@ Item{
                     }
                     width: parent.width/5
                     height: removeButton.width
-
+                    visible: model.course !== ""? true:false
                     anchors{
                         right: parent.right
                     }
-                    visible: model.course !== "" ? true:false
-                    onClicked: currentSchedule.onRemoveTimeSlot(model.index);
+
+                    onClicked: _testtest.onRemoveTimeSlot(model.index)
                 }
             }
         }
@@ -252,8 +257,7 @@ Item{
                         hoverEnabled: true
 
                         onClicked: {
-                            currentSchedule.currentDay = day;
-                            currentSchedule.editSelectedCell(addTimeSlotPopup.slotIndex,day,sectionNumCB.currentSelection,courseTypeCB.currentSelection,doctorCB.currentSelection,doctorCB.currentSelection,courseCB.currentSelection
+                            _testtest.editSelectedCell(addTimeSlotPopup.slotIndex,day,sectionNumCB.currentSelection,courseTypeCB.currentSelection,doctorCB.currentSelection,doctorCB.currentSelection,courseCB.currentSelection
                                                        ,courseCB.currentSelection + " " + courseTypeCB.currentSelection + "(" + sectionNumCB.currentSelection + ")"
                                                        + " " + doctorCB.currentSelection + " " + doctor2CB.currentSelection)
                             addTimeSlotPopup.close()
@@ -305,7 +309,7 @@ Item{
                 spacing:35
                 Text {
                     Layout.preferredWidth: 400
-                    text: "Enter new time slot info!"
+                    text: "Enter new place info!"
                     horizontalAlignment: Text.AlignHCenter
                     verticalAlignment: Text.AlignVCenter
                     font {
@@ -322,7 +326,7 @@ Item{
                 }
                 LabeledComboBox{
                     comboBoxModel: ["Class 7","Fahmy","Said"]
-                    comboBoxLabel: "Course"
+                    comboBoxLabel: "Place"
                     id: placesCB
                     Layout.preferredWidth: 400
                     Layout.preferredHeight: mainBody.height/16
@@ -365,8 +369,8 @@ Item{
                         hoverEnabled: true
 
                         onClicked: {
-                            if(currentSchedule.rows >= 7)
-                                currentSchedule.addRow(placesCB.currentSelection)
+                            if(_testtest.rows >= 7)
+                                _testtest.addRow(placesCB.currentSelection)
                             addPlacePopup.close()
                         }
 

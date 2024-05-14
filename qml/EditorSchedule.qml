@@ -44,19 +44,21 @@ Item {
 
             currentIndex: tabbar.currentIndex
             TableSchedule{
+                currentTable: currentIndex
                 //anchors.fill: parent
             }
             TableSchedule{
+                currentTable: currentIndex
                //anchors.fill: parent
             }
             TableSchedule{
+                currentTable: currentIndex
                //anchors.fill: parent
             }
             TableSchedule{
+                currentTable: currentIndex
                 //anchors.fill: parent
             }
-
-
         }
     }
 }

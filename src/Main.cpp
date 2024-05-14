@@ -12,12 +12,24 @@ void cleanup() {
     QString testt = "hi";
     qDebug()<<testt;
     // qDebug()<<test.dayGrid[0].size();
-    for(int i = 0; i < TimeSlotModel::dataSet[0].size();i++)
+    //qDebug()<<Schedule::schedules.at(Schedule::schedules.size() - 1)->at(0).course;
+    Schedule::FormatSchedule();
+
+    auto currentDay = Schedule::formatedSchedules;
+    for(int i = 0; i <currentDay.size();i++)
     {
-        //qDebug()<<dayGrid[0][i].day;
-        //qDebug()<<TimeSlotModel::dayGrid[0][i].timePeriod;
-        //qDebug()<<TimeSlotModel::dayGrid[0][i].place;
-        //qDebug()<<TimeSlotModel::dayGrid[0][i].course;
+        for(int j = 0; j <currentDay[i].size();j++)
+        {
+            for(int k = 0; k < currentDay[i][j].size();k++)
+            {
+                if(currentDay[i][j][k].course == "") continue;
+                qDebug()<<currentDay[i][j][k].day;
+                qDebug()<<currentDay[i][j][k].timePeriod;
+                qDebug()<<currentDay[i][j][k].sectionNumbers;
+                qDebug()<<currentDay[i][j][k].course;
+                qDebug()<<currentDay[i][j][k].place;
+            }
+        }
     }
 }
 int main(int argc, char* argv[]) {

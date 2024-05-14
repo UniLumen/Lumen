@@ -16,6 +16,7 @@ class TimeSlotModel : public QAbstractListModel
     Q_OBJECT
     Q_PROPERTY(double rows READ getRows NOTIFY rowCountChanged);
     Q_PROPERTY(int currentDay  READ getCurrentDay WRITE setCurrentDay NOTIFY currentDayChanged);
+    Q_PROPERTY(int currentTable  READ getCurrentTable WRITE setCurrentTable NOTIFY currentTableChanged);
 
 public:
     enum Roles {
@@ -31,16 +32,19 @@ public:
     };
 
     static std::unordered_map<int, std::vector<TimeSlot>> dataSet;
-    std::unordered_map<int, std::vector<TimeSlot>> dayGrid;
+    //std::unordered_map<int, std::vector<TimeSlot>> dayGrid;
+    std::vector<TimeSlot> dayGrid;
     TimeSlotModel(QObject *parent = nullptr);
 
     int rowCount(const QModelIndex &parent) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
-
+    void setGridDays();
     double getRows() const;
     int getCurrentDay() const;
     void setCurrentDay(const int &day);
+    int getCurrentTable() const;
+    void setCurrentTable(const int &table);
 
 public slots:
     void editSelectedCell(int indexInGrid,const int &day,const int &sectionNum,const QString &type,const QString &primaryInstructor
@@ -55,9 +59,12 @@ public slots:
 signals:
     void rowCountChanged();
     void currentDayChanged();
+    void currentTableChanged();
 
 private:
     int m_currentDay;
+    int m_currentTable;
+
 };
 
 #endif // TIMESLOTMODEL_H

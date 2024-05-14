@@ -6,8 +6,10 @@ class Schedule
 {
 public:
     Schedule();
-    static std::vector<std::unordered_map<int, std::vector<TimeSlot>>> schedules;
-    static void addSchedule(std::unordered_map<int, std::vector<TimeSlot>> newSchedule);
+    static std::vector<std::vector<TimeSlot>*> schedules;
+    static std::vector<std::vector<std::vector<TimeSlot>>> formatedSchedules;
+    static void addSchedule(std::vector<TimeSlot> *newSchedule);
+    static void FormatSchedule();
 };
 
 #endif // SCHEDULE_H
