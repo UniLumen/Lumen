@@ -18,6 +18,7 @@ public:
 
     void setName(const QString& name);
     bool setEmail(const QString& email);
+    void setAsDoc(bool doc);
 
     QJsonValue toJson() const override;
     void fromJson(JsonReader& reader, const QJsonValue& json) override;

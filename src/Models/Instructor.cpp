@@ -45,6 +45,10 @@ bool Instructor::setEmail(const QString& email) {
     return false;
 }
 
+void Instructor::setAsDoc(bool doc) {
+    m_isDoc = doc;
+}
+
 QJsonValue Lumen::Instructor::toJson() const {
     QJsonObject json;
 
