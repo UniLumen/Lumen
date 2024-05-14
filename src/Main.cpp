@@ -5,12 +5,12 @@
 #include <QFontDatabase>
 
 #include "Controllers/CourseController.h"
+#include "Controllers/LocationController.h"
 #include "Controllers/UserConfController.h"
-#include "InstructorModel.h"
-#include "LocationModel.h"
 #include "RepositoryManager.h"
 #include "UserConf.h"
 #include "Views/CourseListView.h"
+#include "Views/LocationListView.h"
 
 int main(int argc, char* argv[]) {
     QGuiApplication app(argc, argv);
@@ -36,6 +36,9 @@ int main(int argc, char* argv[]) {
 
     UserConfController userController(&userConf, &userView);
 
+    LocationListView locationsView;
+    LocationController locationController(&repoManager.locationRepo, &locationsView);
+
     QQmlApplicationEngine engine;
     QQmlContext* context = engine.rootContext();
     const QUrl url(u"qrc:/qt/qml/Lumen/qml/Main.qml"_qs);
@@ -50,6 +53,7 @@ int main(int argc, char* argv[]) {
 
     context->setContextProperty("__courseModel", &coursesView);
     context->setContextProperty("__userModel", &userView);
+    context->setContextProperty("__locationModel", &locationsView);
 
     engine.load(url);
     if (engine.rootObjects().isEmpty()) {

@@ -19,7 +19,7 @@ namespace Lumen {
 
         void setName(const QString& name);
         void setBuilding(const QString& building);
-        void setFloor(const QString& floor);
+        void setFloor(int floor);
         void setDescription(const QString& description);
 
         QJsonValue toJson() const override;
