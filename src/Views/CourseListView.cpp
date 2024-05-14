@@ -106,6 +106,24 @@ void CourseListView::addCourse(const ICourse* course) {
     validate();
 }
 
+void CourseListView::createCourse(const QVariantMap& courseMap) {
+    CourseCreationDTO dto = {};
+
+    dto.name = courseMap["name"].toString();
+    dto.code = courseMap["code"].toString();
+    dto.dept = courseMap["dept"].toString();
+    dto.year = courseMap["year"].toInt();
+    dto.creditHours = courseMap["creditHours"].toInt();
+    dto.hasLecture = courseMap["hasLecture"].toBool();
+    dto.hasLab = courseMap["hasLab"].toBool();
+    dto.hasTutorial = courseMap["hasTutorial"].toBool();
+    dto.isLectureMandatory = courseMap["isLectureMandatory"].toBool();
+    dto.isLabMandatory = courseMap["isLabMandatory"].toBool();
+    dto.isTutorialMandatory = courseMap["isTutorialMandatory"].toBool();
+
+    emit createCourseRequest(dto);
+}
+
 const ICourse* CourseListView::removeCourse(int index) {
     if (index < 0 || index >= m_courses.count()) {
         return nullptr;

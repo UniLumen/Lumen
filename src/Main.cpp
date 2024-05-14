@@ -4,7 +4,10 @@
 #include <QFont>
 #include <QFontDatabase>
 
+#include "Controllers/CourseController.h"
 #include "Controllers/UserConfController.h"
+#include "InstructorModel.h"
+#include "LocationModel.h"
 #include "RepositoryManager.h"
 #include "UserConf.h"
 #include "Views/CourseListView.h"
@@ -25,6 +28,8 @@ int main(int argc, char* argv[]) {
     });
 
     CourseListView coursesView(courses);
+    CourseController courseController(&repoManager.courseRepo, &coursesView);
+
     CourseListView userView;
     userView.setMinCreditHours(12);
     userView.setMaxCreditHours(21);

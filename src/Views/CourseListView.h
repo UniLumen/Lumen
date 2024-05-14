@@ -2,6 +2,7 @@
 
 #include <QAbstractListModel>
 
+#include "DTOs/CourseCreationDTO.h"
 #include "Models/Course.h"
 
 using namespace Lumen;
@@ -43,14 +44,15 @@ public:
 
 public slots:
     void addCourse(const ICourse* course);
+    void createCourse(const QVariantMap& courseMap);
     const ICourse* removeCourse(int index);
     const ICourse* removeCourse(const ICourse* course);
 
 signals:
     void addCourseRequest(const QUuid& id);
     void addCourseAttendanceRequest(const QUuid& id, bool lecture, bool lab, bool tutorial);
-    void addCourseRequest(const QString& name, QString year, const QString& dept, const QString& credits, bool hasLab, bool hasTutorial);
     void removeCourseRequest(int index);
+    void createCourseRequest(const CourseCreationDTO& creationDTO);
 
     void creditHoursChanged();
     void postValidation();

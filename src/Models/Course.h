@@ -63,7 +63,7 @@ namespace Lumen {
         QString m_name;
         QString m_code;
         QString m_dept;
-        int m_year;
+        int m_year = 1;
         int m_creditHours = 0;
         unsigned int m_courseComponents = 0;
         QVector<Lecture> m_lectures;
