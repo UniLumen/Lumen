@@ -18,15 +18,16 @@ class ScheduleOptimizer
 {
 public:
     ScheduleOptimizer();
+    static int getMinimumDays(int day, int time,int mask,bool take);
+    static int buildOptimizedSchedules(int day, int time,int mask,bool take);
+    const static int MASK = (1<<6)-1;
+    int initialMask = 0;
+    static QMap<QPair<int,int>,int> reserved;
+    static QVector<QVector<QVector<int>>>ans;
+    static QVector<QVector<int>>path;
+    static int dp[6][6][1<<24][2];
+    static std::unordered_map<QString,int>idFinder;
 };
 
-
-QMap<QPair<int,int>,int> reserved;
-std::unordered_map<int, QVector<int>> schedule[6];
-QVector<QVector<QVector<int>>>ans;
-QVector<QVector<int>>path;
-const int DAYS =6,TIMES = 13,MASK = (1<<6)-1;
-int dp[DAYS][TIMES][1<<8][2];
-const QVector<int> timeSlots = {8, 10, 12, 2, 4, 6};
 
 #endif // SCHEDULEOPTIMIZER_H
