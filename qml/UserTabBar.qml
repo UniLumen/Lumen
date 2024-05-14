@@ -3,7 +3,7 @@ import QtQuick.Controls
 import QtQuick.Controls.Material
 
 TabBar {
-    id: editorTabBar
+    id: userTabBar
 
     background: Rectangle {
         color: "transparent"
@@ -25,5 +25,10 @@ TabBar {
     LumenTabButton {
         text: Constants.textSchedulesTab
         icon.source: Constants.iconSchedule
+    }
+
+    LumenTabButton {
+        text: Constants.textCoursesGraphTab
+        icon.source: Constants.iconCoursesGraph
     }
 }

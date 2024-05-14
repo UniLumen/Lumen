@@ -34,7 +34,7 @@ Item {
 
     // Here I was unable to use constants for anything, QT doesn't allow this inside ListModel for some reason
     // Should try to find a fix for this
-    ListModel{
+    ListModel {
         id: cardsModel
         ListElement {
             title: "Add Location"
@@ -65,7 +65,7 @@ Item {
             left: parent.left
             right: parent.right
             top: titleWithUnderline.bottom
-            topMargin: 150
+            topMargin: 100
         }
         spacing: 64
 

@@ -13,6 +13,7 @@ QtObject {
     readonly property string textInstructorsTab: " Doctors/TAs"
     readonly property string textCoursesTab: " Courses"
     readonly property string textSchedulesTab: " Schedules"
+    readonly property string textCoursesGraphTab: " Courses Graph"
     // Colors
     readonly property string colorBackground: "#282D32"
     readonly property string colorYellowMain: "#FCB80A"
@@ -29,6 +30,7 @@ QtObject {
     readonly property string imageYellowLines: "qrc:/images/yellow_lines.svg"
     readonly property string imageLumenLogo: "qrc:/images/lumen_logo.svg"
     readonly property string imageLandPageMan: "qrc:/images/land_page_man.svg"
+    readonly property string fullGraph: "qrc:/images/full_graph.svg"
     readonly property string iconHome: "qrc:/images/home_icon.svg"
     readonly property string iconLocation: "qrc:/images/location_icon.svg"
     readonly property string iconInfoBlack: "qrc:/images/more_info_icon_black.svg"
@@ -39,6 +41,8 @@ QtObject {
     readonly property url iconKpi: "qrc:/images/icon_kpi.svg"
     readonly property url iconEdit: "qrc:/images/icon_edit.svg"
     readonly property url iconRemove: "qrc:/images/icon_remove.svg"
+    readonly property url iconCoursesGraph: "qrc:/images/courses_graph_icon.svg"
+    readonly property url iconGraphCard: "qrc:/images/graph_card_icon.svg"
 
     readonly property int sizeHeader1: 32
     readonly property int sizeHeader2: 24

@@ -84,6 +84,8 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/KPI.qml
         qml/LumenCard.qml
         qml/UserTabBar.qml
+        qml/CoursesGraph.qml
+        qml/LumenButton.qml
 )
 
 target_include_directories(${PROJECT_NAME}

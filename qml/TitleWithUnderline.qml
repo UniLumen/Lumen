@@ -6,12 +6,13 @@ Text {
     font {
         family: Constants.fontPoppins
         pixelSize: 45
-        weight: Font.ExtraBold
+        weight: Font.Bold
+        letterSpacing: 2
     }
     color: Constants.colorWhitePure
 
     Rectangle {
-        height: parent.contentHeight / 4
+        height: parent.contentHeight / 8
         width: parent.contentWidth / 4
         radius: 8
         color: Constants.colorYellowMain
