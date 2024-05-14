@@ -214,7 +214,7 @@ Item{
                 }
                 LabeledComboBox{
                     comboBoxModel: [1,2,3,4,5]
-                    comboBoxLabel: "Group Number"
+                    comboBoxLabel: "Section Number"
                     id: sectionNumCB
                     Layout.preferredWidth: 400
                     Layout.preferredHeight: mainBody.height/16

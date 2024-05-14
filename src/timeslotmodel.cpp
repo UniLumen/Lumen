@@ -6,7 +6,7 @@ std::unordered_map<int, std::vector<TimeSlot>> TimeSlotModel::dataSet;
 
 TimeSlotModel::TimeSlotModel(QObject *parent){
     Schedule::addSchedule(&dayGrid);
-    dayGrid.push_back(TimeSlot("CIS 2"));
+    dayGrid.push_back(TimeSlot("Fahmy"));
     dayGrid.push_back(TimeSlot(""));
     dayGrid.push_back(TimeSlot(""));
     dayGrid.push_back(TimeSlot(""));
