@@ -24,6 +24,16 @@ namespace Lumen {
         return m_course->code();
     }
 
+    QString CourseAttendance::dept() const {
+        Q_ASSERT(m_course);
+        return m_course->dept();
+    }
+
+    int CourseAttendance::year() const {
+        Q_ASSERT(m_course);
+        return m_course->year();
+    }
+
     int CourseAttendance::creditHours() const {
         Q_ASSERT(m_course);
         return m_course->creditHours();
@@ -39,6 +49,21 @@ namespace Lumen {
 
     bool CourseAttendance::hasTutorial() const {
         return (m_attendance & Course::TutorialComponent);
+    }
+
+    bool CourseAttendance::hasMandatoryLecture() const {
+        Q_ASSERT(m_course);
+        return m_course->hasMandatoryLecture();
+    }
+
+    bool CourseAttendance::hasMandatoryLab() const {
+        Q_ASSERT(m_course);
+        return m_course->hasMandatoryLab();
+    }
+
+    bool CourseAttendance::hasMandatoryTutorial() const {
+        Q_ASSERT(m_course);
+        return m_course->hasMandatoryTutorial();
     }
 
     QList<Lecture> CourseAttendance::lectures() const {
@@ -60,6 +85,10 @@ namespace Lumen {
 
     void CourseAttendance::setCode(const QString& code) {}
 
+    void CourseAttendance::setDept(const QString& dept) {}
+
+    void CourseAttendance::setYear(int year) {}
+
     bool CourseAttendance::setCreditHours(int creditHours) {
         return false;
     }
@@ -67,6 +96,8 @@ namespace Lumen {
     void CourseAttendance::setCourseComponents(unsigned int components) {
         m_attendance = components;
     }
+
+    void CourseAttendance::setMandatoryComponents(unsigned int components) {}
 
     QJsonValue CourseAttendance::toJson() const {
         QJsonObject json;
