@@ -29,7 +29,7 @@ public:
     };
 
     explicit TimeSlotModel(QObject *parent = nullptr);
-    std::unordered_map<int, std::vector<TimeSlot>> dayGrid;
+    static std::unordered_map<int, std::vector<TimeSlot>> dayGrid;
     int rowCount(const QModelIndex &parent) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
