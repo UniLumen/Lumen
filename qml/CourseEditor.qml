@@ -5,6 +5,14 @@ import QtQuick.Controls
 Item {
     id: root
 
+    property int _headerSpacing: 32
+    property int _cardWidth: 170
+    property int _cardHeight: 270
+    property int _cellMarginX: 15
+    property int _cellMarginY: 25
+    property real _splitValue: 0.5
+    property bool _editorMode: true
+
     LumenLogo {
         id: lumenLogo
     }
@@ -21,195 +29,103 @@ Item {
         }
     }
 
-    GridView {
-        id: gView
-
+    RowLayout {
         anchors {
-            top: editorTabBar.bottom;
-            bottom: parent.bottom;
-        }
-
-        width: parent.width * 3 / 5
-        cellWidth: gView.width / 4
-        cellHeight: gView.cellWidth * 1.5
-        clip: true
-
-        model: __courseModel
-
-        delegate: CardTemplate {
-            cardTitle: model.title
-
-            content1: "Credit Hours: " + model.creditHours
-            content2: "Year Of Study: " + model.YearOfStudy
-            content3: "Offering Departmnet: " + model.dept
-            iconPath: "qrc:/images/course_icon.svg"
-
-            RoundButton {
-                id: removeButton
-
-                anchors{
-                    right: parent.right
-                }
-
-                width: parent.width/5
-                height: removeButton.width
-
-                background: Image{
-                    id: removeImage
-                    source: "qrc:/images/icon_remove.svg"
-                }
-
-                onClicked: __courseModel.removeCourseRequest(model.index)
-            }
-        }
-
-        displaced: Transition {
-            NumberAnimation { properties: "x,y"; duration: 250 }
-        }
-
-        remove: Transition {
-            NumberAnimation { property: "opacity"; to: 0; duration: 250 }
-        }
-
-        add: Transition {
-            NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 250 }
-        }
-    }
-
-    Rectangle {
-        id: courseForm
-
-        anchors {
-            left: gView.right
-            top: parent.top
+            top:  lumenLogo.bottom
             bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+            topMargin: 32
         }
 
-        width: parent.width * 1.5 / 5
-        radius: courseForm.width*0.07
-        color: "white"
+        spacing: 0
 
-        GridLayout{
-            anchors {
-                fill: parent
-                margins: 0.05 * parent.width
-            }
+        ColumnLayout {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.preferredWidth: 1 / _splitValue
 
-            columns: 2
+            spacing: _headerSpacing
 
-            Text {
-                id: formTitle
-
-                text: "Enter New Subject !"
-                font.pointSize: 0.06 *parent.width
-
-                Layout.column: 0
-                Layout.columnSpan: 2
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            }
-
-            Rectangle{
-                id: subjectNameRect
-
-                Layout.preferredWidth: 1
-                Layout.preferredHeight: yearCombo.height
+            TitleWithUnderline {
                 Layout.fillWidth: true
-                Layout.columnSpan: 2
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                Layout.fillHeight: true
+                Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)
 
-                border.color: "black"
-                border.width: 1
-                radius: 0.05 * subjectNameRect.width
-
-                TextInput {
-                    id:subjectName
-                    anchors.fill: parent
-                    font.pixelSize: parent.height*0.7
-                    leftPadding: 0.05*parent.width
-                }
+                text: "Courses"
+                color: Constants.colorWhitePure
+                font.bold: true
+                font.pixelSize: Constants.sizeHeader1
+                minimumPixelSize: Constants.sizeHeader6
+                fontSizeMode: Text.Fit
+                wrapMode: Text.WordWrap
             }
 
-
-            LabeledComboBox {
-                id: yearCombo
-                comboBoxLabel: "Year"
-                comboBoxModel: ["1","2","3","4"]
+            GridView {
+                Layout.fillHeight: true
                 Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            }
 
-            LabeledComboBox {
-                id: deptCombo
-                comboBoxLabel: "Department"
-                comboBoxModel: ["CS","CSys","IT","SC"]
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            }
-
-            LabeledComboBox {
-                id: creditCombo
-                comboBoxLabel: "CreditHours"
-                comboBoxModel: ["1","2","3","4"]
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            }
-
-            Rectangle {
-                id: checkBoxRect
-
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                Layout.preferredWidth: 1
-                Layout.preferredHeight: creditCombo.height
-                Layout.fillWidth: true
+                cellWidth: _cardWidth + _cellMarginX
+                cellHeight: _cardHeight + _cellMarginY
 
                 clip: true
-                border.color: "black"
-                border.width: 1
-                radius: 0.05 * checkBoxRect.width
 
-                RowLayout {
-                    anchors.fill: parent
+                model: __courseModel
+                delegate: LumenCard {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
 
-                    CheckBox {
-                        id:labCheckBox
-                        text: "Lab"
-                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                    _iconSource: Constants.iconCourse
+                    _text: model.title
+                    _helpText: model.code
+                    _description: "Course hours: " + model.creditHours
+
+                    onDeleteInvoked: {
+                        __courseModel.removeCourseRequest(model.index)
                     }
 
-                    CheckBox {
-                        id:tutorialCheckBox
-                        text: "Section"
-                        Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-                    }
+                    width: _cardWidth
+                    height: _cardHeight
+                }
+
+                displaced: Transition {
+                    NumberAnimation { properties: "x,y"; duration: 250 }
+                }
+
+                remove: Transition {
+                    NumberAnimation { property: "opacity"; to: 0; duration: 250 }
+                }
+
+                add: Transition {
+                    NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 250 }
                 }
             }
+        }
 
-            RoundButton{
-                id: addButton
+        ColumnLayout {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.preferredWidth: 1
 
-                background: Image {
-                    id: addImage
-                    source: "qrc:/images/addButton.svg"
-                }
+            spacing: _headerSpacing
 
-                Layout.preferredWidth: parent.width * 0.15
-                Layout.preferredHeight: addButton.width
-                radius: addButton.width / 2
-                Layout.columnSpan: 2
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+            TitleWithUnderline {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)
 
-                onClicked: {
-                    var courseDTO = {
-                        "name": subjectName.displayText,
-                        "year": yearCombo.currentSelection,
-                        "dept": deptCombo.currentSelection,
-                        "creditHours": creditCombo.currentSelection,
-                        "hasLab": labCheckBox.checked,
-                        "hasTutorial": tutorialCheckBox.checked
-                    };
+                text: "Add Course"
+                color: Constants.colorWhitePure
+                font.bold: true
+                font.pixelSize: Constants.sizeHeader1
+                minimumPixelSize: Constants.sizeHeader6
+                fontSizeMode: Text.Fit
+                wrapMode: Text.WordWrap
+            }
 
-                    __courseModel.createCourse(courseDTO);
-                }
+            CourseForm {
+                Layout.fillWidth: true
+                Layout.fillHeight: true;
             }
         }
     }
