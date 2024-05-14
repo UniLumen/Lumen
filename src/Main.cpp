@@ -40,7 +40,9 @@ int main(int argc, char* argv[]) {
 
     LocationListView locationsView;
     LocationController locationController(&repoManager.locationRepo, &locationsView);
-    InstructorListView instructorModel;
+
+    InstructorListView instructorListView;
+    InstructorController instructorController(&repoManager.instructorRepo, &instructorListView);
 
     QQmlApplicationEngine engine;
     QQmlContext* context = engine.rootContext();
@@ -57,7 +59,7 @@ int main(int argc, char* argv[]) {
     context->setContextProperty("__courseModel", &coursesView);
     context->setContextProperty("__userModel", &userView);
 
-    context->setContextProperty("__instructorModel", &instructorModel);
+    context->setContextProperty("__instructorModel", &instructorListView);
     context->setContextProperty("__locationModel", &locationsView);
 
     engine.load(url);

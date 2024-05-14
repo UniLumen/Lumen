@@ -1,10 +1,10 @@
 #include "InstructorController.h"
 
-InstructorController::InstructorController(Repository<QUuid, Instructor>* repository,
-                                           InstructorListView* instructorListView) {
+InstructorController::InstructorController(Repository<QUuid, Instructor>* repository, InstructorListView* instructorListView)
+    : m_repository(repository), m_instructorListView(instructorListView) {
     QVector<const Instructor*> instructors;
-    for (const auto& l : repository->getAll()) {
-        instructors.push_back(l);
+    for (const auto& i : repository->getAll()) {
+        instructors.push_back(i);
     }
     m_instructorListView->setInstructors(instructors);
 
