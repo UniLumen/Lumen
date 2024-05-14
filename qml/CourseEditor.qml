@@ -33,7 +33,7 @@ Item{
 
         delegate: CardTemplate{
             cardTitle: model.name
-            content1: "Credit Hours:" + model.creditHours
+            content1: "Credit Hours: " + model.creditHours
             content2: "Year Of Study: " + model.YearOfStudy
             content3: "Offering Departmnet: " + model.dept
             iconPath: "qrc:/images/course_icon.svg"

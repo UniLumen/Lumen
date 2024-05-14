@@ -54,10 +54,10 @@ void CourseModel::onAddCourse(QString name, QString year, QString dept, QString 
     beginInsertRows(QModelIndex(),m_data.size(), m_data.size());
     unsigned int courseCompontents = 1; //001
     if(hasLab){
-        courseCompontents = courseCompontents & 2; //010
+        courseCompontents = courseCompontents | 2; //010
     }
     if(hasTutorial){
-        courseCompontents = courseCompontents & 4; //100
+        courseCompontents = courseCompontents | 4; //100
     }
     Course* p_newCourse = new Course(name, year.toInt(), dept, credits.toInt(), courseCompontents);
     m_data.push_back(p_newCourse);
