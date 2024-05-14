@@ -40,6 +40,7 @@ QtObject {
     readonly property url iconEdit: "qrc:/images/icon_edit.svg"
     readonly property url iconRemove: "qrc:/images/icon_remove.svg"
     readonly property url iconAdd: "qrc:/images/icon_add.svg"
+    readonly property url iconGear: "qrc:/images/gear_icon.svg"
 
     readonly property int sizeHeader1: 32
     readonly property int sizeHeader2: 24
