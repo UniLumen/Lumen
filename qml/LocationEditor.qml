@@ -6,7 +6,13 @@ import QtQuick.Controls
 Item{
     id: root
 
-    anchors.fill: parent
+    property int _headerSpacing: 32
+    property int _cardWidth: 170
+    property int _cardHeight: 270
+    property int _cellMarginX: 15
+    property int _cellMarginY: 25
+    property real _splitValue: 0.5
+    property bool _editorMode: true
 
     LumenLogo {
         id: lumenLogo
@@ -23,160 +29,171 @@ Item{
         }
     }
 
-    GridView{
-        id: gView
+    RowLayout {
         anchors {
-            top: editorTabBar.bottom;
-            bottom: parent.bottom;
-        }
-
-        width: parent.width*3/5
-        cellWidth: gView.width/4
-        cellHeight: gView.cellWidth*1.5
-        clip:true
-
-        displaced: Transition{
-            NumberAnimation { properties: "x,y"; duration: 250 }
-        }
-
-        remove: Transition{
-            NumberAnimation { property: "opacity"; to: 0; duration: 250 }
-        }
-
-        add: Transition{
-            NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 250 }
-        }
-
-        model: _locationModel
-
-        delegate: CardTemplate{
-            cardTitle: model.name
-            content1: "Building:" + model.building
-            content2: "Floor: " + model.floor
-            iconPath: "qrc:/images/location_icon.svg"
-
-            RoundButton{
-                id: removeButton
-                background: Image{
-                    id: removeImage
-                    source: "qrc:/images/icon_remove.svg"
-                }
-                width: parent.width/5
-                height: removeButton.width
-
-                anchors{
-                    right: parent.right
-                }
-
-                onClicked: _locationModel.onRemoveLocation(model.index)
-            }
-        }
-    }
-
-    Rectangle{
-        id: courseForm
-        width: parent.width*1.5/5
-        color: "white"
-        anchors{
-            left: gView.right
-            top: parent.top
+            top:  lumenLogo.bottom
             bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+            topMargin: 32
         }
-        radius: courseForm.width*0.07
 
-        GridLayout{
-            columns: 2
-            anchors.margins: 0.05*parent.width
-            height: 0.7*parent.height
-            anchors{
-                left: parent.left
-                right: parent.right
-                verticalCenter: parent.verticalCenter
-            }
+        spacing: 0
 
-            rowSpacing: 60
-            Text {
-                id: formTitle
-                text: "Enter New Location !"
-                Layout.column: 0
-                Layout.columnSpan: 2
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                font.pointSize: 0.06*parent.width
-            }
+        ColumnLayout {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.preferredWidth: 1 / _splitValue
 
-            Rectangle{
-                id: locationNameRect
-                Layout.preferredWidth: 1
-                Layout.preferredHeight: floorCombo.height
+            spacing: _headerSpacing
+
+            TitleWithUnderline {
                 Layout.fillWidth: true
-                Layout.columnSpan: 2
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                border.color: "black"
-                border.width: 1
-                radius: 0.05*locationNameRect.width
+                Layout.fillHeight: true
+                Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)
+
+                text: "Locations"
+                color: Constants.colorWhitePure
+                font.bold: true
+                font.pixelSize: Constants.sizeHeader1
+                minimumPixelSize: Constants.sizeHeader6
+                fontSizeMode: Text.Fit
+                wrapMode: Text.WordWrap
+            }
+
+            GridView {
+                Layout.fillHeight: true
+                Layout.fillWidth: true
+
+                cellWidth: _cardWidth + _cellMarginX
+                cellHeight: _cardHeight + _cellMarginY
+
                 clip: true
 
-                TextInput{
-                    id:locationName
-                    anchors.fill: parent
-                    font.pixelSize: parent.height*0.7
-                    leftPadding: 0.05*parent.width
+                model: __locationModel
+                delegate: LumenCard {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+
+                    _iconSource: Constants.iconLocation
+                    _text: model.name
+                    _description: "Building: " + model.building +
+                                  "\nFloor: " + model.floor
+
+                    onDeleteInvoked: {
+                        __locationModel.removeLocationRequest(model.index)
+                    }
+
+                    width: _cardWidth
+                    height: _cardHeight
+                }
+
+                displaced: Transition {
+                    NumberAnimation { properties: "x,y"; duration: 250 }
+                }
+
+                remove: Transition {
+                    NumberAnimation { property: "opacity"; to: 0; duration: 250 }
+                }
+
+                add: Transition {
+                    NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 250 }
                 }
             }
+        }
 
+        ColumnLayout {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.preferredWidth: 1
 
-            LabeledComboBox{
-                id: floorCombo
-                comboBoxLabel: "Floor Number"
-                comboBoxModel: ["1","2","3","4"]
+            spacing: _headerSpacing
+
+            TitleWithUnderline {
                 Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            }
-
-            LabeledComboBox{
-                id: buildingCombo
-                comboBoxLabel: "Building"
-                comboBoxModel: ["Faculty Building","Genedy"]
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            }
-
-            Rectangle{
-                id: descriptionRect
-                border.width: 1
-                border.color: "black"
-                Layout.columnSpan: 2
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 Layout.fillHeight: true
-                radius: 0.05*descriptionRect.width
+                Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)
 
-                TextInput{
-                    id: descriptionText
-                    anchors.fill: parent
-                    leftPadding: 0.05*parent.width
-                    topPadding:  0.05*parent.width
-                }
-
+                text: "Add Location"
+                color: Constants.colorWhitePure
+                font.bold: true
+                font.pixelSize: Constants.sizeHeader1
+                minimumPixelSize: Constants.sizeHeader6
+                fontSizeMode: Text.Fit
+                wrapMode: Text.WordWrap
             }
 
 
-            RoundButton{
-                id: addButton
-                background: Image{
-                    id: addImage
-                    source: "qrc:/images/addButton.svg"
+            LumenRectangle {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                implicitHeight: cLayout.implicitHeight + 2 * cLayout.anchors.margins
+
+                GridLayout {
+                    id: cLayout
+
+                    anchors {
+                        fill: parent
+                        margins: 0.05 * parent.width
+                    }
+
+                    columns: 2
+
+                    TextField {
+                        id: locationName
+
+                        Layout.fillWidth: true
+                        Layout.columnSpan: 2
+
+                        placeholderText: "Name"
+                    }
+
+                    ComboBox {
+                        id: floorCombo
+
+                        Layout.fillWidth: true
+
+                        displayText: "Floor #: " + currentValue
+                        model: [1, 2, 3, 4]
+                    }
+
+                    ComboBox {
+                        id: buildingCombo
+
+                        Layout.fillWidth: true
+
+                        displayText: "Building: " + currentValue
+                        model: ["Faculty Building","Genedy"]
+                    }
+
+                    TextField {
+                        id: descriptionText
+
+                        Layout.fillWidth: true
+                        Layout.fillHeight: true
+                        Layout.columnSpan: 2
+
+                        placeholderText: "Description"
+                    }
+
+                    RoundButton {
+                        id: addButton
+
+                        Layout.columnSpan: 2
+                        Layout.fillWidth: true
+                        Layout.preferredHeight: Constants.sizeHuge.height
+
+                        background: Image {
+                            id: addImage
+                            source: Constants.iconAdd
+                            fillMode: Image.PreserveAspectFit
+                            mipmap: true
+                        }
+
+                        onClicked: __locationModel.createLocationRequest(locationName.displayText, buildingCombo.currentValue, floorCombo.currentValue, descriptionText.displayText)
+                    }
                 }
-
-                Layout.preferredWidth: parent.width*0.15
-                Layout.preferredHeight: addButton.width
-                radius: addButton.width/2
-                Layout.columnSpan: 2
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
-
-                onClicked: _locationModel.onAddLocation(locationName.displayText, buildingCombo.currentSelection, floorCombo.currentSelection, descriptionText.displayText)
             }
         }
     }
 }
-
