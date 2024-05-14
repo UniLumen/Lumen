@@ -6,7 +6,8 @@ class Schedule
 {
 public:
     Schedule();
-    QVector<TimeSlot> timeSlots;
+    static std::vector<std::unordered_map<int, std::vector<TimeSlot>>> schedules;
+    static void addSchedule(std::unordered_map<int, std::vector<TimeSlot>> newSchedule);
 };
 
 #endif // SCHEDULE_H

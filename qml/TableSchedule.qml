@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import Qt.labs.qmlmodels
 import QtQuick.Layouts
-// import Time 1.0
+import Time 1.0
 Item{
     // TimeSlot{
     //     id: aha
@@ -31,6 +31,9 @@ Item{
             top: parent.top
         }
     }
+    TimeSlot{
+        id: _testtest
+    }
     ListView{
         width: tableScheduleWidth
         height: tableScheduleHeight
@@ -42,6 +45,7 @@ Item{
             scheduleWidth: tableScheduleWidth
             timeSlotHeight: tableScheduleHeight / 6
             day: model.index
+            currentSchedule: _testtest
         }
     }
 }

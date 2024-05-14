@@ -7,10 +7,7 @@ Item{
     property double scheduleWidth: 1200
     property double timeSlotHeight: 100
     property int day
-    TimeSlot{
-        id: _testtest
-        currentDay: schedule.day
-    }
+    property TimeSlot currentSchedule
     width: scheduleWidth
     height: timeSlots.height
     Rectangle {
@@ -19,7 +16,7 @@ Item{
         border.width: 1
         border.color: "#828282"
         width: parent.width / 8
-        height: timeSlotHeight * Math.ceil(_testtest.rows / 7) //* timeSlots.rows
+        height: timeSlotHeight * Math.ceil(currentSchedule.rows / 7) //* timeSlots.rows
         anchors.left: parent.left
         MouseArea {
             anchors.fill: parent
@@ -66,8 +63,8 @@ Item{
                 MouseArea{
                     anchors.fill: parent
                     onPressed:{
-                        if(_testtest.rows > 7)
-                            _testtest.removeRow()
+                        if(currentSchedule.rows > 7)
+                            currentSchedule.removeRow()
                     }
                 }
             }
@@ -85,7 +82,7 @@ Item{
         anchors.left: daySlot.right
         Repeater {
             id: timeSlotRepeater
-            model: _testtest
+            model: currentSchedule
             delegate: Rectangle {
                 width: timeSlots.width / 7
                 height: timeSlotHeight
@@ -96,7 +93,7 @@ Item{
                     anchors.fill: parent
                     onPressed: {
                         console.log(model.index % 7)
-                        console.log(_testtest.rows)
+                        console.log(currentSchedule.rows)
                     }
                 }
                 Text{
@@ -125,6 +122,21 @@ Item{
                         addTimeSlotPopup.open();
                     }
 
+                }
+                RoundButton{
+                    id: removeButton
+                    background: Image{
+                        id: removeImage
+                        source: Constants.removeButtonPath
+                    }
+                    width: parent.width/5
+                    height: removeButton.width
+
+                    anchors{
+                        right: parent.right
+                    }
+                    visible: model.course !== "" ? true:false
+                    onClicked: currentSchedule.onRemoveTimeSlot(model.index);
                 }
             }
         }
@@ -240,7 +252,8 @@ Item{
                         hoverEnabled: true
 
                         onClicked: {
-                            _testtest.editSelectedCell(addTimeSlotPopup.slotIndex,day,sectionNumCB.currentSelection,courseTypeCB.currentSelection,doctorCB.currentSelection,doctorCB.currentSelection,courseCB.currentSelection
+                            currentSchedule.currentDay = day;
+                            currentSchedule.editSelectedCell(addTimeSlotPopup.slotIndex,day,sectionNumCB.currentSelection,courseTypeCB.currentSelection,doctorCB.currentSelection,doctorCB.currentSelection,courseCB.currentSelection
                                                        ,courseCB.currentSelection + " " + courseTypeCB.currentSelection + "(" + sectionNumCB.currentSelection + ")"
                                                        + " " + doctorCB.currentSelection + " " + doctor2CB.currentSelection)
                             addTimeSlotPopup.close()
@@ -352,8 +365,8 @@ Item{
                         hoverEnabled: true
 
                         onClicked: {
-                            if(_testtest.rows >= 7)
-                                _testtest.addRow(placesCB.currentSelection)
+                            if(currentSchedule.rows >= 7)
+                                currentSchedule.addRow(placesCB.currentSelection)
                             addPlacePopup.close()
                         }
 

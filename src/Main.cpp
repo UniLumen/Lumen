@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QQmlContext>
 #include "RepositoryManager.h"
+#include "schedule.h"
 // #include "timeslot.h"
 
 #include "timeslotmodel.h"
@@ -13,10 +14,10 @@ void cleanup() {
     // qDebug()<<test.dayGrid[0].size();
     for(int i = 0; i < TimeSlotModel::dataSet[0].size();i++)
     {
-        qDebug()<<TimeSlotModel::dataSet[0][i].day;
-        qDebug()<<TimeSlotModel::dataSet[0][i].timePeriod;
-        qDebug()<<TimeSlotModel::dataSet[0][i].place;
-        qDebug()<<TimeSlotModel::dataSet[0][i].course;
+        //qDebug()<<dayGrid[0][i].day;
+        //qDebug()<<TimeSlotModel::dayGrid[0][i].timePeriod;
+        //qDebug()<<TimeSlotModel::dayGrid[0][i].place;
+        //qDebug()<<TimeSlotModel::dayGrid[0][i].course;
     }
 }
 int main(int argc, char* argv[]) {
@@ -40,6 +41,10 @@ int main(int argc, char* argv[]) {
         },
         Qt::QueuedConnection);
     engine.load(url);
+
+
+    qDebug()<<Schedule::schedules.size();
+
     if (engine.rootObjects().isEmpty()) {
         return -1;
     }

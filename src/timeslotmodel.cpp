@@ -1,11 +1,11 @@
 #include "timeslotmodel.h"
 #include <QDebug>
 // #include "QAbstractListModel"
-
+#include "schedule.h"
 std::unordered_map<int, std::vector<TimeSlot>> TimeSlotModel::dataSet;
 
-TimeSlotModel::TimeSlotModel(QObject *parent):
-    QAbstractListModel(parent){
+TimeSlotModel::TimeSlotModel(QObject *parent){
+    Schedule::addSchedule(dayGrid);
     dayGrid[0].push_back(TimeSlot("CIS 2"));
     dayGrid[0].push_back(TimeSlot(""));
     dayGrid[0].push_back(TimeSlot(""));
@@ -57,7 +57,6 @@ TimeSlotModel::TimeSlotModel(QObject *parent):
     dayGrid[6].push_back(TimeSlot(""));
     // m_currentDay = -1;
 }
-
 int TimeSlotModel::rowCount(const QModelIndex& parent) const{
 
     if (parent.isValid()){
@@ -138,8 +137,16 @@ void TimeSlotModel::editSelectedCell(int index,const int &day,const int &section
     TimeSlotModel::dataSet[m_currentDay].push_back(dayGrid[m_currentDay][index]);
     TimeSlot ti = dayGrid[m_currentDay][index];
     qDebug() << ti.timePeriod << ' ' << ti.course << ' ' << ti.day << ' ' << ti.place;
+    qDebug() << m_currentDay << "\n";
 }
-
+void TimeSlotModel::onRemoveTimeSlot(int index){
+    beginResetModel();
+    //TimeSlotModel::dataSet[m_currentDay].erase(dayGrid[m_currentDay][index]);
+    dayGrid[m_currentDay].erase(dayGrid[m_currentDay].begin()+index);
+    dayGrid[m_currentDay].insert(dayGrid[m_currentDay].begin()+index,TimeSlot(""));
+    qDebug() << "onRemove timeSlot called on index: " + std::to_string(index);
+    endResetModel();
+}
 void TimeSlotModel::addRow(const QString &place){
     beginResetModel();
     dayGrid.at(m_currentDay).push_back(TimeSlot(place));
@@ -153,7 +160,10 @@ void TimeSlotModel::addRow(const QString &place){
     endResetModel();
     emit rowCountChanged();
 }
-
+void TimeSlotModel::addToSchedule()
+{
+    Schedule::schedules.push_back(dayGrid);
+}
 void TimeSlotModel::removeRow()
 {
     beginResetModel();

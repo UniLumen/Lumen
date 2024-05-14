@@ -31,7 +31,8 @@ public:
     };
 
     static std::unordered_map<int, std::vector<TimeSlot>> dataSet;
-    explicit TimeSlotModel(QObject *parent = nullptr);
+    std::unordered_map<int, std::vector<TimeSlot>> dayGrid;
+    TimeSlotModel(QObject *parent = nullptr);
 
     int rowCount(const QModelIndex &parent) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
@@ -48,6 +49,8 @@ public slots:
                           ,const QString &displayText);
     void addRow(const QString &place);
     void removeRow();
+    void onRemoveTimeSlot(int index);
+    void addToSchedule();
 
 signals:
     void rowCountChanged();
@@ -55,7 +58,6 @@ signals:
 
 private:
     int m_currentDay;
-    std::unordered_map<int, std::vector<TimeSlot>> dayGrid;
 };
 
 #endif // TIMESLOTMODEL_H
