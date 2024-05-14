@@ -112,6 +112,8 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/LocationEditor.qml
         qml/CourseForm.qml
         qml/EditorPage.qml
+        qml/UserPage.qml
+        qml/UserOptimizedSchedules.qml
 )
 
 target_include_directories(${PROJECT_NAME}
