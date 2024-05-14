@@ -17,15 +17,13 @@ namespace Lumen {
         QJsonObject root = QJsonDocument::fromJson(data).object();
 
         Q_ASSERT(root.contains("locations"));
-        Q_ASSERT(root.contains("doctors"));
-        Q_ASSERT(root.contains("tas"));
+        Q_ASSERT(root.contains("instructors"));
         Q_ASSERT(root.contains("courses"));
 
         JsonReader reader;
 
         locationRepo.fromJson(reader, root["locations"]);
-        doctorRepo.fromJson(reader, root["doctors"]);
-        taRepo.fromJson(reader, root["tas"]);
+        instructorRepo.fromJson(reader, root["instructors"]);
         courseRepo.fromJson(reader, root["courses"]);
     }
 
@@ -48,8 +46,7 @@ namespace Lumen {
             QJsonObject json;
 
             json["locations"] = locationRepo.toJson();
-            json["doctors"] = doctorRepo.toJson();
-            json["tas"] = taRepo.toJson();
+            json["instructors"] = instructorRepo.toJson();
             json["courses"] = courseRepo.toJson();
 
             f.write(QJsonDocument(json).toJson());

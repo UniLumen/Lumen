@@ -21,8 +21,7 @@ namespace Lumen {
 
     public:
         Repository<QUuid, Location> locationRepo;
-        Repository<QUuid, Instructor> doctorRepo;
-        Repository<QUuid, Instructor> taRepo;
+        Repository<QUuid, Instructor> instructorRepo;
         Repository<QUuid, Course> courseRepo;
 
     private:
