@@ -12,24 +12,9 @@ Item {
     property real _splitValue: 0.5
     property bool _editMode: false
 
-    LumenLogo {
-        id: lumenLogo
-    }
-
-    UserTabBar {
-        id: tabBar
-        anchors {
-            left: lumenLogo.right
-            right: parent.right
-            bottom: lumenLogo.bottom
-            leftMargin: 20
-            bottomMargin: -8
-        }
-    }
-
     RowLayout {
         anchors {
-            top:  lumenLogo.bottom
+            top:  parent.top
             bottom: parent.bottom
             left: parent.left
             right: parent.right
