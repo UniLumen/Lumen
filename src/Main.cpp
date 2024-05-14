@@ -5,11 +5,13 @@
 #include <QFontDatabase>
 
 #include "Controllers/CourseController.h"
+#include "Controllers/InstructorController.h"
 #include "Controllers/LocationController.h"
 #include "Controllers/UserConfController.h"
 #include "RepositoryManager.h"
 #include "UserConf.h"
 #include "Views/CourseListView.h"
+#include "Views/InstructorListView.h"
 #include "Views/LocationListView.h"
 
 int main(int argc, char* argv[]) {
@@ -38,6 +40,7 @@ int main(int argc, char* argv[]) {
 
     LocationListView locationsView;
     LocationController locationController(&repoManager.locationRepo, &locationsView);
+    InstructorListView instructorModel;
 
     QQmlApplicationEngine engine;
     QQmlContext* context = engine.rootContext();
@@ -53,6 +56,8 @@ int main(int argc, char* argv[]) {
 
     context->setContextProperty("__courseModel", &coursesView);
     context->setContextProperty("__userModel", &userView);
+
+    context->setContextProperty("__instructorModel", &instructorModel);
     context->setContextProperty("__locationModel", &locationsView);
 
     engine.load(url);
