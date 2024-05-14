@@ -14,5 +14,6 @@
         <file>images/icon_edit.svg</file>
         <file>images/icon_remove.svg</file>
         <file>fonts/Poppins-Regular.ttf</file>
+        <file>images/icon_add.svg</file>
     </qresource>
 </RCC>

@@ -92,6 +92,7 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/CourseEditor.qml
         qml/InstructorEditor.qml
         qml/LocationEditor.qml
+        qml/CourseForm.qml
 )
 
 target_include_directories(${PROJECT_NAME}
