@@ -25,16 +25,19 @@ TabBar {
     LumenTabButton {
         text: Constants.textLocationsTab
         icon.source: Constants.iconLocation
+        onClicked: mainLoader.source = "LocationEditor.qml"
     }
 
     LumenTabButton {
         text: Constants.textInstructorsTab
         icon.source: Constants.iconInstructor
+        onClicked: mainLoader.source = "InstructorEditor.qml"
     }
 
     LumenTabButton {
         text: Constants.textCoursesTab
         icon.source: Constants.iconCourse
+        onClicked: mainLoader.source = "CourseEditor.qml"
     }
 
     LumenTabButton {

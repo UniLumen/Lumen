@@ -3,36 +3,42 @@ import QtQuick.Layouts
 import QtQuick.Controls
 
 
-Item{
+Item {
     id: root
 
-    anchors.fill: parent
+    LumenLogo {
+        id: lumenLogo
+    }
 
+    EditorTabBar {
+        id: editorTabBar
+        anchors {
+            left: lumenLogo.right
+            right: parent.right
+            bottom: lumenLogo.bottom
+            leftMargin: 20
+            bottomMargin: -8
+        }
+    }
 
     GridView{
         id: gView
-        width: parent.width*3/5
-        height: parent.height
-        cellWidth: gView.width/4
-        cellHeight: gView.cellWidth*1.5
-        clip:true
 
-        displaced: Transition{
-            NumberAnimation { properties: "x,y"; duration: 250 }
+        anchors {
+            top: editorTabBar.bottom;
+            bottom: parent.bottom;
         }
 
-        remove: Transition{
-            NumberAnimation { property: "opacity"; to: 0; duration: 250 }
-        }
+        width: parent.width * 3 / 5
+        cellWidth: gView.width / 4
+        cellHeight: gView.cellWidth * 1.5
+        clip: true
 
-        add: Transition{
-            NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 250 }
-        }
+        model: __courseModel
 
-        model: _courseModel
-
-        delegate: CardTemplate{
+        delegate: CardTemplate {
             cardTitle: model.name
+
             content1: "Credit Hours: " + model.creditHours
             content2: "Year Of Study: " + model.YearOfStudy
             content3: "Offering Departmnet: " + model.dept
@@ -51,8 +57,20 @@ Item{
                     right: parent.right
                 }
 
-                onClicked: _courseModel.onRemoveCourse(model.index)
+                onClicked: __courseModel.removeCourseRequest(model.index)
             }
+        }
+
+        displaced: Transition {
+            NumberAnimation { properties: "x,y"; duration: 250 }
+        }
+
+        remove: Transition {
+            NumberAnimation { property: "opacity"; to: 0; duration: 250 }
+        }
+
+        add: Transition {
+            NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 250 }
         }
     }
 
@@ -171,9 +189,8 @@ Item{
                 Layout.columnSpan: 2
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
 
-                onClicked: _courseModel.onAddCourse(subjectName.displayText, yearCombo.currentSelection, deptCombo.currentSelection,
-                                                    creditCombo.currentSelection,
-                                                    labCheckBox.checkState == Qt.Checked, tutorialCheckBox.checkState == Qt.Checked )
+                onClicked: __courseModel.addCourseRequest(subjectName.displayText, yearCombo.currentSelection, deptCombo.currentSelection,
+                                                          creditCombo.currentSelection, labCheckBox.checked, tutorialCheckBox.checked)
             }
 
 

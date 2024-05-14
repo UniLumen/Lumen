@@ -49,6 +49,7 @@ public slots:
 signals:
     void addCourseRequest(const QUuid& id);
     void addCourseAttendanceRequest(const QUuid& id, bool lecture, bool lab, bool tutorial);
+    void addCourseRequest(const QString& name, QString year, const QString& dept, const QString& credits, bool hasLab, bool hasTutorial);
     void removeCourseRequest(int index);
 
     void creditHoursChanged();
