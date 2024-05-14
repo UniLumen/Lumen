@@ -3,14 +3,15 @@
 namespace Lumen {
     Course::Course() : m_id(QUuid::createUuid()) {}
 
-    Course::Course(const QString& name, const QString& code, int creditHours, unsigned int courseComponents)
-        : m_id(QUuid::createUuid()), m_name(name), m_code(code), m_creditHours(creditHours), m_courseComponents(courseComponents) {}
+    Course::Course(const QString& name, const QString& code, const QString& dept, int year, int creditHours,
+                   unsigned int mandatoryComponents, unsigned int courseComponents)
+        : m_name(name), m_code(code), m_dept(dept), m_year(year), m_creditHours(creditHours),
+          m_mandatoryComponents(mandatoryComponents), m_courseComponents(courseComponents) {}
 
-    Course::Course(const QUuid& id, const QString& name, const QString& code, int creditHours, unsigned int courseComponents)
-        : m_id(id), m_name(name), m_code(code), m_creditHours(creditHours), m_courseComponents(courseComponents) {}
-
-    Course::Course(const QString& name, int year,const QString& dept, int creditHours, unsigned int courseComponents)
-        : m_id(QUuid::createUuid()), m_name(name), m_year(year), m_dept(dept), m_creditHours(creditHours), m_courseComponents(courseComponents){}
+    Course::Course(const QUuid& id, const QString& name, const QString& code, const QString& dept, int year,
+                   int creditHours, unsigned int mandatoryComponents, unsigned int courseComponents)
+        : m_id(id), m_name(name), m_code(code), m_dept(dept), m_year(year), m_creditHours(creditHours),
+          m_mandatoryComponents(mandatoryComponents), m_courseComponents(courseComponents) {}
 
     QUuid Course::id() const {
         return m_id;
@@ -20,16 +21,16 @@ namespace Lumen {
         return m_name;
     }
 
-    int Course::yearOfStudy() const{
-        return m_year;
+    QString Course::code() const {
+        return m_code;
     }
 
-    QString Course::department() const{
+    QString Course::dept() const {
         return m_dept;
     }
 
-    QString Course::code() const {
-        return m_code;
+    int Course::year() const {
+        return m_year;
     }
 
     int Course::creditHours() const {
@@ -46,6 +47,18 @@ namespace Lumen {
 
     bool Course::hasTutorial() const {
         return (m_courseComponents & TutorialComponent);
+    }
+
+    bool Course::hasMandatoryLecture() const {
+        return (m_mandatoryComponents & LectureComponent);
+    }
+
+    bool Course::hasMandatoryLab() const {
+        return (m_mandatoryComponents & LabComponent);
+    }
+
+    bool Course::hasMandatoryTutorial() const {
+        return (m_mandatoryComponents & TutorialComponent);
     }
 
     QList<Lecture> Course::lectures() const {
@@ -68,6 +81,14 @@ namespace Lumen {
         m_code = code;
     }
 
+    void Course::setDept(const QString& dept) {
+        m_dept = dept;
+    }
+
+    void Course::setYear(int year) {
+        m_year = year;
+    }
+
     bool Course::setCreditHours(int creditHours) {
         if (creditHours < 0) {
             return false;
@@ -81,6 +102,10 @@ namespace Lumen {
         m_courseComponents = components;
     }
 
+    void Course::setMandatoryComponents(unsigned int components) {
+        m_mandatoryComponents = components;
+    }
+
     QJsonValue Course::toJson() const {
         QJsonObject json;
 
@@ -88,11 +113,14 @@ namespace Lumen {
         json["name"] = m_name;
         json["code"] = m_code;
         json["creditHours"] = m_creditHours;
-        json["yearOfStudy"] = m_year;
+        json["year"] = m_year;
         json["dept"] = m_dept;
         json["hasLecture"] = hasLecture();
         json["hasLab"] = hasLab();
         json["hasTutorial"] = hasTutorial();
+        json["hasMandatoryLecture"] = hasMandatoryLecture();
+        json["hasMandatoryLab"] = hasMandatoryLab();
+        json["hasMandatoryTutorial"] = hasMandatoryTutorial();
 
         {
             QJsonArray lecs;
@@ -130,7 +158,7 @@ namespace Lumen {
         Q_ASSERT(obj.contains("name"));
         Q_ASSERT(obj.contains("code"));
         Q_ASSERT(obj.contains("creditHours"));
-        Q_ASSERT(obj.contains("yearOfStudy"));
+        Q_ASSERT(obj.contains("year"));
         Q_ASSERT(obj.contains("dept"));
         Q_ASSERT(obj.contains("lectures"));
         Q_ASSERT(obj.contains("sections"));
@@ -138,12 +166,15 @@ namespace Lumen {
         Q_ASSERT(obj.contains("hasLecture"));
         Q_ASSERT(obj.contains("hasLab"));
         Q_ASSERT(obj.contains("hasTutorial"));
+        Q_ASSERT(obj.contains("hasMandatoryLecture"));
+        Q_ASSERT(obj.contains("hasMandatoryLab"));
+        Q_ASSERT(obj.contains("hasMandatoryTutorial"));
 
         m_id = QUuid::fromString(obj.value("id").toString());
         m_name = obj.value("name").toString();
         m_code = obj.value("code").toString();
         m_creditHours = obj.value("creditHours").toInt();
-        m_year = obj.value("yearOfStudy").toInt();
+        m_year = obj.value("year").toInt();
         m_dept = obj.value("dept").toString();
 
         if (obj.value("hasLecture").toBool()) {
@@ -154,6 +185,16 @@ namespace Lumen {
         }
         if (obj.value("hasTutorial").toBool()) {
             m_courseComponents |= TutorialComponent;
+        }
+
+        if (obj.value("hasMandatoryLecture").toBool()) {
+            m_mandatoryComponents |= LectureComponent;
+        }
+        if (obj.value("hasMandatoryLab").toBool()) {
+            m_mandatoryComponents |= LabComponent;
+        }
+        if (obj.value("hasMandatoryTutorial").toBool()) {
+            m_mandatoryComponents |= TutorialComponent;
         }
 
         {

@@ -117,9 +117,9 @@ void CourseListView::createCourse(const QVariantMap& courseMap) {
     dto.hasLecture = courseMap["hasLecture"].toBool();
     dto.hasLab = courseMap["hasLab"].toBool();
     dto.hasTutorial = courseMap["hasTutorial"].toBool();
-    dto.isLectureMandatory = courseMap["isLectureMandatory"].toBool();
-    dto.isLabMandatory = courseMap["isLabMandatory"].toBool();
-    dto.isTutorialMandatory = courseMap["isTutorialMandatory"].toBool();
+    dto.hasMandatoryLecture = courseMap["isLectureMandatory"].toBool();
+    dto.hasMandatoryLab = courseMap["isLabMandatory"].toBool();
+    dto.hasMandatoryTutorial = courseMap["isTutorialMandatory"].toBool();
 
     emit createCourseRequest(dto);
 }

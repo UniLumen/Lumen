@@ -14,18 +14,27 @@ namespace Lumen {
         QUuid id() const override;
         QString name() const override;
         QString code() const override;
+        QString dept() const override;
+        int year() const override;
         int creditHours() const override;
         bool hasLecture() const override;
         bool hasLab() const override;
         bool hasTutorial() const override;
+        bool hasMandatoryLecture() const override;
+        bool hasMandatoryLab() const override;
+        bool hasMandatoryTutorial() const override;
+
         QList<Lecture> lectures() const override;
         QList<Section> sections() const override;
         QList<const Instructor*> doctors() const override;
 
         void setName(const QString& name) override;
         void setCode(const QString& code) override;
+        void setDept(const QString& dept) override;
+        void setYear(int year) override;
         bool setCreditHours(int creditHours) override;
         void setCourseComponents(unsigned int components) override;
+        void setMandatoryComponents(unsigned int components) override;
 
         QJsonValue toJson() const override;
         void fromJson(JsonReader& reader, const QJsonValue& json) override;
