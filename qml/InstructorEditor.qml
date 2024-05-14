@@ -2,10 +2,17 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 
-Item {
+
+Item{
     id: root
 
-    anchors.fill: parent
+    property int _headerSpacing: 32
+    property int _cardWidth: 170
+    property int _cardHeight: 270
+    property int _cellMarginX: 15
+    property int _cellMarginY: 25
+    property real _splitValue: 0.5
+    property bool _editorMode: true
 
     LumenLogo {
         id: lumenLogo
@@ -22,149 +29,164 @@ Item {
         }
     }
 
-    GridView{
-        id: gView
-
+    RowLayout {
         anchors {
-            top: editorTabBar.bottom;
-            bottom: parent.bottom;
-        }
-
-        width: parent.width*3/5
-        cellWidth: gView.width/4
-        cellHeight: gView.cellWidth*1.5
-        clip:true
-
-        displaced: Transition{
-            NumberAnimation { properties: "x,y"; duration: 250 }
-        }
-
-        remove: Transition{
-            NumberAnimation { property: "opacity"; to: 0; duration: 250 }
-        }
-
-        add: Transition{
-            NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 250 }
-        }
-
-        model: _instructorModel
-
-        delegate: CardTemplate{
-            cardTitle: model.name
-            content1: "Email: " + model.email
-            iconPath: "qrc:/images/instructor_icon.svg"
-
-            RoundButton{
-                id: removeButton
-                background: Image{
-                    id: removeImage
-                    source: "qrc:/images/icon_remove.svg"
-                }
-                width: parent.width/5
-                height: removeButton.width
-
-                anchors{
-                    right: parent.right
-                }
-
-                onClicked: _instructorModel.onRemoveInstructor(model.index)
-            }
-        }
-    }
-
-    Rectangle{
-        id: instructorForm
-        width: parent.width*1.5/5
-        color: "white"
-        anchors{
-            left: gView.right
-            top: parent.top
+            top:  lumenLogo.bottom
             bottom: parent.bottom
+            left: parent.left
+            right: parent.right
+            topMargin: 32
         }
-        radius: instructorForm.width*0.07
 
-        GridLayout{
-            anchors{
-                left: parent.left
-                right: parent.right
-                top: parent.top
-            }
-            height: 0.6*parent.height
+        spacing: 0
 
-            anchors.margins: 0.05*parent.width
-            columns: 2
-            Text {
-                id: formTitle
-                text: "Enter New Instructor !"
-                Layout.column: 0
-                Layout.columnSpan: 2
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                font.pointSize: 0.06*parent.width
-            }
+        ColumnLayout {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.preferredWidth: 1 / _splitValue
 
-            Rectangle{
-                id: instructorNameRect
-                Layout.preferredWidth: 1
-                Layout.preferredHeight: 50
+            spacing: _headerSpacing
+
+            TitleWithUnderline {
                 Layout.fillWidth: true
-                Layout.columnSpan: 2
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                border.color: "black"
-                border.width: 1
-                radius: 0.08*instructorNameRect.width
-                clip:true
+                Layout.fillHeight: true
+                Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)
 
-                TextInput{
-                    id:instructorName
-                    font.pixelSize: parent.height*0.7
-                    text: "Doctor/Ta Name"
-                    anchors.fill: parent
-                    leftPadding: 0.05*parent.width
-                }
+                text: "Instructors"
+                color: Constants.colorWhitePure
+                font.bold: true
+                font.pixelSize: Constants.sizeHeader1
+                minimumPixelSize: Constants.sizeHeader6
+                fontSizeMode: Text.Fit
+                wrapMode: Text.WordWrap
             }
 
-            Rectangle{
-                id: instructorEmailRect
-                Layout.preferredWidth: 1
-                Layout.preferredHeight: 50
+            GridView {
+                Layout.fillHeight: true
                 Layout.fillWidth: true
-                Layout.columnSpan: 2
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                border.color: "black"
-                border.width: 1
-                radius: 0.08*instructorEmailRect.width
-                clip:true
 
-                TextInput{
-                    id:instructorEmail
-                    text: "Email"
-                    anchors.fill: parent
-                    font.pixelSize: parent.height*0.7
-                    leftPadding: 0.05*parent.width
-                }
-            }
+                cellWidth: _cardWidth + _cellMarginX
+                cellHeight: _cardHeight + _cellMarginY
 
-            CheckBox{
-                id:isDoc
-                text: "Check this box if the instructor is a professor"
-                font.pixelSize: parent.width*0.03
-                Layout.alignment: Qt.AlignLeft
-            }
+                clip: true
 
-            RoundButton{
-                id: addButton
-                background: Image{
-                    id: addImage
-                    source: "qrc:/images/addButton.svg"
+                model: __instructorModel
+                delegate: LumenCard {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+
+                    _iconSource: Constants.iconInstructor
+                    _text: (model.isDoc ? "Dr. " : "Ta. ") + model.name
+                    _description: "Email: " + model.email
+
+                    onDeleteInvoked: {
+                        __instructorModel.removeInstructorRequest(model.index)
+                    }
+
+                    width: _cardWidth
+                    height: _cardHeight
                 }
 
-                Layout.preferredWidth: parent.width*0.15
-                Layout.preferredHeight: addButton.width
-                radius: addButton.width/2
-                Layout.columnSpan: 2
-                Layout.alignment: Qt.AlignHCenter | Qt.AlignVCenter
+                displaced: Transition {
+                    NumberAnimation { properties: "x,y"; duration: 250 }
+                }
 
-                onClicked: _instructorModel.onAddInstructor(instructorName.displayText, instructorEmail.displayText, isDoc.checkState == Qt.Checked)
+                remove: Transition {
+                    NumberAnimation { property: "opacity"; to: 0; duration: 250 }
+                }
+
+                add: Transition {
+                    NumberAnimation { property: "opacity"; from: 0; to: 1; duration: 250 }
+                }
+            }
+        }
+
+        ColumnLayout {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.preferredWidth: 1
+
+            spacing: _headerSpacing
+
+            TitleWithUnderline {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.maximumHeight: Math.max(contentHeight, font.pixelSize)
+
+                text: "Add Instructor"
+                color: Constants.colorWhitePure
+                font.bold: true
+                font.pixelSize: Constants.sizeHeader1
+                minimumPixelSize: Constants.sizeHeader6
+                fontSizeMode: Text.Fit
+                wrapMode: Text.WordWrap
+            }
+
+            Item {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+
+                LumenRectangle {
+                    anchors {
+                        left: parent.left
+                        right: parent.right
+                    }
+                    implicitHeight: cLayout.implicitHeight + 2 * cLayout.anchors.margins
+
+                    GridLayout {
+                        id: cLayout
+
+                        anchors {
+                            fill: parent
+                            margins: 0.05 * parent.width
+                        }
+
+                        columns: 2
+
+                        TextField {
+                            id: instructorName
+
+                            Layout.fillWidth: true
+                            Layout.columnSpan: 2
+
+                            placeholderText: "Name"
+                        }
+
+                        TextField {
+                            id: instructorEmail
+
+                            Layout.fillWidth: true
+                            Layout.columnSpan: 2
+
+                            placeholderText: "Email"
+                        }
+
+                        CheckBox {
+                            id: isDoc
+
+                            Layout.fillWidth: true
+
+                            text: "Check this box if the instructor is a professor"
+                        }
+
+                        RoundButton {
+                            id: addButton
+
+                            Layout.columnSpan: 2
+                            Layout.fillWidth: true
+                            Layout.preferredHeight: Constants.sizeHuge.height
+
+                            background: Image {
+                                id: addImage
+                                source: Constants.iconAdd
+                                fillMode: Image.PreserveAspectFit
+                                mipmap: true
+                            }
+
+                            onClicked: __instructorModel.createInstructorRequest(instructorName.displayText, instructorEmail.displayText, isDoc.checked)
+                        }
+                    }
+                }
             }
         }
     }
