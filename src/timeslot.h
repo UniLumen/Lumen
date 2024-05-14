@@ -23,6 +23,7 @@ public:
 
     QString day;
     QString place;
+    //course
     TimePeriod timePeriod;
     std::list<int> sectionNumbers;
     QString type;
