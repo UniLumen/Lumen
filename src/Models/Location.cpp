@@ -36,11 +36,11 @@ namespace Lumen {
     }
 
     void Location::setBuilding(const QString& building) {
-        m_name = building;
+        m_building = building;
     }
 
-    void Location::setFloor(const QString& floor) {
-        m_name = floor;
+    void Location::setFloor(int floor) {
+        m_floor = floor;
     }
 
     void Location::setDescription(const QString& description) {

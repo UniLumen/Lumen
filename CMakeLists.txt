@@ -43,13 +43,15 @@ qt_add_executable(${PROJECT_NAME}
     src/Controllers/UserConfController.cpp
     src/InstructorModel.h
     src/InstructorModel.cpp
-    src/LocationModel.h
-    src/LocationModel.cpp
+    src/Views/LocationListView.h
+    src/Views/LocationListView.cpp
     src/Models/Instructor.h
     src/Models/Instructor.cpp
     src/Controllers/CourseController.h
     src/Controllers/CourseController.cpp
     src/DTOs/CourseCreationDTO.h
+    src/Controllers/LocationController.h
+    src/Controllers/LocationController.cpp
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"
