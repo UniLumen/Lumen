@@ -148,6 +148,8 @@ Item {
             }
 
             PointingHandCursor {}
+
+            onClicked: __optimizedSchedulesModel.createOptimizedSchedules(groupNumberTextField.text, sectionNumberTextField.text);
         }
     }
 }

@@ -13,6 +13,7 @@
 #include "Views/CourseListView.h"
 #include "Views/InstructorListView.h"
 #include "Views/LocationListView.h"
+#include <Views/OptimizedScheduleView.h>
 
 int main(int argc, char* argv[]) {
     QGuiApplication app(argc, argv);
@@ -43,6 +44,7 @@ int main(int argc, char* argv[]) {
 
     InstructorListView instructorListView;
     InstructorController instructorController(&repoManager.instructorRepo, &instructorListView);
+    OptimizedScheduleView optimizedScheduleView;
 
     QQmlApplicationEngine engine;
     QQmlContext* context = engine.rootContext();
@@ -58,6 +60,7 @@ int main(int argc, char* argv[]) {
 
     context->setContextProperty("__courseModel", &coursesView);
     context->setContextProperty("__userModel", &userView);
+    context->setContextProperty("__optimizedSchedulesModel", &optimizedScheduleView);
 
     context->setContextProperty("__instructorModel", &instructorListView);
     context->setContextProperty("__locationModel", &locationsView);
