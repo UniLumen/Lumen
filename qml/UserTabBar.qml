@@ -20,10 +20,12 @@ TabBar {
     LumenTabButton {
         text: Constants.textDashboardTab
         icon.source: Constants.iconHome
+        onClicked: stackView.pop()
     }
 
     LumenTabButton {
         text: Constants.textSchedulesTab
         icon.source: Constants.iconSchedule
+        onClicked: stackView.push("UserOptimizedSchedules.qml")
     }
 }

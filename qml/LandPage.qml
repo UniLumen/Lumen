@@ -63,7 +63,7 @@ Item {
                     borderColor: Constants.colorBackground
                     textColor: Constants.colorBackground
 
-                    onClicked: mainLoader.source = "UserDashboard.qml"
+                    onClicked: mainLoader.source = "UserPage.qml"
                 }
 
                 LandPageButton{
