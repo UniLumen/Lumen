@@ -1,12 +1,11 @@
-#ifndef LOCATIONMODEL_H
-#define LOCATIONMODEL_H
+#pragma once
 
 #include <QAbstractListModel>
+
 #include "Models/Location.h"
 #include "RepositoryManager.h"
 
-class LocationModel : public QAbstractListModel
-{
+class LocationModel : public QAbstractListModel {
     Q_OBJECT
 public:
     enum Roles{
@@ -15,9 +14,9 @@ public:
         Floor
     };
 
-    LocationModel(QObject *parent = nullptr);
-    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
-    QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    LocationModel(QObject* parent = nullptr);
+    int rowCount(const QModelIndex& parent = QModelIndex()) const override;
+    QVariant data(const QModelIndex& index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
 
 public slots:
@@ -28,4 +27,3 @@ private:
     QList<Lumen::Location*> m_data;
     Lumen::RepositoryManager& repoManager = Lumen::RepositoryManager::instance();
 };
-#endif // LOCATIONMODEL_H

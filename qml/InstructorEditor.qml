@@ -7,11 +7,30 @@ Item {
 
     anchors.fill: parent
 
+    LumenLogo {
+        id: lumenLogo
+    }
+
+    EditorTabBar {
+        id: editorTabBar
+        anchors {
+            left: lumenLogo.right
+            right: parent.right
+            bottom: lumenLogo.bottom
+            leftMargin: 20
+            bottomMargin: -8
+        }
+    }
 
     GridView{
         id: gView
+
+        anchors {
+            top: editorTabBar.bottom;
+            bottom: parent.bottom;
+        }
+
         width: parent.width*3/5
-        height: parent.height
         cellWidth: gView.width/4
         cellHeight: gView.cellWidth*1.5
         clip:true
