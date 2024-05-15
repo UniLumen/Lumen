@@ -7,28 +7,13 @@ Item {
     implicitWidth: Constants.widthDefault
     implicitHeight: Constants.heightDefault
 
-    LumenLogo {
-        id: lumenLogo
-    }
-
-    EditorTabBar {
-        id: editorTabBar
-        anchors {
-            left: lumenLogo.right
-            right: parent.right
-            bottom: lumenLogo.bottom
-            leftMargin: 20
-            bottomMargin: -8
-        }
-    }
-
     TitleWithUnderline {
         id: titleWithUnderline
         text: Constants.textEditorPageTitle
         anchors{
-            top: lumenLogo.bottom
+            top: parent.top
             topMargin: 100
-            left: lumenLogo.left
+            left: parent.left
         }
     }
 
@@ -40,21 +25,25 @@ Item {
             title: "Add Location"
             iconPath: "qrc:/images/location_icon.svg"
             infoText: "Here you can input all the\nlocations and classes available\nat your university"
+            destinationPageTabBarIndex: 1
         }
         ListElement {
             title: "Add Doctors/TAs"
             iconPath: "qrc:/images/instructor_icon.svg"
             infoText: "Here you can input all the\ndoctors and TAs available\nat your university"
+            destinationPageTabBarIndex: 2
         }
         ListElement {
             title: "Add Courses"
             iconPath: "qrc:/images/course_icon.svg"
             infoText: "Here you can input all the\ncourses available\nat your university"
+            destinationPageTabBarIndex: 3
         }
         ListElement {
             title: "Add Schedules"
             iconPath: "qrc:/images/schedule_icon.svg"
             infoText: "Here you can input all\nyears' schedules available\nat your university"
+            destinationPageTabBarIndex: 4
         }
     }
 
@@ -78,6 +67,7 @@ Item {
                 text: model.title
                 icon.source: model.iconPath
                 infoText: model.infoText
+                destinationPageTabBarIndex: model.destinationPageTabBarIndex
             }
         }
 

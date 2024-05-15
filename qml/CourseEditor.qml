@@ -13,25 +13,9 @@ Item {
     property real _splitValue: 0.5
     property bool _editorMode: true
 
-    LumenLogo {
-        id: lumenLogo
-    }
-
-    EditorTabBar {
-        id: editorTabBar
-
-        anchors {
-            left: lumenLogo.right
-            right: parent.right
-            bottom: lumenLogo.bottom
-            leftMargin: 20
-            bottomMargin: -8
-        }
-    }
-
     RowLayout {
         anchors {
-            top:  lumenLogo.bottom
+            top:  parent.top
             bottom: parent.bottom
             left: parent.left
             right: parent.right

@@ -5,9 +5,12 @@ Button {
     id: homePageCard
 
     property alias infoText: moreInfoButton.infoPopupText
+    property int destinationPageTabBarIndex;
 
     display: AbstractButton.TextUnderIcon
     hoverEnabled: true
+
+    onClicked: editorTabBar.currentIndex = destinationPageTabBarIndex;
 
     background: Rectangle {
         color: homePageCard.hovered && !moreInfoButton.hovered ? Constants.colorYellowMain : Constants.colorWhitePure
