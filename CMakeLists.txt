@@ -40,6 +40,8 @@ qt_add_executable(${PROJECT_NAME}
     src/RepositoryManager.cpp
     src/timeslotmodel.h
     src/timeslotmodel.cpp
+    src/scheduleoptimizer.h src/scheduleoptimizer.cpp
+
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"
