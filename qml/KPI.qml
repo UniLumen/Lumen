@@ -88,6 +88,22 @@ Item {
                     textRole: "title"
                     valueRole: "id"
                     visible: _editMode
+
+                    onCurrentIndexChanged: {
+                        var courseMap = __courseModel.getCourseMap(currentIndex);
+
+                        cLectureCheckBox.enabled = !courseMap["hasMandatoryLecture"];
+                        cLectureCheckBox.checked = courseMap["hasMandatoryLecture"];
+                        cLectureCheckBox.visible = courseMap["hasLecture"];
+
+                        cLabCheckBox.enabled = !courseMap["hasMandatoryLab"];
+                        cLabCheckBox.checked = courseMap["hasMandatoryLab"];
+                        cLabCheckBox.visible = courseMap["hasLab"];
+
+                        cTutorialCheckBox.enabled = !courseMap["hasMandatoryTutorial"];
+                        cTutorialCheckBox.checked = courseMap["hasMandatoryTutorial"];
+                        cTutorialCheckBox.visible = courseMap["hasTutorial"];
+                    }
                 }
 
                 RowLayout {
@@ -95,15 +111,15 @@ Item {
 
                     CheckBox {
                         id: cLectureCheckBox
-                        text: qsTr("Lecture")
+                        text: "Lecture"
                     }
                     CheckBox {
                         id: cLabCheckBox
-                        text: qsTr("Lab")
+                        text: "Lab"
                     }
                     CheckBox {
                         id: cTutorialCheckBox
-                        text: qsTr("Tutorial")
+                        text: "Tutorial"
                     }
 
                     visible: _editMode
