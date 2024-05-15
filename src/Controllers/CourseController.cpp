@@ -1,7 +1,7 @@
 #include "CourseController.h"
 
-CourseController::CourseController(Repository<QUuid, Course>* repository, CourseListView* courseListView)
-    : m_repository(repository), m_courseListView(courseListView) {
+CourseController::CourseController(Repository<QUuid, Course>* repository, UserConf* userConf, CourseListView* courseListView)
+    : m_repository(repository), m_userConf(userConf), m_courseListView(courseListView) {
     QVector<const ICourse*> courses;
     for (const auto& ca : repository->getAll()) {
         courses.push_back(ca);
@@ -16,6 +16,15 @@ CourseController::CourseController(Repository<QUuid, Course>* repository, Course
 
     QObject::connect(m_courseListView, &CourseListView::removeCourseRequest, this, [&](int index) {
         const ICourse* removedCoures = m_courseListView->removeCourse(index);
+
+        // Should find a better solution, but this works for now.
+        for (auto& ca : m_userConf->courseAttendances()) {
+            if (ca->course() == removedCoures) {
+                m_userConf->removeCourseAttendance(ca);
+                break;
+            }
+        }
+
         m_repository->remove(removedCoures->id());
     });
 }

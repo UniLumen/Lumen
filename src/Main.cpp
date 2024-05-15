@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
     });
 
     CourseListView coursesView(courses);
-    CourseController courseController(&repoManager.courseRepo, &coursesView);
+    CourseController courseController(&repoManager.courseRepo, &userConf, &coursesView);
 
     CourseListView userView;
     userView.setMinCreditHours(12);
