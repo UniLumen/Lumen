@@ -51,7 +51,7 @@ Item{
                 horizontalCenter: parent.horizontalCenter
             }
             Image {
-                source: Constants.addButtonPath
+                source: Constants.iconAdd
                 width: 30
                 height: 30
                 MouseArea{
@@ -62,7 +62,7 @@ Item{
                 }
             }
             Image {
-                source: Constants.removeButtonPath
+                source: Constants.iconRemove
                 width: 30
                 height: 30
                 MouseArea{
@@ -132,7 +132,7 @@ Item{
                     id: removeButton
                     background: Image{
                         id: removeImage
-                        source: Constants.removeButtonPath
+                        source: Constants.iconRemove
                     }
                     width: parent.width/5
                     height: removeButton.width
@@ -173,11 +173,10 @@ Item{
                     verticalAlignment: Text.AlignVCenter
                     font {
                         pixelSize: 45
-                        family: Constants.mainFont
+                        family: Constants.fontPoppins
                         weight: Font.DemiBold
                     }
                 }
-
                 Rectangle {
                     id: seperatorLine
                     color: "grey"
@@ -185,7 +184,7 @@ Item{
                     height: 1
                 }
                 LabeledComboBox{
-                    comboBoxModel: ["Data Structures","AI"]
+                    comboBoxModel: __courseModel
                     comboBoxLabel: "Course"
                     id: courseCB
                     Layout.preferredWidth: 400
@@ -199,14 +198,14 @@ Item{
                     Layout.preferredHeight: mainBody.height/16
                 }
                 LabeledComboBox{
-                    comboBoxModel: ["beshoy","Salsabil"]
+                    comboBoxModel: __instructorModel
                     comboBoxLabel: "P.Instructor"
                     id: doctorCB
                     Layout.preferredWidth: 400
                     Layout.preferredHeight: mainBody.height/16
                 }
                 LabeledComboBox{
-                    comboBoxModel: ["beshoy","Salsabil"]
+                    comboBoxModel: __instructorModel
                     comboBoxLabel: "S.Instructor"
                     id: doctor2CB
                     Layout.preferredWidth: 400
@@ -232,23 +231,22 @@ Item{
                         onClicked: addTimeSlotPopup.close()
 
                         background: Rectangle {
-                            color: closeButton.hovered ? Constants.yellowHoverColor : Constants.yellowColor
+                            color: closeButton.hovered ? Constants.colorYellowEditorPageHover : Constants.colorYellowMain
                             radius: 15
                         }
 
                         contentItem: Text{
                             text: "Close"
-                            color: Constants.whiteColor
+                            color: Constants.colorWhitePure
                             anchors.centerIn: parent
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                             font {
                                 pixelSize: 25
-                                family: Constants.mainFont
+                                family: Constants.fontPoppins
                                 weight: Font.Bold
                             }
                         }
-
                         PointingHandCursor{}
                     }
                     Button {
@@ -265,27 +263,25 @@ Item{
                         }
 
                         background: Rectangle {
-                            color: saveButton.hovered ? Constants.yellowHoverColor : Constants.yellowColor
+                            color: saveButton.hovered ? Constants.colorYellowEditorPageHover : Constants.colorYellowMain
                             radius: 15
                         }
 
                         contentItem: Text{
                             text: "Save"
-                            color: Constants.whiteColor
+                            color: Constants.colorWhitePure
                             anchors.centerIn: parent
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                             font {
                                 pixelSize: 25
-                                family: Constants.mainFont
+                                family: Constants.fontPoppins
                                 weight: Font.Bold
                             }
                         }
-
                         PointingHandCursor{}
                     }
                 }
-
             }
         }
     }
@@ -297,7 +293,6 @@ Item{
         else
             return qsTr("("+sectionNum+")")
     }
-
     Popup {
         id: addPlacePopup
         property int slotIndex
@@ -324,7 +319,7 @@ Item{
                     verticalAlignment: Text.AlignVCenter
                     font {
                         pixelSize: 45
-                        family: Constants.mainFont
+                        family: Constants.fontPoppins
                         weight: Font.DemiBold
                     }
                 }
@@ -335,8 +330,8 @@ Item{
                     height: 1
                 }
                 LabeledComboBox{
-                    comboBoxModel: ["Class 7","Fahmy","Said"]
-                    comboBoxLabel: "Place"
+                    comboBoxModel: __locationModel
+                    comboBoxLabel: "Location"
                     id: placesCB
                     Layout.preferredWidth: 400
                     Layout.preferredHeight: mainBody.height/16
@@ -353,23 +348,22 @@ Item{
                         onClicked: addPlacePopup.close()
 
                         background: Rectangle {
-                            color: closeButtonPlace.hovered ? Constants.yellowHoverColor : Constants.yellowColor
+                            color: closeButtonPlace.hovered ? Constants.colorYellowEditorPageHover : Constants.colorYellowMain
                             radius: 15
                         }
 
                         contentItem: Text{
                             text: "Close"
-                            color: Constants.whiteColor
+                            color: Constants.colorWhitePure
                             anchors.centerIn: parent
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                             font {
                                 pixelSize: 25
-                                family: Constants.mainFont
+                                family: Constants.fontPoppins
                                 weight: Font.Bold
                             }
                         }
-
                         PointingHandCursor{}
                     }
                     Button {
@@ -385,27 +379,25 @@ Item{
                         }
 
                         background: Rectangle {
-                            color: saveButtonPlace.hovered ? Constants.yellowHoverColor : Constants.yellowColor
+                            color: saveButtonPlace.hovered ? Constants.colorYellowEditorPageHover : Constants.colorYellowMain
                             radius: 15
                         }
 
                         contentItem: Text{
                             text: "Save"
-                            color: Constants.whiteColor
+                            color: Constants.colorWhitePure
                             anchors.centerIn: parent
                             horizontalAlignment: Text.AlignHCenter
                             verticalAlignment: Text.AlignVCenter
                             font {
                                 pixelSize: 25
-                                family: Constants.mainFont
+                                family: Constants.fontPoppins
                                 weight: Font.Bold
                             }
                         }
-
                         PointingHandCursor{}
                     }
                 }
-
             }
         }
     }

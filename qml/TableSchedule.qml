@@ -2,13 +2,10 @@ import QtQuick
 import QtQuick.Controls
 import Qt.labs.qmlmodels
 import QtQuick.Layouts
-// import Time 1.0
+
 Item{
-    // TimeSlot{
-    //     id: aha
-    // }
     id: tableSchedule
-    property double tableScheduleWidth: Constants.editorWindowWidth
+    property double tableScheduleWidth: Constants.widthDefault
     property double tableScheduleHeight: 540
     property int currentTable
     ListModel{
@@ -43,6 +40,7 @@ Item{
             scheduleWidth: tableScheduleWidth
             timeSlotHeight: tableScheduleHeight / 6
             day: model.index
+            selectedTable: currentTable
         }
     }
 }
