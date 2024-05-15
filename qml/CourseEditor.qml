@@ -10,7 +10,7 @@ Item {
     property int _cardHeight: 270
     property int _cellMarginX: 15
     property int _cellMarginY: 25
-    property real _splitValue: 0.5
+    property real _splitValue: 0.6
 
     RowLayout {
         anchors {
