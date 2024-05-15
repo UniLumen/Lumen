@@ -156,6 +156,8 @@ Item {
                     hoverEnabled: true
                     ToolTip.text: _helpText
                 }
+
+                visible: _helpText
             }
         }
     }
