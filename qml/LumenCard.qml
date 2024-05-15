@@ -14,6 +14,7 @@ Item {
     property alias _checkBox0: cCheckBox0
     property alias _checkBox1: cCheckBox1
     property alias _checkBox2: cCheckBox2
+    property bool _editable: false
 
     signal deleteInvoked
 
@@ -63,7 +64,7 @@ Item {
 
                         background: null
                         onClicked: deleteInvoked()
-                        visible: _editMode
+                        visible: _editable
                     }
                 }
 
