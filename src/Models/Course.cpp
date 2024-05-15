@@ -5,7 +5,7 @@ namespace Lumen {
 
     Course::Course(const QString& name, const QString& code, const QString& dept, int year, int creditHours,
                    unsigned int mandatoryComponents, unsigned int courseComponents)
-        : m_name(name), m_code(code), m_dept(dept), m_year(year), m_creditHours(creditHours),
+        : m_id(QUuid::createUuid()), m_name(name), m_code(code), m_dept(dept), m_year(year), m_creditHours(creditHours),
           m_mandatoryComponents(mandatoryComponents), m_courseComponents(courseComponents) {}
 
     Course::Course(const QUuid& id, const QString& name, const QString& code, const QString& dept, int year,
