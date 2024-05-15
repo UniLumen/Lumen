@@ -55,6 +55,8 @@ namespace Lumen {
             ca->fromJson(reader, v);
             if (ca->course()) {
                 addCourseAttendance(ca);
+            } else {
+                delete ca;
             }
         }
     }
