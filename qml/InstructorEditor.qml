@@ -144,6 +144,8 @@ Item{
                             Layout.columnSpan: 2
 
                             placeholderText: "Email"
+
+                            validator: RegularExpressionValidator { regularExpression: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ }
                         }
 
                         CheckBox {
@@ -168,7 +170,11 @@ Item{
                                 mipmap: true
                             }
 
-                            onClicked: __instructorModel.createInstructorRequest(instructorName.displayText, instructorEmail.displayText, isDoc.checked)
+                            onClicked: {
+                                if (instructorName.displayText.trim() !== "" && instructorEmail.displayText.trim() !== "") {
+                                    __instructorModel.createInstructorRequest(instructorName.displayText, instructorEmail.displayText, isDoc.checked)
+                                }
+                            }
                         }
                     }
                 }
