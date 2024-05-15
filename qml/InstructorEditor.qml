@@ -171,7 +171,7 @@ Item{
                             }
 
                             onClicked: {
-                                if (instructorName.displayText.trim() !== "" && instructorEmail.displayText.trim() !== "") {
+                                if (instructorName.displayText.trim() !== "" && instructorEmail.acceptableInput && instructorEmail.displayText.trim() !== "") {
                                     __instructorModel.createInstructorRequest(instructorName.displayText, instructorEmail.displayText, isDoc.checked)
                                 }
                             }
