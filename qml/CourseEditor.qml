@@ -14,10 +14,7 @@ Item {
 
     RowLayout {
         anchors {
-            top:  parent.top
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
+            fill: parent
             topMargin: 32
         }
 
@@ -39,8 +36,6 @@ Item {
                 color: Constants.colorWhitePure
                 font.bold: true
                 font.pixelSize: Constants.sizeHeader1
-                minimumPixelSize: Constants.sizeHeader6
-                fontSizeMode: Text.Fit
                 wrapMode: Text.WordWrap
             }
 
@@ -102,8 +97,6 @@ Item {
                 color: Constants.colorWhitePure
                 font.bold: true
                 font.pixelSize: Constants.sizeHeader1
-                minimumPixelSize: Constants.sizeHeader6
-                fontSizeMode: Text.Fit
                 wrapMode: Text.WordWrap
             }
 

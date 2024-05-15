@@ -40,8 +40,6 @@ Item{
                 color: Constants.colorWhitePure
                 font.bold: true
                 font.pixelSize: Constants.sizeHeader1
-                minimumPixelSize: Constants.sizeHeader6
-                fontSizeMode: Text.Fit
                 wrapMode: Text.WordWrap
             }
 
@@ -102,8 +100,6 @@ Item{
                 color: Constants.colorWhitePure
                 font.bold: true
                 font.pixelSize: Constants.sizeHeader1
-                minimumPixelSize: Constants.sizeHeader6
-                fontSizeMode: Text.Fit
                 wrapMode: Text.WordWrap
             }
 
