@@ -27,7 +27,7 @@ Item {
             Layout.fillWidth: true
             spacing: 35
             Layout.margins: 20
-            TextLandPage {
+            LandPageText {
                 Layout.leftMargin: 40
                 text: "Schedules Directory"
                 font.pointSize: 30

@@ -1,7 +1,7 @@
 import QtQuick
 
 Image {
-    source: Constants.yellowLinesImagePath
+    source: Constants.imageYellowLines
     opacity: 0.5
     mipmap: true
 }

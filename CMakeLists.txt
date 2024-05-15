@@ -23,25 +23,43 @@ qt_add_executable(${PROJECT_NAME}
     src/schedule.h
     src/schedule.cpp
     src/timeslot.h
-    src/JsonReader.h
-    src/JsonReader.inl
-    src/JsonReader.cpp
-    src/JsonWriter.h
-    src/JsonWriter.inl
-    src/JsonWriter.cpp
     src/Models/Location.h
-    src/Models/Doctor.h
-    src/Models/TA.h
+    src/Models/Location.cpp
     src/Models/Course.h
+    src/Models/Course.cpp
+    src/Models/Lecture.h
+    src/Models/Lecture.cpp
+    src/Models/Section.h
+    src/Models/Section.cpp
     src/Models/Models.h
-    src/Repository.h 
-    src/Repository.inl
+    src/JsonSerializable.h
+    src/JsonReader.h
     src/RepositoryManager.h
     src/RepositoryManager.cpp
     src/timeslotmodel.h
     src/timeslotmodel.cpp
-    src/scheduleoptimizer.h src/scheduleoptimizer.cpp
-
+    src/scheduleoptimizer.h 
+    src/scheduleoptimizer.cpp
+    src/Views/CourseListView.h
+    src/Views/CourseListView.cpp
+    src/UserConf.h
+    src/UserConf.cpp
+    src/Models/CourseAttendance.h
+    src/Models/CourseAttendance.cpp
+    src/Controllers/UserConfController.h
+    src/Controllers/UserConfController.cpp
+    src/Views/InstructorListView.h
+    src/Views/InstructorListView.cpp
+    src/Views/LocationListView.h
+    src/Views/LocationListView.cpp
+    src/Models/Instructor.h
+    src/Models/Instructor.cpp
+    src/Controllers/CourseController.h
+    src/Controllers/CourseController.cpp
+    src/DTOs/CourseCreationDTO.h
+    src/Controllers/LocationController.h
+    src/Controllers/LocationController.cpp
+    src/Controllers/InstructorController.h src/Controllers/InstructorController.cpp
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"
@@ -63,25 +81,37 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/Main.qml
         qml/Constants.qml
         qml/LandPage.qml
-        qml/LumenLogo.qml
-        qml/YellowLinesImage.qml
         qml/LandPageButton.qml
         qml/ManImage.qml
-        qml/TextLandPage.qml
         qml/EditorSchedule.qml
-        qml/EditorTabBar.qml
-        qml/LumenTabButton.qml
-        qml/PointingHandCursor.qml
         qml/SchedulesTabs.qml
         qml/ScheduleTabButton.qml
-        qml/Temp.qml
         qml/TableRow.qml
         qml/TableSchedule.qml
         qml/FixedRow.qml
-        qml/TestWholeTable.qml
-        qml/TestCompoBix.qml
         qml/AddTimeSlot.qml
         qml/LabeledComboBox.qml
+        qml/LandPageText.qml
+        qml/EditorHomePage.qml
+        qml/YellowLinesImage.qml
+        qml/LumenLogo.qml
+        qml/TitleWithUnderline.qml
+        qml/EditorHomePageCard.qml
+        qml/MoreInfoButton.qml
+        qml/EditorTabBar.qml
+        qml/LumenTabButton.qml
+        qml/PointingHandCursor.qml
+        qml/LumenRectangle.qml
+        qml/UserDashboard.qml
+        qml/CreditHoursDisplay.qml
+        qml/KPI.qml
+        qml/LumenCard.qml
+        qml/UserTabBar.qml
+        qml/CourseEditor.qml
+        qml/InstructorEditor.qml
+        qml/LocationEditor.qml
+        qml/CourseForm.qml
+        qml/EditorPage.qml
 )
 
 target_include_directories(${PROJECT_NAME}

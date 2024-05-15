@@ -1,10 +1,20 @@
 import QtQuick
 import QtQuick.Layouts
 Image {
-    id: lumenLogo
-    Layout.preferredWidth:Constants.lumenLogoWidth
-    Layout.preferredHeight: Constants.lumenLogoHeight
-    sourceSize: Qt.size(Constants.lumenLogoWidth, Constants.lumenLogoHeight)
-    source: Constants.lumenLogoPath
-    smooth: true
+    width: parent.width / 9
+    height: parent.height / 15
+    anchors{
+        left: parent.left
+        top : parent.top
+    }
+
+    source: Constants.imageLumenLogo
+    sourceSize: Constants.res128x128
+    fillMode: Image.PreserveAspectFit
+
+    MouseArea {
+        onClicked: mainLoader.source = "LandPage.qml"
+        anchors.fill: parent
+        cursorShape: Qt.PointingHandCursor
+    }
 }

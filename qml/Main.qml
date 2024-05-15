@@ -6,10 +6,13 @@ import QtQuick.Dialogs
 import Lumen
 
 ApplicationWindow {
+    minimumWidth: 1280
+    minimumHeight: 720
+
     visible: true
-    width: Constants.editorWindowWidth
-    height: Constants.editorWindowHeight
-    color: Constants.backgroundDarkColor
+    width: Constants.widthDefault
+    height: Constants.heightDefault
+    color: Constants.colorBackground
 
     background: Item {
         anchors.fill: parent
@@ -23,7 +26,11 @@ ApplicationWindow {
 
     Loader {
         id: mainLoader
-        anchors.fill: parent;
-        source: "EditorSchedule.qml"
+
+        anchors {
+            fill: parent
+            margins: 32
+        }
+        source: "LandPage.qml"
     }
 }
