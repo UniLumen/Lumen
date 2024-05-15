@@ -1,5 +1,10 @@
 #include "scheduleoptimizer.h"
 #include <QVector>
+QMap<std::pair<int,int>,std::pair<int,TimeSlot>>ScheduleOptimizer:: requredAttendanceTimeSlots;
+QVector<QVector<TimeSlot>>ScheduleOptimizer::minimizedTables;
+QVector<TimeSlot>ScheduleOptimizer::minimizedTable;
+std::unordered_map<QString,int>ScheduleOptimizer::idFinder;
+int ScheduleOptimizer::  dp[7][7][1<<22][2];
 ScheduleOptimizer::ScheduleOptimizer() {}
 
 void getMandatorySlots(int section,QVector<QVector<QVector<TimeSlot>>>timeGrid){
@@ -80,7 +85,6 @@ void ScheduleOptimizer:: buildOptimizedSchedules(int day, int time,int mask,bool
         buildOptimizedSchedules(nxtDay,nxtTime,mask ,nxtTake,dayGrid);
     }
     if(requredAttendanceTimeSlots.find({day,time})!=requredAttendanceTimeSlots.end()) {
-        minimizedTable.push_back(requredAttendanceTimeSlots[{day,time}].second);
         buildOptimizedSchedules(nxtDay, nxtTime, mask, (nxtDay==day),dayGrid);
         minimizedTable.pop_back();
         return;
