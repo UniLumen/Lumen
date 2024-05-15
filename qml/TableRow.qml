@@ -197,9 +197,11 @@ Item{
                     Layout.preferredWidth: 400
                     Layout.preferredHeight: mainBody.height/16
                 }
-                LabeledComboBox{
-                    comboBoxModel: __instructorModel
-                    comboBoxLabel: "P.Instructor"
+                ComboBox{
+                    model: __instructorModel
+                    textRole: "name"
+                    valueRole: "name"
+                    // comboBoxLabel: "P.Instructor"
                     id: doctorCB
                     Layout.preferredWidth: 400
                     Layout.preferredHeight: mainBody.height/16
