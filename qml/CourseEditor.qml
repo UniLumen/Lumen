@@ -11,7 +11,6 @@ Item {
     property int _cellMarginX: 15
     property int _cellMarginY: 25
     property real _splitValue: 0.5
-    property bool _editorMode: true
 
     RowLayout {
         anchors {
@@ -63,6 +62,7 @@ Item {
                     _text: model.title
                     _helpText: model.code
                     _description: "Course hours: " + model.creditHours
+                    _editable: true
 
                     onDeleteInvoked: {
                         __courseModel.removeCourseRequest(model.index)

@@ -12,7 +12,6 @@ Item{
     property int _cellMarginX: 15
     property int _cellMarginY: 25
     property real _splitValue: 0.5
-    property bool _editorMode: true
 
     RowLayout {
         anchors {
@@ -63,6 +62,7 @@ Item{
                     _iconSource: Constants.iconInstructor
                     _text: (model.isDoc ? "Dr. " : "Ta. ") + model.name
                     _description: "Email: " + model.email
+                    _editable: true
 
                     onDeleteInvoked: {
                         __instructorModel.removeInstructorRequest(model.index)

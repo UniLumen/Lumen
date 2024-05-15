@@ -12,7 +12,6 @@ Item{
     property int _cellMarginX: 15
     property int _cellMarginY: 25
     property real _splitValue: 0.5
-    property bool _editorMode: true
 
     RowLayout {
         anchors {
@@ -64,6 +63,7 @@ Item{
                     _text: model.name
                     _description: "Building: " + model.building +
                                   "\nFloor: " + model.floor
+                    _editable: true
 
                     onDeleteInvoked: {
                         __locationModel.removeLocationRequest(model.index)
