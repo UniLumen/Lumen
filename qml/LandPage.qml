@@ -73,7 +73,7 @@ Item {
                     borderColor: editorButton.hovered ? Constants.colorBackground : Constants.colorWhiteLandPageButton
                     textColor: editorButton.hovered ? Constants.colorBlackPure : Constants.colorWhiteLandPageButton
 
-                    onClicked: mainLoader.source = "EditorHomePage.qml"
+                    onClicked: mainLoader.source = "EditorPage.qml"
                 }
             }
         }
