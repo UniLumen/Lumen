@@ -1,5 +1,5 @@
 import QtQuick
-import QtQuick.Controls
+import QtQuick.Layouts
 
 Item {
     implicitWidth: Constants.widthDefault
@@ -20,14 +20,18 @@ Item {
         }
     }
 
-    StackView {
+    StackLayout {
         id: stackView
-        initialItem: "UserDashboard.qml"
+        currentIndex: tabBar.currentIndex
         anchors {
             top: lumenLogo.bottom
             right: parent.right
             left: parent.left
             bottom: parent.bottom
         }
+
+        UserDashboard {}
+
+        UserOptimizedSchedules {}
     }
 }
