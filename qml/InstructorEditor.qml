@@ -163,12 +163,18 @@ Item{
                             Layout.fillWidth: true
                             Layout.preferredHeight: Constants.sizeHuge.height
 
-                            background: Image {
-                                id: addImage
-                                source: Constants.iconAdd
-                                fillMode: Image.PreserveAspectFit
-                                mipmap: true
+                            background: Rectangle {
+                                anchors.centerIn: parent
+
+                                height: Math.min(parent.height, parent.width)
+                                width: Math.min(parent.height, parent.width)
+
+                                color: Constants.colorYellowMain
+                                radius: 100
                             }
+
+                            text: "+"
+                            font.pixelSize: Constants.sizeHeader2
 
                             onClicked: {
                                 if (instructorName.displayText.trim() !== "" && instructorEmail.acceptableInput && instructorEmail.displayText.trim() !== "") {
