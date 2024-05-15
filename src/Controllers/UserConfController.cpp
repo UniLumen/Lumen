@@ -19,7 +19,7 @@ namespace Lumen {
 
         QObject::connect(m_userConf, &UserConf::courseAttendanceAdded, m_courseListView, &CourseListView::addCourse);
         QObject::connect(m_userConf, &UserConf::courseAttendanceRemoved, m_courseListView, [&](const CourseAttendance* ca) {
-            m_courseListView->removeCourse(ca->course());
+            m_courseListView->removeCourse(ca);
         });
 
         QObject::connect(m_courseListView, &CourseListView::removeCourseRequest, m_userConf, [&](int index) {
