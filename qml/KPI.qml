@@ -89,19 +89,20 @@ Item {
                     valueRole: "id"
                     visible: _editMode
 
+                    // NOTE: This will force mandatory components to be selected
                     onCurrentIndexChanged: {
                         var courseMap = __courseModel.getCourseMap(currentIndex);
 
-                        cLectureCheckBox.enabled = !courseMap["hasMandatoryLecture"];
-                        cLectureCheckBox.checked = courseMap["hasMandatoryLecture"];
+                    //     cLectureCheckBox.enabled = !courseMap["hasMandatoryLecture"];
+                        cLectureCheckBox.checked = courseMap["hasLecture"];
                         cLectureCheckBox.visible = courseMap["hasLecture"];
 
-                        cLabCheckBox.enabled = !courseMap["hasMandatoryLab"];
-                        cLabCheckBox.checked = courseMap["hasMandatoryLab"];
+                    //     cLabCheckBox.enabled = !courseMap["hasMandatoryLab"];
+                        cLabCheckBox.checked = courseMap["hasLab"];
                         cLabCheckBox.visible = courseMap["hasLab"];
 
-                        cTutorialCheckBox.enabled = !courseMap["hasMandatoryTutorial"];
-                        cTutorialCheckBox.checked = courseMap["hasMandatoryTutorial"];
+                    //     cTutorialCheckBox.enabled = !courseMap["hasMandatoryTutorial"];
+                        cTutorialCheckBox.checked = courseMap["hasTutorial"];
                         cTutorialCheckBox.visible = courseMap["hasTutorial"];
                     }
                 }
