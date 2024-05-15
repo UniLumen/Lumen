@@ -1,14 +1,57 @@
 #include "scheduleoptimizer.h"
+#include "UserConf.h"
+
 #include <QVector>
-QMap<std::pair<int,int>,std::pair<int,TimeSlot>>ScheduleOptimizer:: requredAttendanceTimeSlots;
+std::map<std::pair<int,int>,int>ScheduleOptimizer:: requredAttendanceTimeSlots;
 std::vector<std::vector<TimeSlot>>ScheduleOptimizer::minimizedTables;
 std::vector<TimeSlot>ScheduleOptimizer::minimizedTable;
-std::unordered_map<QString,int>ScheduleOptimizer::idFinder;
+QMap<std::pair<QString,QString>,int> ScheduleOptimizer::idFinder;
+std::vector<TimeSlot>ScheduleOptimizer::mandatoryTimeSlots;
+int ScheduleOptimizer::initialMask;
 int ScheduleOptimizer::  dp[7][7][1<<22][2];
 ScheduleOptimizer::ScheduleOptimizer() {}
 
-void getMandatorySlots(int section,QVector<QVector<QVector<TimeSlot>>>timeGrid){
+void getMandatorySlots(int section,QVector<QVector<QVector<TimeSlot>>>timeGrid,Lumen::UserConf userConf){
+    QList<const Lumen::CourseAttendance*> attendedCourses =userConf.courseAttendances();
+    std::vector<QString>mandatoryCourses;
+    int x = 0;
+    ScheduleOptimizer::initialMask = 0;
+    for (auto it : attendedCourses) {
+        if(it->hasLab()){
+            ScheduleOptimizer::idFinder[{it->name(),"Lab"}] = x++;
+            if(it->hasMandatoryLab()){
+                mandatoryCourses.push_back(it->name());
+                ScheduleOptimizer::initialMask= ScheduleOptimizer::initialMask |(x-1);
+            }
+        }
+        if(it->hasLecture()){
+            ScheduleOptimizer::idFinder[{it->name(),"Lecture"}] = x++;
+            if(it->hasMandatoryLecture()){
+                mandatoryCourses.push_back(it->name());
+                ScheduleOptimizer::initialMask= ScheduleOptimizer::initialMask |(x-1);
+            }
+        }
+        if(it->hasTutorial()){
+            ScheduleOptimizer::idFinder[{it->name(),"Tutorial"}] = x++;
+            if(it->hasMandatoryTutorial()){
+                mandatoryCourses.push_back(it->name());
+                ScheduleOptimizer::initialMask= ScheduleOptimizer::initialMask |(x-1);
 
+            }
+        }
+    }
+    for(auto it : mandatoryCourses){
+        for(auto schedule : timeGrid){
+            for(auto day : schedule){
+                for(auto timeSlot : day){
+                    if(it == timeSlot.course && timeSlot.sectionNumbers == section){
+                        ScheduleOptimizer:: mandatoryTimeSlots.push_back(timeSlot);
+                        ScheduleOptimizer:: requredAttendanceTimeSlots[{timeSlot.day,timeSlot.timePeriod}] = ScheduleOptimizer::mandatoryTimeSlots.size();
+                    }
+                }
+            }
+        }
+    }
 }
 
 
@@ -44,10 +87,10 @@ int ScheduleOptimizer:: getMinimumDays(int day, int time,int mask,bool take,std:
     for(int schedule = 0; schedule < dayGrid.size();schedule++){
         for (int i = time; i < dayGrid[schedule][day].size() ; i+=6) {
             auto it = dayGrid[schedule][day][i];
-            if(mask & (1<<idFinder[it.course])||idFinder.find(it.course)==idFinder.end()){
+            if(mask & (1<<idFinder[{it.course,it.type}])||idFinder.find({it.course,it.type})==idFinder.end()){
                 continue;
             }
-            ans = fmin(int(ans),int(getMinimumDays(nxtday,nxttime,(mask | (1<<idFinder[it.course])),(nxtday==day),dayGrid)+(take==0)));
+            ans = fmin(int(ans),int(getMinimumDays(nxtday,nxttime,(mask | (1<<idFinder[{it.course,it.type}])),(nxtday==day),dayGrid)+(take==0)));
         }
     }
 
@@ -85,6 +128,7 @@ void ScheduleOptimizer:: buildOptimizedSchedules(int day, int time,int mask,bool
         buildOptimizedSchedules(nxtDay,nxtTime,mask ,nxtTake,dayGrid);
     }
     if(requredAttendanceTimeSlots.find({day,time})!=requredAttendanceTimeSlots.end()) {
+        minimizedTable.push_back(mandatoryTimeSlots[requredAttendanceTimeSlots[{day,time}]]);
         buildOptimizedSchedules(nxtDay, nxtTime, mask, (nxtDay==day),dayGrid);
         minimizedTable.pop_back();
         return;
@@ -92,13 +136,13 @@ void ScheduleOptimizer:: buildOptimizedSchedules(int day, int time,int mask,bool
     for(int schedule = 0; schedule < dayGrid.size();schedule++){
         for (int i = time; i < dayGrid[schedule][day].size();i+=6) {
             auto it =dayGrid[schedule][day][i];
-            if(mask & (1<<idFinder[it.course])||idFinder.find(it.course)==idFinder.end()){
+            if(mask & (1<<idFinder[{it.course,it.type}])||idFinder.find({it.course,it.type})==idFinder.end()){
                 continue;
             }
-            if((getMinimumDays(nxtDay,nxtTime,(mask | (1<<idFinder[it.course])),(nxtDay==day),dayGrid)+(take==0))==ans)
+            if((getMinimumDays(nxtDay,nxtTime,(mask | (1<<idFinder[{it.course,it.type}])),(nxtDay==day),dayGrid)+(take==0))==ans)
             {
                 minimizedTable.push_back(it);
-                buildOptimizedSchedules(nxtDay,nxtTime,(mask | (1<<idFinder[it.course])),(nxtDay==day),dayGrid);
+                buildOptimizedSchedules(nxtDay,nxtTime,(mask | (1<<idFinder[{it.course,it.type}])),(nxtDay==day),dayGrid);
                 minimizedTable.pop_back();
             }
         }
