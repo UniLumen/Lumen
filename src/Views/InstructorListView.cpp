@@ -65,6 +65,10 @@ void InstructorListView::addInstructor(const Instructor* instructor) {
 }
 
 const Instructor* InstructorListView::removeInstructor(int index) {
+    if (index < 0 || index >= m_instructors.count()) {
+        return nullptr;
+    }
+
     const Instructor* removedLocation = m_instructors.at(index);
 
     beginRemoveRows(QModelIndex(), index, index);

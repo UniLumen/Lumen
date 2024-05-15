@@ -17,15 +17,17 @@ CourseController::CourseController(Repository<QUuid, Course>* repository, UserCo
     QObject::connect(m_courseListView, &CourseListView::removeCourseRequest, this, [&](int index) {
         const ICourse* removedCoures = m_courseListView->removeCourse(index);
 
-        // Should find a better solution, but this works for now.
-        for (auto& ca : m_userConf->courseAttendances()) {
-            if (ca->course() == removedCoures) {
-                m_userConf->removeCourseAttendance(ca);
-                break;
+        if (removedCoures) {
+            // Should find a better solution, but this works for now.
+            for (auto& ca : m_userConf->courseAttendances()) {
+                if (ca->course() == removedCoures) {
+                    m_userConf->removeCourseAttendance(ca);
+                    break;
+                }
             }
-        }
 
-        m_repository->remove(removedCoures->id());
+            m_repository->remove(removedCoures->id());
+        }
     });
 }
 
