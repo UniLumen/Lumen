@@ -10,15 +10,11 @@ Item {
     property int _cardHeight: 270
     property int _cellMarginX: 15
     property int _cellMarginY: 25
-    property real _splitValue: 0.5
-    property bool _editorMode: true
+    property real _splitValue: 0.6
 
     RowLayout {
         anchors {
-            top:  parent.top
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
+            fill: parent
             topMargin: 32
         }
 
@@ -40,8 +36,6 @@ Item {
                 color: Constants.colorWhitePure
                 font.bold: true
                 font.pixelSize: Constants.sizeHeader1
-                minimumPixelSize: Constants.sizeHeader6
-                fontSizeMode: Text.Fit
                 wrapMode: Text.WordWrap
             }
 
@@ -63,6 +57,7 @@ Item {
                     _text: model.title
                     _helpText: model.code
                     _description: "Course hours: " + model.creditHours
+                    _editable: true
 
                     onDeleteInvoked: {
                         __courseModel.removeCourseRequest(model.index)
@@ -102,8 +97,6 @@ Item {
                 color: Constants.colorWhitePure
                 font.bold: true
                 font.pixelSize: Constants.sizeHeader1
-                minimumPixelSize: Constants.sizeHeader6
-                fontSizeMode: Text.Fit
                 wrapMode: Text.WordWrap
             }
 

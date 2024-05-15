@@ -85,6 +85,7 @@ Item {
                     _checkBox1.checked: model.hasTutorial
                     _checkBox2.text: "Lecture"
                     _checkBox2.checked: model.hasLecture
+                    _editable: _editMode
 
                     onDeleteInvoked: {
                         __userModel.removeCourseRequest(model.index)

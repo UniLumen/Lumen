@@ -44,12 +44,18 @@ QVariant CourseListView::data(const QModelIndex& index, int role) const {
             return course->code();
         case CreditHours:
             return course->creditHours();
-        case hasLecture:
+        case HasLecture:
             return course->hasLecture();
-        case hasLab:
+        case HasLab:
             return course->hasLab();
-        case hasTutorial:
+        case HasTutorial:
             return course->hasTutorial();
+        case HasMandatoryLecture:
+            return course->hasMandatoryLecture();
+        case HasMandatoryLab:
+            return course->hasMandatoryLab();
+        case HasMandatoryTutorial:
+            return course->hasMandatoryTutorial();
     }
 
     return QVariant();
@@ -57,13 +63,16 @@ QVariant CourseListView::data(const QModelIndex& index, int role) const {
 
 QHash<int, QByteArray> CourseListView::roleNames() const {
     static QHash<int, QByteArray> mapping {
-        {     IdRole,          "id"},
-        {  TitleRole,       "title"},
-        {   CodeRole,        "code"},
-        {CreditHours, "creditHours"},
-        { hasLecture,  "hasLecture"},
-        {     hasLab,      "hasLab"},
-        {hasTutorial, "hasTutorial"}
+        {              IdRole,                   "id"},
+        {           TitleRole,                "title"},
+        {            CodeRole,                 "code"},
+        {         CreditHours,          "creditHours"},
+        {          HasLecture,           "hasLecture"},
+        {              HasLab,               "hasLab"},
+        {         HasTutorial,          "hasTutorial"},
+        { HasMandatoryLecture,  "hasMandatoryLecture"},
+        {     HasMandatoryLab,      "hasMandatoryLab"},
+        {HasMandatoryTutorial, "hasMandatoryTutorial"}
     };
 
     return mapping;
@@ -183,3 +192,18 @@ void CourseListView::validate() {
     emit postValidation();
 }
 
+QVariantMap CourseListView::getCourseMap(int index) const {
+    QVariantMap dataMap;
+
+    const QModelIndex idx = this->index(index, 0);
+    if (!idx.isValid()) {
+        return dataMap;
+    }
+
+    const QHash<int, QByteArray> rn = roleNames();
+    for (auto i : rn.keys()) {
+        dataMap[rn.value(i)] = data(idx, i);
+    }
+
+    return dataMap;
+}

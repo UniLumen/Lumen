@@ -30,6 +30,21 @@ namespace Lumen {
     }
 
     template <typename K, typename V>
+    bool Repository<K, V>::contains(const V* value) {
+        if (!value) {
+            return false;
+        }
+
+        for (auto& v : m_dataMap) {
+            if (*v == *value) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    template <typename K, typename V>
     size_t Repository<K, V>::remove(const K& key) {
         return m_dataMap.remove(key);
     }

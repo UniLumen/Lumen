@@ -11,13 +11,19 @@ LocationController::LocationController(Repository<QUuid, Location>* repository, 
     QObject::connect(m_locationListView, &LocationListView::createLocationRequest, this,
                      [&](const QString& name, const QString& building, int floor, const QString& description) {
                          Location* location = new Location(name, building, floor, description);
-                         m_repository->insert(location->id(), location);
-                         m_locationListView->addLocation(location);
+                         if (!m_repository->contains(location)) {
+                             m_repository->insert(location->id(), location);
+                             m_locationListView->addLocation(location);
+                         } else {
+                             delete location;
+                         }
                      });
 
     QObject::connect(m_locationListView, &LocationListView::removeLocationRequest, this, [&](int index) {
         const Location* removedLocation = m_locationListView->removeLocation(index);
-        m_repository->remove(removedLocation->id());
+        if (removedLocation) {
+            m_repository->remove(removedLocation->id());
+        }
     });
 }
 

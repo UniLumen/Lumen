@@ -12,7 +12,6 @@ Item{
     property int _cellMarginX: 15
     property int _cellMarginY: 25
     property real _splitValue: 0.5
-    property bool _editorMode: true
 
     RowLayout {
         anchors {
@@ -41,8 +40,6 @@ Item{
                 color: Constants.colorWhitePure
                 font.bold: true
                 font.pixelSize: Constants.sizeHeader1
-                minimumPixelSize: Constants.sizeHeader6
-                fontSizeMode: Text.Fit
                 wrapMode: Text.WordWrap
             }
 
@@ -64,6 +61,7 @@ Item{
                     _text: model.name
                     _description: "Building: " + model.building +
                                   "\nFloor: " + model.floor
+                    _editable: true
 
                     onDeleteInvoked: {
                         __locationModel.removeLocationRequest(model.index)
@@ -103,8 +101,6 @@ Item{
                 color: Constants.colorWhitePure
                 font.bold: true
                 font.pixelSize: Constants.sizeHeader1
-                minimumPixelSize: Constants.sizeHeader6
-                fontSizeMode: Text.Fit
                 wrapMode: Text.WordWrap
             }
 
@@ -148,7 +144,7 @@ Item{
                         Layout.fillWidth: true
 
                         displayText: "Building: " + currentValue
-                        model: ["Faculty Building","Genedy"]
+                        model: ["Faculty Building", "Genedy"]
                     }
 
                     TextField {
@@ -168,14 +164,24 @@ Item{
                         Layout.fillWidth: true
                         Layout.preferredHeight: Constants.sizeHuge.height
 
-                        background: Image {
-                            id: addImage
-                            source: Constants.iconAdd
-                            fillMode: Image.PreserveAspectFit
-                            mipmap: true
+                        background: Rectangle {
+                            anchors.centerIn: parent
+
+                            height: Math.min(parent.height, parent.width)
+                            width: Math.min(parent.height, parent.width)
+
+                            color: Constants.colorYellowMain
+                            radius: 100
                         }
 
-                        onClicked: __locationModel.createLocationRequest(locationName.displayText, buildingCombo.currentValue, floorCombo.currentValue, descriptionText.displayText)
+                        text: "+"
+                        font.pixelSize: Constants.sizeHeader2
+
+                        onClicked: {
+                            if (locationName.displayText.trim() !== "") {
+                                __locationModel.createLocationRequest(locationName.displayText, buildingCombo.currentValue, floorCombo.currentValue, descriptionText.displayText)
+                            }
+                        }
                     }
                 }
             }

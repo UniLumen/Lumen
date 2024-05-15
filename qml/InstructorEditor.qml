@@ -12,7 +12,6 @@ Item{
     property int _cellMarginX: 15
     property int _cellMarginY: 25
     property real _splitValue: 0.5
-    property bool _editorMode: true
 
     RowLayout {
         anchors {
@@ -41,8 +40,6 @@ Item{
                 color: Constants.colorWhitePure
                 font.bold: true
                 font.pixelSize: Constants.sizeHeader1
-                minimumPixelSize: Constants.sizeHeader6
-                fontSizeMode: Text.Fit
                 wrapMode: Text.WordWrap
             }
 
@@ -63,6 +60,7 @@ Item{
                     _iconSource: Constants.iconInstructor
                     _text: (model.isDoc ? "Dr. " : "Ta. ") + model.name
                     _description: "Email: " + model.email
+                    _editable: true
 
                     onDeleteInvoked: {
                         __instructorModel.removeInstructorRequest(model.index)
@@ -102,8 +100,6 @@ Item{
                 color: Constants.colorWhitePure
                 font.bold: true
                 font.pixelSize: Constants.sizeHeader1
-                minimumPixelSize: Constants.sizeHeader6
-                fontSizeMode: Text.Fit
                 wrapMode: Text.WordWrap
             }
 
@@ -144,6 +140,8 @@ Item{
                             Layout.columnSpan: 2
 
                             placeholderText: "Email"
+
+                            validator: RegularExpressionValidator { regularExpression: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/ }
                         }
 
                         CheckBox {
@@ -161,14 +159,24 @@ Item{
                             Layout.fillWidth: true
                             Layout.preferredHeight: Constants.sizeHuge.height
 
-                            background: Image {
-                                id: addImage
-                                source: Constants.iconAdd
-                                fillMode: Image.PreserveAspectFit
-                                mipmap: true
+                            background: Rectangle {
+                                anchors.centerIn: parent
+
+                                height: Math.min(parent.height, parent.width)
+                                width: Math.min(parent.height, parent.width)
+
+                                color: Constants.colorYellowMain
+                                radius: 100
                             }
 
-                            onClicked: __instructorModel.createInstructorRequest(instructorName.displayText, instructorEmail.displayText, isDoc.checked)
+                            text: "+"
+                            font.pixelSize: Constants.sizeHeader2
+
+                            onClicked: {
+                                if (instructorName.displayText.trim() !== "" && instructorEmail.acceptableInput && instructorEmail.displayText.trim() !== "") {
+                                    __instructorModel.createInstructorRequest(instructorName.displayText, instructorEmail.displayText, isDoc.checked)
+                                }
+                            }
                         }
                     }
                 }
