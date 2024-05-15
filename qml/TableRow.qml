@@ -158,7 +158,7 @@ Item{
         anchors.centerIn: parent
         contentItem: Item{
             id: mainBody
-            implicitHeight: 600
+            implicitHeight: 800
             implicitWidth: 600
             anchors.centerIn: parent
             //body of the pop-up
@@ -183,43 +183,42 @@ Item{
                     width: parent.width
                     height: 1
                 }
-                LabeledComboBox{
-                    comboBoxModel: __courseModel
-                    comboBoxLabel: "Course"
+                ComboBox {
                     id: courseCB
-                    Layout.preferredWidth: 400
-                    Layout.preferredHeight: mainBody.height/16
+
+                    //displayText: "Course: " + currentValue
+                    model:  __courseModel
+                    textRole: "title"
+                    valueRole: "title"
+                    Layout.fillWidth: true
                 }
-                LabeledComboBox{
-                    comboBoxModel: ["Lecture","Section","Lab"]
-                    comboBoxLabel: "Type"
+                ComboBox{
+                    model: ["Lecture","Tutorial","Lab"]
+                    displayText: currentValue
                     id: courseTypeCB
-                    Layout.preferredWidth: 400
-                    Layout.preferredHeight: mainBody.height/16
+                    Layout.fillWidth: true
                 }
                 ComboBox{
                     model: __instructorModel
                     textRole: "name"
                     valueRole: "name"
-                    // comboBoxLabel: "P.Instructor"
+
                     id: doctorCB
-                    Layout.preferredWidth: 400
-                    Layout.preferredHeight: mainBody.height/16
+                    Layout.fillWidth: true
                 }
-                LabeledComboBox{
-                    comboBoxModel: __instructorModel
-                    comboBoxLabel: "S.Instructor"
+                ComboBox{
+                    model: __instructorModel
+                    textRole: "name"
+                    valueRole: "name"
                     id: doctor2CB
-                    Layout.preferredWidth: 400
-                    Layout.preferredHeight: mainBody.height/16
+                    Layout.fillWidth: true
                 }
-                LabeledComboBox{
-                    comboBoxModel: [1,2,3,4,5]
-                    comboBoxLabel: "Section Number"
+                ComboBox{
+                    model: [1,2,3,4,5,6,7,8]
+                    displayText: currentValue
                     id: sectionNumCB
-                    Layout.preferredWidth: 400
-                    Layout.preferredHeight: mainBody.height/16
-                    visible: courseTypeCB.currentSelection === "Lecture"? false: true
+                    Layout.fillWidth: true
+                    visible: courseTypeCB.currentValue === "Lecture"? false:true
                 }
                 RowLayout{
                     Layout.preferredWidth: 200
@@ -258,9 +257,9 @@ Item{
                         hoverEnabled: true
 
                         onClicked: {
-                            _testtest.editSelectedCell(addTimeSlotPopup.slotIndex,day,sectionNumCB.currentSelection,courseTypeCB.currentSelection,doctorCB.currentSelection,doctorCB.currentSelection,courseCB.currentSelection
-                                                       ,courseCB.currentSelection + " " + courseTypeCB.currentSelection + correctDisplay(courseTypeCB.currentSelection,sectionNumCB.currentSelection)
-                                                       + " " + doctorCB.currentSelection + " " + doctor2CB.currentSelection)
+                            _testtest.editSelectedCell(addTimeSlotPopup.slotIndex,day,sectionNumCB.currentValue,courseTypeCB.currentValue,doctorCB.currentValue,doctorCB.currentValue,courseCB.currentValue
+                                                       ,courseCB.currentValue + " " + courseTypeCB.currentValue + correctDisplay(courseTypeCB.currentValue,sectionNumCB.currentValue)
+                                                       + " " + doctorCB.currentValue + " " + doctor2CB.currentValue)
                             addTimeSlotPopup.close()
                         }
 
@@ -331,13 +330,20 @@ Item{
                     width: parent.width
                     height: 1
                 }
-                LabeledComboBox{
-                    comboBoxModel: __locationModel
-                    comboBoxLabel: "Location"
+                ComboBox{
+                    model: __locationModel
+                    textRole: "name"
+                    valueRole: "name"
                     id: placesCB
-                    Layout.preferredWidth: 400
-                    Layout.preferredHeight: mainBody.height/16
+                    Layout.fillWidth: true
                 }
+                // LabeledComboBox{
+                //     comboBoxModel: __locationModel
+                //     comboBoxLabel: "Location"
+                //     id: placesCB
+                //     Layout.preferredWidth: 400
+                //     Layout.preferredHeight: mainBody.height/16
+                // }
                 RowLayout{
                     Layout.preferredWidth: 200
                     Layout.preferredHeight: mainBody.height/12
@@ -376,7 +382,7 @@ Item{
 
                         onClicked: {
                             if(_testtest.rows >= 7)
-                                _testtest.addRow(placesCB.currentSelection)
+                                _testtest.addRow(placesCB.currentValue)
                             addPlacePopup.close()
                         }
 
