@@ -2,6 +2,7 @@
 #include "Models/OptimizedSchedule.h"
 
 #include <QDebug>
+#include <unordered_map>
 
 OptimizedScheduleView::OptimizedScheduleView(QObject* parent) : QAbstractListModel(parent) {}
 
@@ -41,7 +42,7 @@ QVariant OptimizedScheduleView::data(const QModelIndex& index, int role) const {
     }
 
     OptimizedSchedule optimizedSchedule = m_optimizedSchedules.at(index.row());
-    QHash<QString, bool> attendingDays = optimizedSchedule.getAttendingDays();
+    std::unordered_map<QString, bool> attendingDays = optimizedSchedule.getAttendingDays();
     switch (role) {
         case SelectedGroupRole:
             return optimizedSchedule.getSelectedGroup();
@@ -59,20 +60,13 @@ QVariant OptimizedScheduleView::data(const QModelIndex& index, int role) const {
             return attendingDays["Wednesday"];
         case ThursdayAttendanceRole:
             return attendingDays["Thursday"];
-        // Add here a way to calculate the number of days he is attending from the attendingDays Hash map
+        case NumberOfDaysToAttendRole:
+            return optimizedSchedule.getNumberOfAttendingDays();
         default:
             return QVariant();
     }
 
     return QVariant();
-}
-
-void OptimizedScheduleView::addOptimizedSchedule(OptimizedSchedule optimizedSchedule){
-    int index = m_optimizedSchedules.count();
-
-    beginInsertRows(QModelIndex(), index, index);
-    m_optimizedSchedules.push_back(optimizedSchedule);
-    endInsertRows();
 }
 
 void OptimizedScheduleView::createOptimizedSchedules(int selectedGroup, int selectedSection){
@@ -83,9 +77,24 @@ void OptimizedScheduleView::createOptimizedSchedules(int selectedGroup, int sele
     // And assign the optimized schedule itself to the optimizedSchedule object
     // For now this is just a demo
 
-    qDebug() << selectedGroup << " " << selectedSection;
+    if (selectedGroup < 1 || selectedGroup > 30){
+        m_inputValidationNote = "Please enter a valid group number between 1-30";
+        emit postValidation();
+        return;
+    }
+    else if(selectedSection < 1 || selectedSection > 30){
+        m_inputValidationNote = "Please enter a valid section number between 1-30";
+        emit postValidation();
+        return;
+    }
+    else{
+        m_inputValidationNote = "";
+        emit postValidation();
+    }
 
-    QHash<QString, bool> attendingDays;
+    m_numberOfOptimizedSchedulesAdded.push(1);
+
+    std::unordered_map<QString, bool> attendingDays;
 
     if(selectedGroup == 2){
         attendingDays = {{"Saturday", 1}, {"Sunday", 1}, {"Monday", 0}, {"Tuesday", 0}, {"Wednesday", 0}, {"Thursday", 0}};
@@ -100,4 +109,40 @@ void OptimizedScheduleView::createOptimizedSchedules(int selectedGroup, int sele
     OptimizedSchedule optimizedSchedule = OptimizedSchedule(selectedGroup, selectedSection, attendingDays);
 
     addOptimizedSchedule(optimizedSchedule);
+}
+
+void OptimizedScheduleView::addOptimizedSchedule(OptimizedSchedule optimizedSchedule){
+    int index = m_optimizedSchedules.count();
+
+    beginInsertRows(QModelIndex(), index, index);
+    m_optimizedSchedules.push_back(optimizedSchedule);
+    endInsertRows();
+}
+
+void OptimizedScheduleView::removeOptimizedSchedule(int index) {
+    if (index < 0 || index >= m_optimizedSchedules.count()) {
+        return;
+    }
+
+    OptimizedSchedule optimizedSchedule = m_optimizedSchedules.at(index);
+
+    beginRemoveRows(QModelIndex(), index, index);
+    m_optimizedSchedules.removeAt(index);
+    endRemoveRows();
+
+    while(!m_numberOfOptimizedSchedulesAdded.empty()){
+        m_numberOfOptimizedSchedulesAdded.pop();
+    }
+}
+
+void OptimizedScheduleView::undoAddedOptimizedSchedules(){
+    if(m_numberOfOptimizedSchedulesAdded.empty()){
+        return;
+    }
+
+    beginRemoveRows(QModelIndex(), m_optimizedSchedules.count() - m_numberOfOptimizedSchedulesAdded.top(), m_optimizedSchedules.count());
+    m_optimizedSchedules.erase(m_optimizedSchedules.end() - m_numberOfOptimizedSchedulesAdded.top(), m_optimizedSchedules.end());
+    endRemoveRows();
+
+    m_numberOfOptimizedSchedulesAdded.pop();
 }

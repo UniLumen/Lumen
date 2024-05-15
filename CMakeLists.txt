@@ -118,6 +118,9 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/EditorPage.qml
         qml/UserPage.qml
         qml/UserOptimizedSchedules.qml
+        qml/OptimizedScheduleCard.qml
+        qml/OptimizeNewScheduleCard.qml
+        qml/OptimizedScheduleDayRectangle.qml
 )
 
 target_include_directories(${PROJECT_NAME}
