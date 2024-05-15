@@ -218,6 +218,7 @@ Item{
                     id: sectionNumCB
                     Layout.preferredWidth: 400
                     Layout.preferredHeight: mainBody.height/16
+                    visible: courseTypeCB.currentSelection === "Lecture"? false: true
                 }
                 RowLayout{
                     Layout.preferredWidth: 200
@@ -258,7 +259,7 @@ Item{
 
                         onClicked: {
                             _testtest.editSelectedCell(addTimeSlotPopup.slotIndex,day,sectionNumCB.currentSelection,courseTypeCB.currentSelection,doctorCB.currentSelection,doctorCB.currentSelection,courseCB.currentSelection
-                                                       ,courseCB.currentSelection + " " + courseTypeCB.currentSelection + "(" + sectionNumCB.currentSelection + ")"
+                                                       ,courseCB.currentSelection + " " + courseTypeCB.currentSelection + correctDisplay(courseTypeCB.currentSelection,sectionNumCB.currentSelection)
                                                        + " " + doctorCB.currentSelection + " " + doctor2CB.currentSelection)
                             addTimeSlotPopup.close()
                         }
@@ -288,6 +289,15 @@ Item{
             }
         }
     }
+
+    function correctDisplay(type,sectionNum)
+    {
+        if(type === "Lecture")
+            return ""
+        else
+            return qsTr("("+sectionNum+")")
+    }
+
     Popup {
         id: addPlacePopup
         property int slotIndex
