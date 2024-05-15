@@ -11,9 +11,10 @@ int ScheduleOptimizer::initialMask;
 int ScheduleOptimizer::  dp[7][7][1<<22][2];
 ScheduleOptimizer::ScheduleOptimizer() {}
 
-void getMandatorySlots(int section,QVector<QVector<QVector<TimeSlot>>>timeGrid,Lumen::UserConf userConf){
+std::vector<std::vector<TimeSlot>> getMandatorySlots(int section,std::vector<std::vector<std::vector<TimeSlot>>>timeGrid,Lumen::UserConf userConf){
     QList<const Lumen::CourseAttendance*> attendedCourses =userConf.courseAttendances();
     std::vector<QString>mandatoryCourses;
+    memset(ScheduleOptimizer::dp,-1,sizeof ScheduleOptimizer::dp);
     int x = 0;
     ScheduleOptimizer::initialMask = 0;
     for (auto it : attendedCourses) {
@@ -52,6 +53,9 @@ void getMandatorySlots(int section,QVector<QVector<QVector<TimeSlot>>>timeGrid,L
             }
         }
     }
+    int d = ScheduleOptimizer:: getMinimumDays(0,0,ScheduleOptimizer::initialMask,0,timeGrid);
+    ScheduleOptimizer::buildOptimizedSchedules(0,0,ScheduleOptimizer::initialMask,0,timeGrid);
+    return ScheduleOptimizer::minimizedTables;
 }
 
 
