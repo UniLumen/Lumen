@@ -26,7 +26,7 @@ namespace Lumen {
         void fromJson(JsonReader& reader, const QJsonValue& json) override;
 
         inline bool operator==(const Location& other) const {
-            return m_name == other.m_name && m_description == other.m_description;
+            return m_name == other.m_name;
         }
 
         inline bool operator!=(const Location& other) const {

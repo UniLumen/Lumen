@@ -10,8 +10,12 @@ CourseController::CourseController(Repository<QUuid, Course>* repository, UserCo
 
     QObject::connect(m_courseListView, &CourseListView::createCourseRequest, this, [&](const CourseCreationDTO& dto) {
         Course* course = dto.toCourse();
-        m_repository->insert(course->id(), course);
-        m_courseListView->addCourse(course);
+        if (!m_repository->contains(course)) {
+            m_repository->insert(course->id(), course);
+            m_courseListView->addCourse(course);
+        } else {
+            delete course;
+        }
     });
 
     QObject::connect(m_courseListView, &CourseListView::removeCourseRequest, this, [&](int index) {

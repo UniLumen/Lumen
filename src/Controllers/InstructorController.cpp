@@ -11,8 +11,12 @@ InstructorController::InstructorController(Repository<QUuid, Instructor>* reposi
     QObject::connect(m_instructorListView, &InstructorListView::createInstructorRequest, this,
                      [&](const QString& name, const QString& email, bool isDoc) {
                          Instructor* instructor = new Instructor(name, email, isDoc);
-                         m_repository->insert(instructor->id(), instructor);
-                         m_instructorListView->addInstructor(instructor);
+                         if (!m_repository->contains(instructor)) {
+                             m_repository->insert(instructor->id(), instructor);
+                             m_instructorListView->addInstructor(instructor);
+                         } else {
+                             delete instructor;
+                         }
                      });
 
     QObject::connect(m_instructorListView, &InstructorListView::removeInstructorRequest, this, [&](int index) {
