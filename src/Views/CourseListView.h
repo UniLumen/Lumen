@@ -22,9 +22,12 @@ public:
         TitleRole,
         CodeRole,
         CreditHours,
-        hasLecture,
-        hasLab,
-        hasTutorial
+        HasLecture,
+        HasLab,
+        HasTutorial,
+        HasMandatoryLecture,
+        HasMandatoryLab,
+        HasMandatoryTutorial
     };
 
     explicit CourseListView(QObject* parent = nullptr);
@@ -47,6 +50,7 @@ public slots:
     void createCourse(const QVariantMap& courseMap);
     const ICourse* removeCourse(int index);
     const ICourse* removeCourse(const ICourse* course);
+    QVariantMap getCourseMap(int index) const;
 
 signals:
     void addCourseRequest(const QUuid& id);
