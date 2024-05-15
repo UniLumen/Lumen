@@ -53,7 +53,9 @@ namespace Lumen {
             CourseAttendance* ca = new CourseAttendance();
 
             ca->fromJson(reader, v);
-            addCourseAttendance(ca);
+            if (ca->course()) {
+                addCourseAttendance(ca);
+            }
         }
     }
 
