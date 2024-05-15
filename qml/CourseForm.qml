@@ -40,6 +40,8 @@ Item {
                 Layout.columnSpan: 1
 
                 placeholderText: "Course Code"
+
+                validator: RegularExpressionValidator { regularExpression: /^[a-zA-Z0-9]*$/ }
             }
 
             ComboBox {
@@ -56,12 +58,14 @@ Item {
                 displayText: "Department: " + currentValue
                 model: ["CS", "CSys", "IT", "SC"]
                 Layout.fillWidth: true
+
+                enabled: yearCombo.currentValue > 2
             }
 
             ComboBox {
                 id: creditCombo
                 displayText: "CreditHours: " + currentValue
-                model: [1, 2, 3, 4]
+                model: [1, 2, 3, 4, 5]
                 Layout.fillWidth: true
             }
 
@@ -80,6 +84,11 @@ Item {
                         Layout.fillWidth: true
 
                         text: "Lecture"
+
+                        onCheckStateChanged: {
+                            lectureManAttenCheckBox.enabled = checked
+                            lectureManAttenCheckBox.checked = false;
+                        }
                     }
 
                     CheckBox {
@@ -88,6 +97,11 @@ Item {
                         Layout.fillWidth: true
 
                         text: "Lab"
+
+                        onCheckStateChanged: {
+                            labManAttendCheckBox.enabled = checked
+                            labManAttendCheckBox.checked = false;
+                        }
                     }
 
                     CheckBox {
@@ -96,6 +110,11 @@ Item {
                         Layout.fillWidth: true
 
                         text: "Section"
+
+                        onCheckStateChanged: {
+                            tutorialManAttendCheckBox.enabled = checked
+                            tutorialManAttendCheckBox.checked = false;
+                        }
                     }
                 }
             }
@@ -115,6 +134,8 @@ Item {
                         Layout.fillWidth: true
 
                         text: "Lecture"
+
+                        enabled: false
                     }
 
                     CheckBox {
@@ -123,6 +144,8 @@ Item {
                         Layout.fillWidth: true
 
                         text: "Lab"
+
+                        enabled: false
                     }
 
                     CheckBox {
@@ -131,6 +154,8 @@ Item {
                         Layout.fillWidth: true
 
                         text: "Section"
+
+                        enabled: false
                     }
                 }
             }
@@ -150,21 +175,25 @@ Item {
                 }
 
                 onClicked: {
-                    var courseDTO = {
-                        "name": subjectName.displayText,
-                        "year": yearCombo.currentValue,
-                        "dept": deptCombo.currentValue,
-                        "code": subjectCode.displayText,
-                        "creditHours": creditCombo.currentValue,
-                        "hasLecture": lectureCheckBox.checked,
-                        "hasLab": labCheckBox.checked,
-                        "hasTutorial": tutorialCheckBox.checked,
-                        "isLectureMandatory": lectureManAttenCheckBox.checked,
-                        "isLabMandatory": labManAttendCheckBox.checked,
-                        "isTutorialMandatory": tutorialManAttendCheckBox.checked,
-                    };
+                    if ((subjectName.displayText.trim() !== "") && (subjectCode.displayText.trim() !== "")) {
+                        var deptValue = deptCombo.enabled ? deptCombo.currentValue : "";
 
-                    __courseModel.createCourse(courseDTO);
+                        var courseDTO = {
+                            "name": subjectName.displayText.trim(),
+                            "year": yearCombo.currentValue,
+                            "dept": deptValue,
+                            "code": subjectCode.displayText.trim(),
+                            "creditHours": creditCombo.currentValue,
+                            "hasLecture": lectureCheckBox.checked,
+                            "hasLab": labCheckBox.checked,
+                            "hasTutorial": tutorialCheckBox.checked,
+                            "isLectureMandatory": lectureManAttenCheckBox.checked,
+                            "isLabMandatory": labManAttendCheckBox.checked,
+                            "isTutorialMandatory": tutorialManAttendCheckBox.checked,
+                        };
+
+                        __courseModel.createCourse(courseDTO);
+                    }
                 }
             }
         }
