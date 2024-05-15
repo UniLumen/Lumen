@@ -1,11 +1,12 @@
 import QtQuick
 import QtQuick.Controls
+import QtQuick.Layouts
 
 Item {
     implicitWidth: Constants.widthDefault
     implicitHeight: Constants.heightDefault
 
-    TitleWithUnderline {
+    Text {
         id: myOptimizedSchedulesTitle
         text: "My Optimized Schedules"
         anchors{
@@ -13,6 +14,12 @@ Item {
             topMargin: 100
             left: parent.left
         }
+        font {
+            family: Constants.fontPoppins
+            pixelSize: 45
+            weight: Font.ExtraBold
+        }
+        color: Constants.colorWhitePure
     }
 
     Text {
@@ -34,122 +41,40 @@ Item {
         wrapMode: Text.WordWrap
     }
 
-    LumenRectangle {
-        id: optimizeNewScheduleCard
+    OptimizeNewScheduleCard {id : optimizeNewScheduleCard}
 
-        implicitWidth: optimizeNewScheduleTitle.width + 100
-        implicitHeight: 430
-
+    GridView {
         anchors {
-            top: optimizeNewScheduleTitle.bottom
-            left: optimizeNewScheduleTitle.left
-            right: parent.right
-            rightMargin: 20
-            topMargin: 30
+            top: myOptimizedSchedulesTitle.bottom
+            topMargin: 40
+            left: myOptimizedSchedulesTitle.left
+            bottom: parent.bottom
+            right: optimizeNewScheduleCard.left
+            rightMargin: 100
         }
 
-        Image {
-            id: gearIcon
-            source: Constants.iconGear
-            anchors {
-                left: parent.left
-                top: parent.top
-                margins: 10
+        cellWidth: 280
+        cellHeight: 380
+
+        clip: true
+
+        model: __optimizedSchedulesModel
+        delegate: OptimizedScheduleCard {
+            id: optimizedScheduleCard
+            _title: "Schedule " + (model.index + 1)
+            _selectedGroupText: "Selected Group: " + model.selectedGroup
+            _selectedSectionText: "Selected Section: " + model.selectedSection
+            _daysToAttendText: "Days to attend: " + model.numberOfDaysToAttend
+            _attendsInSaturday: model.saturdayAttendance
+            _attendsInSunday: model.sundayAttendance
+            _attendsInMonday: model.mondayAttendance
+            _attendsInTuesday: model.tuesdayAttendance
+            _attendsInWednesday: model.wednesdayAttendance
+            _attendsInThursday: model.thursdayAttendance
+
+            onDeleteInvoked: {
+                __optimizedSchedulesModel.removeOptimizedSchedule(model.index)
             }
-        }
-
-        component TextFieldTitle : Text{
-                font {
-                    family: Constants.fontPoppins
-                    pixelSize: 35
-                    weight: Font.DemiBold
-                }
-                color: Constants.colorBlackPure
-        }
-
-        TextFieldTitle {
-            id: groupNumberText
-            text: "Group Number"
-
-            anchors{
-                top: gearIcon.bottom
-                topMargin: 30
-                left: gearIcon.left
-                leftMargin: 5
-            }
-        }
-
-        TextField {
-            id: groupNumberTextField
-            placeholderText: focus || text ? "" : "Enter group number"
-
-            background: Rectangle {
-                implicitWidth: groupNumberText.width + 20
-                color: "transparent"
-                border.color: Constants.colorGray
-                radius: 7
-            }
-
-            anchors {
-                top: groupNumberText.bottom
-                topMargin: 15
-                left: groupNumberText.left
-            }
-        }
-
-        TextFieldTitle {
-            id: sectionNumberText
-            text: "Section Number"
-
-            anchors{
-                top: groupNumberTextField.bottom
-                topMargin: 20
-                left: groupNumberTextField.left
-            }
-        }
-
-        TextField {
-            id: sectionNumberTextField
-            placeholderText: focus || text ? "" : "Enter section number"
-
-            background: Rectangle {
-                implicitWidth: groupNumberText.width + 20
-                color: "transparent"
-                border.color: Constants.colorGray
-                radius: 7
-            }
-
-            anchors {
-                top: sectionNumberText.bottom
-                topMargin: 15
-                left: sectionNumberText.left
-            }
-        }
-
-        Button {
-            text: "Optimize Schedule"
-            font {
-                family: Constants.fontPoppins
-                weight: Font.DemiBold
-                pixelSize: 15
-            }
-            hoverEnabled: true
-
-            background: Rectangle {
-                color: parent.hovered ? Constants.colorYellowEditorPageHover : Constants.colorYellowMain
-                radius: 12
-            }
-
-            anchors {
-                bottom: parent.bottom
-                right: parent.right
-
-                margins: 15
-            }
-
-            PointingHandCursor {}
-
-            onClicked: __optimizedSchedulesModel.createOptimizedSchedules(groupNumberTextField.text, sectionNumberTextField.text);
         }
     }
 }
