@@ -148,7 +148,7 @@ Item{
                         Layout.fillWidth: true
 
                         displayText: "Building: " + currentValue
-                        model: ["Faculty Building","Genedy"]
+                        model: ["Faculty Building", "Genedy"]
                     }
 
                     TextField {
@@ -175,7 +175,11 @@ Item{
                             mipmap: true
                         }
 
-                        onClicked: __locationModel.createLocationRequest(locationName.displayText, buildingCombo.currentValue, floorCombo.currentValue, descriptionText.displayText)
+                        onClicked: {
+                            if (locationName.displayText.trim() !== "") {
+                                __locationModel.createLocationRequest(locationName.displayText, buildingCombo.currentValue, floorCombo.currentValue, descriptionText.displayText)
+                            }
+                        }
                     }
                 }
             }
