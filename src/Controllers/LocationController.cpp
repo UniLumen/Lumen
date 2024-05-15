@@ -17,7 +17,9 @@ LocationController::LocationController(Repository<QUuid, Location>* repository, 
 
     QObject::connect(m_locationListView, &LocationListView::removeLocationRequest, this, [&](int index) {
         const Location* removedLocation = m_locationListView->removeLocation(index);
-        m_repository->remove(removedLocation->id());
+        if (removedLocation) {
+            m_repository->remove(removedLocation->id());
+        }
     });
 }
 

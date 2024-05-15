@@ -63,6 +63,10 @@ void LocationListView::addLocation(const Location* location) {
 }
 
 const Location* LocationListView::removeLocation(int index) {
+    if (index < 0 || index >= m_locations.count()) {
+        return nullptr;
+    }
+
     const Location* removedLocation = m_locations.at(index);
 
     beginRemoveRows(QModelIndex(), index, index);

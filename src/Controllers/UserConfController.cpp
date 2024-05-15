@@ -25,7 +25,9 @@ namespace Lumen {
         QObject::connect(m_courseListView, &CourseListView::removeCourseRequest, m_userConf, [&](int index) {
             // CAUTION: userView.removeCourse is invoked twice
             const ICourse* removedCourse = m_courseListView->removeCourse(index);
-            m_userConf->removeCourseAttendance(static_cast<const CourseAttendance*>(removedCourse));
+            if (removedCourse) {
+                m_userConf->removeCourseAttendance(static_cast<const CourseAttendance*>(removedCourse));
+            }
         });
 
         QObject::connect(m_courseListView, &CourseListView::addCourseAttendanceRequest, this, &UserConfController::addCourseAttendance);

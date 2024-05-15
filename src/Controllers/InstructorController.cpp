@@ -17,7 +17,9 @@ InstructorController::InstructorController(Repository<QUuid, Instructor>* reposi
 
     QObject::connect(m_instructorListView, &InstructorListView::removeInstructorRequest, this, [&](int index) {
         const Instructor* removedInstructor = m_instructorListView->removeInstructor(index);
-        m_repository->remove(removedInstructor->id());
+        if (removedInstructor) {
+            m_repository->remove(removedInstructor->id());
+        }
     });
 }
 
