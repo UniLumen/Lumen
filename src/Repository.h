@@ -21,6 +21,7 @@ namespace Lumen {
         virtual QList<V*> getAll();
         virtual V* get(const K& key);
         virtual bool contains(const K& key);
+        virtual bool contains(const V* value);
         virtual size_t remove(const K& key);
 
         template <typename Predicate>
