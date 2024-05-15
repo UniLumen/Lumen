@@ -3,6 +3,7 @@
 #include <QDebug>
 #include <QQmlContext>
 #include "RepositoryManager.h"
+#include "scheduleoptimizer.h"
 #include "schedule.h"
 // #include "timeslot.h"
 
@@ -31,6 +32,8 @@ void cleanup() {
             }
         }
     }
+    memset(ScheduleOptimizer::dp,-1,sizeof ScheduleOptimizer::dp);
+    qDebug()<<ScheduleOptimizer::getMinimumDays(0,0,0,0,Schedule::formatedSchedules);
 }
 int main(int argc, char* argv[]) {
     QGuiApplication app(argc, argv);

@@ -1,8 +1,8 @@
 #include "scheduleoptimizer.h"
 #include <QVector>
 QMap<std::pair<int,int>,std::pair<int,TimeSlot>>ScheduleOptimizer:: requredAttendanceTimeSlots;
-QVector<QVector<TimeSlot>>ScheduleOptimizer::minimizedTables;
-QVector<TimeSlot>ScheduleOptimizer::minimizedTable;
+std::vector<std::vector<TimeSlot>>ScheduleOptimizer::minimizedTables;
+std::vector<TimeSlot>ScheduleOptimizer::minimizedTable;
 std::unordered_map<QString,int>ScheduleOptimizer::idFinder;
 int ScheduleOptimizer::  dp[7][7][1<<22][2];
 ScheduleOptimizer::ScheduleOptimizer() {}
@@ -12,7 +12,7 @@ void getMandatorySlots(int section,QVector<QVector<QVector<TimeSlot>>>timeGrid){
 }
 
 
-int ScheduleOptimizer:: getMinimumDays(int day, int time,int mask,bool take,QVector<QVector<QVector<TimeSlot>>>dayGrid){
+int ScheduleOptimizer:: getMinimumDays(int day, int time,int mask,bool take,std::vector<std::vector<std::vector<TimeSlot>>>dayGrid){
     if(day ==6){
         return (MASK!=mask) * 18;
     }
@@ -58,7 +58,7 @@ int ScheduleOptimizer:: getMinimumDays(int day, int time,int mask,bool take,QVec
 
 }
 
-void ScheduleOptimizer:: buildOptimizedSchedules(int day, int time,int mask,bool take,QVector<QVector<QVector<TimeSlot>>>dayGrid){
+void ScheduleOptimizer:: buildOptimizedSchedules(int day, int time,int mask,bool take,std::vector<std::vector<std::vector<TimeSlot>>>dayGrid){
 
     if(day ==6){
         if(MASK==mask){
