@@ -60,6 +60,10 @@ qt_add_executable(${PROJECT_NAME}
     src/Controllers/LocationController.h
     src/Controllers/LocationController.cpp
     src/Controllers/InstructorController.h src/Controllers/InstructorController.cpp
+    src/Models/OptimizedSchedule.h
+    src/Views/OptimizedScheduleView.h
+    src/Models/OptimizedSchedule.cpp
+    src/Views/OptimizedScheduleView.cpp
 )
 
 qt_add_resources(${PROJECT_NAME} "configuration"
@@ -112,6 +116,11 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/LocationEditor.qml
         qml/CourseForm.qml
         qml/EditorPage.qml
+        qml/UserPage.qml
+        qml/UserOptimizedSchedules.qml
+        qml/OptimizedScheduleCard.qml
+        qml/OptimizeNewScheduleCard.qml
+        qml/OptimizedScheduleDayRectangle.qml
 )
 
 target_include_directories(${PROJECT_NAME}

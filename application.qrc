@@ -13,7 +13,10 @@
         <file>images/icon_kpi.svg</file>
         <file>images/icon_edit.svg</file>
         <file>images/icon_remove.svg</file>
+        <file>images/gear_icon.svg</file>
         <file>fonts/Poppins-Regular.ttf</file>
         <file>images/icon_add.svg</file>
+        <file>images/icon_maximize.svg</file>
+        <file>images/icon_schedule_white.svg</file>
     </qresource>
 </RCC>
