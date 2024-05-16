@@ -259,7 +259,7 @@ Item{
                         onClicked: {
                             _testtest.editSelectedCell(addTimeSlotPopup.slotIndex,day,sectionNumCB.currentValue,courseTypeCB.currentValue,doctorCB.currentValue,doctorCB.currentValue,courseCB.currentValue
                                                        ,courseCB.currentValue + " " + courseTypeCB.currentValue + correctDisplay(courseTypeCB.currentValue,sectionNumCB.currentValue)
-                                                       + " " + doctorCB.currentValue + " " + doctor2CB.currentValue)
+                                                       + " " + doctorCB.currentValue + " " + doctor2CB.currentValue, addTimeSlotPopup.slotIndex % 7)
                             addTimeSlotPopup.close()
                         }
 

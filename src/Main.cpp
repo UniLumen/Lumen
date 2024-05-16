@@ -14,41 +14,11 @@
 #include "RepositoryManager.h"
 #include "UserConf.h"
 #include "Views/CourseListView.h"
-<<<<<<< HEAD
 #include "Views/InstructorListView.h"
 #include "Views/LocationListView.h"
-=======
-#include <Views/OptimizedScheduleView.h>
->>>>>>> 43fa88c (Created optimized schedule class and optimized schedule model)
-
 #include "timeslotmodel.h"
-// TimeSlotModel test;
-void cleanup() {
-    QString testt = "hi";
-    qDebug()<<testt;
-    // qDebug()<<test.dayGrid[0].size();
-    //qDebug()<<Schedule::schedules.at(Schedule::schedules.size() - 1)->at(0).course;
-    Schedule::FormatSchedule();
+#include "Views/OptimizedScheduleView.h"
 
-    auto currentDay = Schedule::formatedSchedules;
-    for(int i = 0; i <currentDay.size();i++)
-    {
-        for(int j = 0; j <currentDay[i].size();j++)
-        {
-            for(int k = 0; k < currentDay[i][j].size();k++)
-            {
-                if(currentDay[i][j][k].course == "") continue;
-                qDebug()<<currentDay[i][j][k].day;
-                qDebug()<<currentDay[i][j][k].timePeriod;
-                qDebug()<<currentDay[i][j][k].sectionNumbers;
-                qDebug()<<currentDay[i][j][k].course;
-                qDebug()<<currentDay[i][j][k].place;
-            }
-        }
-    }
-    memset(ScheduleOptimizer::dp,-1,sizeof ScheduleOptimizer::dp);
-    qDebug()<<ScheduleOptimizer::getMinimumDays(0,0,0,0,Schedule::formatedSchedules);
-}
 int main(int argc, char* argv[]) {
     QGuiApplication app(argc, argv);
 
@@ -57,6 +27,8 @@ int main(int argc, char* argv[]) {
 
     Lumen::UserConf userConf;
     userConf.loadFromDisk("user.json");
+
+    OptimizedScheduleView::userConf = &userConf;
 
     QList<Course*> allCourses = repoManager.courseRepo.getAll();
     QVector<const ICourse*> courses;
@@ -84,7 +56,6 @@ int main(int argc, char* argv[]) {
     QQmlContext* context = engine.rootContext();
     const QUrl url(u"qrc:/qt/qml/Lumen/qml/Main.qml"_qs);
     qmlRegisterType<TimeSlotModel>("Time", 1, 0, "TimeSlot");
-    QObject::connect(&app, &QCoreApplication::aboutToQuit, &cleanup);
     QObject::connect(
         &engine, &QQmlApplicationEngine::objectCreated, &app,
         [url](QObject* obj, const QUrl& objUrl) {
@@ -93,8 +64,6 @@ int main(int argc, char* argv[]) {
             }
         },
         Qt::QueuedConnection);
-
-    qDebug()<<Schedule::schedules.size();
 
     context->setContextProperty("__courseModel", &coursesView);
     context->setContextProperty("__userModel", &userView);

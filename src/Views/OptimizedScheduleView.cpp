@@ -1,8 +1,15 @@
 #include "OptimizedScheduleView.h"
 #include "Models/OptimizedSchedule.h"
+#include "schedule.h"
+#include "scheduleoptimizer.h"
+#include "timeslot.h"
 
 #include <QDebug>
 #include <unordered_map>
+#include <vector>
+
+// Static things declarations
+Lumen::UserConf *OptimizedScheduleView::userConf;
 
 OptimizedScheduleView::OptimizedScheduleView(QObject* parent) : QAbstractListModel(parent) {}
 
@@ -92,23 +99,34 @@ void OptimizedScheduleView::createOptimizedSchedules(int selectedGroup, int sele
         emit postValidation();
     }
 
-    m_numberOfOptimizedSchedulesAdded.push(1);
+    Schedule::FormatSchedule();
 
-    std::unordered_map<QString, bool> attendingDays;
+    std::vector<std::vector<TimeSlot>> optimizedSchedules = ScheduleOptimizer::getOptimizedSchedules(selectedSection, Schedule::formatedSchedules, userConf);
 
-    if(selectedGroup == 2){
-        attendingDays = {{"Saturday", 1}, {"Sunday", 1}, {"Monday", 0}, {"Tuesday", 0}, {"Wednesday", 0}, {"Thursday", 0}};
-    }
-    else if(selectedGroup == 4){
-        attendingDays = {{"Saturday", 0}, {"Sunday", 1}, {"Monday", 1}, {"Tuesday", 1}, {"Wednesday", 1}, {"Thursday", 0}};
-    }
-    else{
-        attendingDays = {{"Saturday", 1}, {"Sunday", 1}, {"Monday", 1}, {"Tuesday", 1}, {"Wednesday", 1}, {"Thursday", 1}};
+    for (std::vector<TimeSlot> schedule : optimizedSchedules){
+        for(TimeSlot timeSlot : schedule){
+            qDebug() << "Course name : " << timeSlot.course << "Day : " << timeSlot.day << "Place : " << timeSlot.place
+                     << "Time period : " << timeSlot.timePeriod << "\n";
+        }
     }
 
-    OptimizedSchedule optimizedSchedule = OptimizedSchedule(selectedGroup, selectedSection, attendingDays);
+    // m_numberOfOptimizedSchedulesAdded.push(1);
 
-    addOptimizedSchedule(optimizedSchedule);
+    // std::unordered_map<QString, bool> attendingDays;
+
+    // if(selectedGroup == 2){
+    //     attendingDays = {{"Saturday", 1}, {"Sunday", 1}, {"Monday", 0}, {"Tuesday", 0}, {"Wednesday", 0}, {"Thursday", 0}};
+    // }
+    // else if(selectedGroup == 4){
+    //     attendingDays = {{"Saturday", 0}, {"Sunday", 1}, {"Monday", 1}, {"Tuesday", 1}, {"Wednesday", 1}, {"Thursday", 0}};
+    // }
+    // else{
+    //     attendingDays = {{"Saturday", 1}, {"Sunday", 1}, {"Monday", 1}, {"Tuesday", 1}, {"Wednesday", 1}, {"Thursday", 1}};
+    // }
+
+    // OptimizedSchedule optimizedSchedule = OptimizedSchedule(selectedGroup, selectedSection, attendingDays);
+
+    // addOptimizedSchedule(optimizedSchedule);
 }
 
 void OptimizedScheduleView::addOptimizedSchedule(OptimizedSchedule optimizedSchedule){

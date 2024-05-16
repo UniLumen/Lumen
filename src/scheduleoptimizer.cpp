@@ -8,11 +8,11 @@ std::vector<TimeSlot>ScheduleOptimizer::minimizedTable;
 QMap<std::pair<QString,QString>,int> ScheduleOptimizer::idFinder;
 std::vector<TimeSlot>ScheduleOptimizer::mandatoryTimeSlots;
 int ScheduleOptimizer::initialMask;
-int ScheduleOptimizer::  dp[7][7][1<<22][2];
+int ScheduleOptimizer::dp[7][7][1<<22][2];
 ScheduleOptimizer::ScheduleOptimizer() {}
 
-std::vector<std::vector<TimeSlot>> getMandatorySlots(int section,std::vector<std::vector<std::vector<TimeSlot>>>timeGrid,Lumen::UserConf userConf){
-    QList<const Lumen::CourseAttendance*> attendedCourses =userConf.courseAttendances();
+std::vector<std::vector<TimeSlot>> ScheduleOptimizer::getOptimizedSchedules(int section,std::vector<std::vector<std::vector<TimeSlot>>>timeGrid,Lumen::UserConf *userConf){
+    QList<const Lumen::CourseAttendance*> attendedCourses =userConf->courseAttendances();
     std::vector<QString>mandatoryCourses;
     memset(ScheduleOptimizer::dp,-1,sizeof ScheduleOptimizer::dp);
     int x = 0;
@@ -27,6 +27,7 @@ std::vector<std::vector<TimeSlot>> getMandatorySlots(int section,std::vector<std
         }
         if(it->hasLecture()){
             ScheduleOptimizer::idFinder[{it->name(),"Lecture"}] = x++;
+            qDebug() << it->name() << "\n";
             if(it->hasMandatoryLecture()){
                 mandatoryCourses.push_back(it->name());
                 ScheduleOptimizer::initialMask= ScheduleOptimizer::initialMask |(x-1);
@@ -59,7 +60,7 @@ std::vector<std::vector<TimeSlot>> getMandatorySlots(int section,std::vector<std
 }
 
 
-int ScheduleOptimizer:: getMinimumDays(int day, int time,int mask,bool take,std::vector<std::vector<std::vector<TimeSlot>>>dayGrid){
+int ScheduleOptimizer::getMinimumDays(int day, int time,int mask,bool take,std::vector<std::vector<std::vector<TimeSlot>>>dayGrid){
     if(day ==6){
         return (MASK!=mask) * 18;
     }
@@ -105,7 +106,7 @@ int ScheduleOptimizer:: getMinimumDays(int day, int time,int mask,bool take,std:
 
 }
 
-void ScheduleOptimizer:: buildOptimizedSchedules(int day, int time,int mask,bool take,std::vector<std::vector<std::vector<TimeSlot>>>dayGrid){
+void ScheduleOptimizer::buildOptimizedSchedules(int day, int time,int mask,bool take,std::vector<std::vector<std::vector<TimeSlot>>>dayGrid){
 
     if(day ==6){
         if(MASK==mask){

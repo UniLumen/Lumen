@@ -50,7 +50,7 @@ public slots:
     void editSelectedCell(int indexInGrid,const int &day,const int &sectionNum,const QString &type,const QString &primaryInstructor
                           ,const QString &secondaryInstructor
                           ,const QString &course
-                          ,const QString &displayText);
+                          ,const QString &displayText, const int &timePeriod);
     void addRow(const QString &place);
     void removeRow();
     void onRemoveTimeSlot(int index);

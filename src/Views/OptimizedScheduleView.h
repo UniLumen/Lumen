@@ -3,6 +3,7 @@
 #include <QtCore>
 #include <Models/OptimizedSchedule.h>
 #include <stack>
+#include "UserConf.h"
 
 using namespace Lumen;
 
@@ -22,6 +23,8 @@ public:
         ThursdayAttendanceRole,
         NumberOfDaysToAttendRole
     };
+
+    static Lumen::UserConf *userConf;
 
     OptimizedScheduleView(QObject* parent = nullptr);
 

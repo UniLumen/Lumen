@@ -9,7 +9,6 @@
 #include <QAbstractListModel>
 #include <QString>
 #include <QVector>
-#include <unordered_map>
 #include<QPair>
 #include <QList>
 #include<QMap>
@@ -22,7 +21,7 @@ class ScheduleOptimizer
 public:
     ScheduleOptimizer();
     static int getMinimumDays(int day, int time,int  mask,bool take,std::vector<std::vector<std::vector<TimeSlot>>>timeGrid);
-    static std::vector<std::vector<TimeSlot>> getMandatorySlots(int section,std::vector<std::vector<std::vector<TimeSlot>>>timeGrid,Lumen::UserConf userConf);
+    static std::vector<std::vector<TimeSlot>> getOptimizedSchedules(int section,std::vector<std::vector<std::vector<TimeSlot>>>timeGrid,Lumen::UserConf *userConf);
     static void buildOptimizedSchedules(int day, int time,int mask,bool take,std::vector<std::vector<std::vector<TimeSlot>>>timeGrid);
     const static int MASK = (1<<6)-1;
     static int initialMask;

@@ -70,7 +70,7 @@ void TimeSlotModel::editSelectedCell(int index,const int &day,const int &section
                                      ,const QString &primaryInstructor
                                      ,const QString &secondaryInstructor
                                      ,const QString &course
-                                     ,const QString &displayText){
+                                     ,const QString &displayText, const int &timePeriod){
     if ((index % 7) < 1){
         return;
     }
@@ -83,15 +83,8 @@ void TimeSlotModel::editSelectedCell(int index,const int &day,const int &section
     dayGrid[index].secondaryInstructor = secondaryInstructor;
     dayGrid[index].course = course;
     dayGrid[index].displayText = displayText;
-    switch(index % 7)
-    {
-    case 1: dayGrid[index].timePeriod = 8;break;
-    case 2: dayGrid[index].timePeriod = 10;break;
-    case 3: dayGrid[index].timePeriod = 12;break;
-    case 4: dayGrid[index].timePeriod = 2;break;
-    case 5: dayGrid[index].timePeriod = 4;break;
-    case 6: dayGrid[index].timePeriod = 6;break;
-    }
+    dayGrid[index].timePeriod = timePeriod;
+
     endResetModel();
     //TimeSlotModel::dataSet[m_currentDay].push_back(dayGrid[m_currentDay][index]);
     TimeSlot ti = dayGrid[index];
@@ -103,7 +96,6 @@ void TimeSlotModel::onRemoveTimeSlot(int index){
     //TimeSlotModel::dataSet[m_currentDay].erase(dayGrid[m_currentDay][index]);
     dayGrid.erase(dayGrid.begin()+index);
     dayGrid.insert(dayGrid.begin()+index,TimeSlot(""));
-    qDebug() << "onRemove timeSlot called on index: " + std::to_string(index);
     endResetModel();
 }
 void TimeSlotModel::addRow(const QString &place){
@@ -115,7 +107,6 @@ void TimeSlotModel::addRow(const QString &place){
     dayGrid.push_back(TimeSlot(" "));
     dayGrid.push_back(TimeSlot(" "));
     dayGrid.push_back(TimeSlot(" "));
-    qDebug() << "ahaa";
     endResetModel();
     emit rowCountChanged();
 }

@@ -7,7 +7,6 @@ std::vector<std::vector<std::vector<TimeSlot>>> Schedule::optimizedSchedules;
 void Schedule::addSchedule(std::vector<TimeSlot>  *newSchedule)
 {
     Schedule::schedules.push_back(newSchedule);
-    qDebug() <<"added";
 }
 void Schedule::FormatSchedule()
 {
