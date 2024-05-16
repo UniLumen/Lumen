@@ -33,5 +33,7 @@ Item {
         UserDashboard {}
 
         UserOptimizedSchedules {}
+
+        CoursesGraph {}
     }
 }

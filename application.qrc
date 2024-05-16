@@ -18,5 +18,9 @@
         <file>images/icon_add.svg</file>
         <file>images/icon_maximize.svg</file>
         <file>images/icon_schedule_white.svg</file>
+        <file>images/full_graph.svg</file>
+        <file>images/graph_card_icon.svg</file>
+        <file>images/explore_icon.svg</file>
+        <file>images/courses_graph_icon.svg</file>
     </qresource>
 </RCC>

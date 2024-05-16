@@ -44,6 +44,10 @@ QtObject {
     readonly property url iconGear: "qrc:/images/gear_icon.svg"
     readonly property url iconMaximize: "qrc:/images/icon_maximize.svg"
     readonly property url iconScheduleWhite: "qrc:/images/icon_schedule_white.svg"
+    readonly property url iconExplore: "qrc:/images/explore_icon.svg"
+    readonly property url iconGraphCard: "qrc:/images/graph_card_icon.svg"
+    readonly property url fullGraph: "qrc:/images/full_graph.svg"
+    readonly property url iconGraph: "qrc:/images/courses_graph_icon.svg"
 
     readonly property int sizeHeader1: 32
     readonly property int sizeHeader2: 24

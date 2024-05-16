@@ -26,4 +26,10 @@ TabBar {
         text: Constants.textSchedulesTab
         icon.source: Constants.iconSchedule
     }
+
+
+    LumenTabButton {
+        text: "Courses Graph"
+        icon.source: Constants.iconGraph
+    }
 }

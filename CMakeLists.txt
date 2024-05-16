@@ -106,6 +106,7 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/OptimizedScheduleCard.qml
         qml/OptimizeNewScheduleCard.qml
         qml/OptimizedScheduleDayRectangle.qml
+        qml/CoursesGraph.qml
 )
 
 target_include_directories(${PROJECT_NAME}
