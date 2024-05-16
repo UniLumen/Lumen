@@ -8,7 +8,8 @@ std::vector<TimeSlot>ScheduleOptimizer::minimizedTable;
 QMap<std::pair<QString,QString>,int> ScheduleOptimizer::idFinder;
 std::vector<TimeSlot>ScheduleOptimizer::mandatoryTimeSlots;
 int ScheduleOptimizer::initialMask;
-int ScheduleOptimizer::dp[7][7][1<<22][2];
+int ScheduleOptimizer::MASK;
+int ScheduleOptimizer::dp[7][7][1<<15][2];
 ScheduleOptimizer::ScheduleOptimizer() {}
 
 std::vector<std::vector<TimeSlot>> ScheduleOptimizer::getOptimizedSchedules(int section,std::vector<std::vector<std::vector<TimeSlot>>>timeGrid,Lumen::UserConf *userConf){
@@ -27,7 +28,6 @@ std::vector<std::vector<TimeSlot>> ScheduleOptimizer::getOptimizedSchedules(int 
         }
         if(it->hasLecture()){
             ScheduleOptimizer::idFinder[{it->name(),"Lecture"}] = x++;
-            qDebug() << it->name() << "\n";
             if(it->hasMandatoryLecture()){
                 mandatoryCourses.push_back(it->name());
                 ScheduleOptimizer::initialMask= ScheduleOptimizer::initialMask |(x-1);
@@ -54,8 +54,15 @@ std::vector<std::vector<TimeSlot>> ScheduleOptimizer::getOptimizedSchedules(int 
             }
         }
     }
-    int d = ScheduleOptimizer:: getMinimumDays(0,0,ScheduleOptimizer::initialMask,0,timeGrid);
-    ScheduleOptimizer::buildOptimizedSchedules(0,0,ScheduleOptimizer::initialMask,0,timeGrid);
+    MASK = (1 << x) - 1;
+    qDebug() << "id finder size = " << ScheduleOptimizer::idFinder.size() << "\n";
+    int d = ScheduleOptimizer:: getMinimumDays(0,1,ScheduleOptimizer::initialMask,0,timeGrid);
+    qDebug() << "d value = " << d << "\n";
+    for (auto i = ScheduleOptimizer::idFinder.cbegin(), end = ScheduleOptimizer::idFinder.cend(); i != end; ++i){
+        qDebug() << i.value() << "\n";
+    }
+    qDebug() << "x value = " << x << "\n";
+    ScheduleOptimizer::buildOptimizedSchedules(0,1,ScheduleOptimizer::initialMask,0,timeGrid);
     return ScheduleOptimizer::minimizedTables;
 }
 
@@ -68,12 +75,12 @@ int ScheduleOptimizer::getMinimumDays(int day, int time,int mask,bool take,std::
     bool nxttake;
     if(time == 6) {
         nxtday = day + 1;
-        nxttime = 8;
+        nxttime = 1;
         nxttake = 0;
     }
     else{
         nxtday = day;
-        nxttime = ((time + 1)%12)+1;
+        nxttime = (time + 1);
         nxttake = take;
     }
     int &ans = dp[day][time][mask][take];
@@ -87,11 +94,13 @@ int ScheduleOptimizer::getMinimumDays(int day, int time,int mask,bool take,std::
     if(time%7==0){
         return ans = fmin(ans,getMinimumDays(nxtday,nxttime,mask ,nxttake,dayGrid));
     }
+
     if(requredAttendanceTimeSlots.find({day,time})!=requredAttendanceTimeSlots.end())
         return ans = fmin(ans,getMinimumDays(nxtday,nxttime,mask ,(nxtday==day),dayGrid)+(take==0));
     for(int schedule = 0; schedule < dayGrid.size();schedule++){
-        for (int i = time; i < dayGrid[schedule][day].size() ; i+=6) {
+        for (int i = time; i < dayGrid[schedule][day].size() ; i+=7) {
             auto it = dayGrid[schedule][day][i];
+            qDebug() << "it.course = " << it.course << " " << it.type << "\n";
             if(mask & (1<<idFinder[{it.course,it.type}])||idFinder.find({it.course,it.type})==idFinder.end()){
                 continue;
             }
@@ -118,12 +127,12 @@ void ScheduleOptimizer::buildOptimizedSchedules(int day, int time,int mask,bool 
     bool nxtTake;
     if(time == 6) {
         nxtDay = day + 1;
-        nxtTime = 8;
+        nxtTime = 1;
         nxtTake = 0;
     }
     else{
         nxtDay = day;
-        nxtTime = ((time + 1)%12)+1;
+        nxtTime = (time + 1);
         nxtTake = take;
     }
 
@@ -131,6 +140,7 @@ void ScheduleOptimizer::buildOptimizedSchedules(int day, int time,int mask,bool 
     //take
     if(time%7==0){
         buildOptimizedSchedules(nxtDay,nxtTime,mask ,nxtTake,dayGrid);
+        return;
     }
     if(requredAttendanceTimeSlots.find({day,time})!=requredAttendanceTimeSlots.end()) {
         minimizedTable.push_back(mandatoryTimeSlots[requredAttendanceTimeSlots[{day,time}]]);
@@ -139,7 +149,7 @@ void ScheduleOptimizer::buildOptimizedSchedules(int day, int time,int mask,bool 
         return;
     }
     for(int schedule = 0; schedule < dayGrid.size();schedule++){
-        for (int i = time; i < dayGrid[schedule][day].size();i+=6) {
+        for (int i = time; i < dayGrid[schedule][day].size();i+=7) {
             auto it =dayGrid[schedule][day][i];
             if(mask & (1<<idFinder[{it.course,it.type}])||idFinder.find({it.course,it.type})==idFinder.end()){
                 continue;

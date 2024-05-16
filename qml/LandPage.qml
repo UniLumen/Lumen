@@ -63,7 +63,11 @@ Item {
                     borderColor: Constants.colorBackground
                     textColor: Constants.colorBackground
 
-                    onClicked: mainLoader.source = "UserPage.qml"
+                    onClicked: {
+                        var component = Qt.createComponent("UserPage.qml")
+                        var window    = component.createObject(landPage)
+                        window.show()
+                    }
                 }
 
                 LandPageButton{
@@ -73,7 +77,11 @@ Item {
                     borderColor: editorButton.hovered ? Constants.colorBackground : Constants.colorWhiteLandPageButton
                     textColor: editorButton.hovered ? Constants.colorBlackPure : Constants.colorWhiteLandPageButton
 
-                    onClicked: mainLoader.source = "EditorPage.qml"
+                    onClicked: {
+                        var component = Qt.createComponent("EditorPage.qml")
+                        var window    = component.createObject(landPage)
+                        window.show()
+                    }
                 }
             }
         }

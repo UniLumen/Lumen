@@ -1,9 +1,22 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls
 
-Item {
-    implicitWidth: Constants.widthDefault
-    implicitHeight: Constants.heightDefault
+ApplicationWindow {
+    width: Constants.widthDefault
+    height: Constants.heightDefault
+
+    color: Constants.colorBackground
+
+    background: Item {
+        anchors.fill: parent
+
+        YellowLinesImage {
+            width: parent.width
+            height: parent.height / 2
+            anchors.bottom: parent.bottom
+        }
+    }
 
     LumenLogo {
         id: lumenLogo
