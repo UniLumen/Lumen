@@ -20,6 +20,9 @@ endif()
 qt_add_executable(${PROJECT_NAME}
     application.qrc
     src/Main.cpp
+    src/schedule.h
+    src/schedule.cpp
+    src/timeslot.h
     src/Models/Location.h
     src/Models/Location.cpp
     src/Models/Course.h
@@ -33,6 +36,10 @@ qt_add_executable(${PROJECT_NAME}
     src/JsonReader.h
     src/RepositoryManager.h
     src/RepositoryManager.cpp
+    src/timeslotmodel.h
+    src/timeslotmodel.cpp
+    src/scheduleoptimizer.h 
+    src/scheduleoptimizer.cpp
     src/Views/CourseListView.h
     src/Views/CourseListView.cpp
     src/UserConf.h
@@ -80,6 +87,14 @@ qt_add_qml_module(${CMAKE_PROJECT_NAME}
         qml/LandPage.qml
         qml/LandPageButton.qml
         qml/ManImage.qml
+        qml/EditorSchedule.qml
+        qml/SchedulesTabs.qml
+        qml/ScheduleTabButton.qml
+        qml/TableRow.qml
+        qml/TableSchedule.qml
+        qml/FixedRow.qml
+        qml/AddTimeSlot.qml
+        qml/LabeledComboBox.qml
         qml/LandPageText.qml
         qml/EditorHomePage.qml
         qml/YellowLinesImage.qml
@@ -121,4 +136,4 @@ target_link_libraries(${PROJECT_NAME}
         Qt6::Quick
 )
 
-add_subdirectory(test/)
+# add_subdirectory(test/)

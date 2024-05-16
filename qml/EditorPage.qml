@@ -37,5 +37,7 @@ Item {
         InstructorEditor {}
 
         CourseEditor {}
+
+        EditorSchedule{}
     }
 }

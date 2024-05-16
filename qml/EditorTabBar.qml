@@ -8,7 +8,7 @@ TabBar {
     background: Rectangle {
         color: "transparent"
     }
-
+    
     // Sets the color of the default bottom highlight line that is in QT TabBar, I don't want this line so I set it's color to transparent
     // Check https://stackoverflow.com/questions/42460451/color-of-line-in-tabbar-qt-qml
     Material.accent: "transparent"

@@ -5,7 +5,7 @@ import QtQuick
 QtObject {
     // Text
     readonly property string appName: "Lumen"
-
+    
     readonly property string fontPoppins: "Poppins"
     readonly property string textEditorPageTitle: "Editor's POV"
     readonly property string textDashboardTab: " Dashboard"

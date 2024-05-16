@@ -1,5 +1,5 @@
 import QtQuick
-
+import QtQuick.Layouts
 Image {
     width: parent.width / 9
     height: parent.height / 15
