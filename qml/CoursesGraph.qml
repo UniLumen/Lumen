@@ -72,6 +72,7 @@ Item {
         }
 
         ComboBox {
+            width: 350;
             model:[
                 "Introduction to CS",
                 "Physics I",
