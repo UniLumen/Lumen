@@ -4,12 +4,9 @@
 #include <QObject>
 #include <QAbstractListModel>
 #include <QString>
-#include <vector>
-#include <unordered_map>
 
 #include <QList>
 #include <QtGlobal>
-#include "timeslot.h"
 
 class TimeSlotModel : public QAbstractListModel
 {
@@ -31,20 +28,17 @@ public:
         DisplayText
     };
 
-    static std::unordered_map<int, std::vector<TimeSlot>> dataSet;
-    //std::unordered_map<int, std::vector<TimeSlot>> dayGrid;
-    std::vector<TimeSlot> dayGrid;
     TimeSlotModel(QObject *parent = nullptr);
 
     int rowCount(const QModelIndex &parent) const override;
     QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     QHash<int, QByteArray> roleNames() const override;
-    void setGridDays();
+    void setCurrentDay(const int &day);
+    void setCurrentTable(const int &table);
+    bool exist(const QString &place) const;
     double getRows() const;
     int getCurrentDay() const;
-    void setCurrentDay(const int &day);
     int getCurrentTable() const;
-    void setCurrentTable(const int &table);
 
 public slots:
     void editSelectedCell(int indexInGrid,const int &day,const int &sectionNum,const QString &type,const QString &primaryInstructor
@@ -54,7 +48,6 @@ public slots:
     void addRow(const QString &place);
     void removeRow();
     void onRemoveTimeSlot(int index);
-    void addToSchedule();
 
 signals:
     void rowCountChanged();
@@ -64,7 +57,6 @@ signals:
 private:
     int m_currentDay;
     int m_currentTable;
-
 };
 
 #endif // TIMESLOTMODEL_H

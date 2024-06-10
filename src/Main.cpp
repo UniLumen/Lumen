@@ -1,8 +1,9 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QDebug>
-#include "scheduleoptimizer.h"
+
 #include "schedule.h"
+
 #include <QQmlContext>
 #include <QFont>
 #include <QFontDatabase>
@@ -21,34 +22,54 @@
 #include "timeslotmodel.h"
 // TimeSlotModel test;
 void cleanup() {
-    QString testt = "hi";
-    qDebug()<<testt;
-    // qDebug()<<test.dayGrid[0].size();
-    //qDebug()<<Schedule::schedules.at(Schedule::schedules.size() - 1)->at(0).course;
-    Schedule::FormatSchedule();
-
-    auto currentDay = Schedule::formatedSchedules;
-    for(int i = 0; i <currentDay.size();i++)
-    {
-        for(int j = 0; j <currentDay[i].size();j++)
-        {
-            for(int k = 0; k < currentDay[i][j].size();k++)
-            {
-                if(currentDay[i][j][k].course == "") continue;
-                qDebug()<<currentDay[i][j][k].day;
-                qDebug()<<currentDay[i][j][k].timePeriod;
-                qDebug()<<currentDay[i][j][k].sectionNumbers;
-                qDebug()<<currentDay[i][j][k].course;
-                qDebug()<<currentDay[i][j][k].place;
-            }
-        }
-    }
-    memset(ScheduleOptimizer::dp,-1,sizeof ScheduleOptimizer::dp);
-    qDebug()<<ScheduleOptimizer::getMinimumDays(0,0,0,0,Schedule::formatedSchedules);
+    qDebug() << "cool\n";
 }
 int main(int argc, char* argv[]) {
+    for(int i = 0; i <= 3; i++){
+        Schedule::dataSet[i][0].push_back(TimeSlot("Fahmy"));
+        Schedule::dataSet[i][0].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][0].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][0].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][0].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][0].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][0].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][1].push_back(TimeSlot("Cis 6"));
+        Schedule::dataSet[i][1].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][1].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][1].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][1].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][1].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][1].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][2].push_back(TimeSlot("lab 7"));
+        Schedule::dataSet[i][2].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][2].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][2].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][2].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][2].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][2].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][3].push_back(TimeSlot("test plus"));
+        Schedule::dataSet[i][3].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][3].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][3].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][3].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][3].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][3].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][4].push_back(TimeSlot("ECPC"));
+        Schedule::dataSet[i][4].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][4].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][4].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][4].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][4].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][4].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][5].push_back(TimeSlot("ICPC"));
+        Schedule::dataSet[i][5].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][5].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][5].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][5].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][5].push_back(TimeSlot(" "));
+        Schedule::dataSet[i][5].push_back(TimeSlot(" "));
+    }
     QGuiApplication app(argc, argv);
-
     Lumen::RepositoryManager& repoManager = Lumen::RepositoryManager::instance();
     repoManager.loadFromDisk("db.json");
 

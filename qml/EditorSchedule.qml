@@ -7,20 +7,6 @@ Item {
         width: parent.width
         spacing: 35
         Layout.margins: 20
-        // RowLayout{
-        //     id: ediotrTabBar
-        //     Layout.fillHeight: true
-        //     Layout.fillWidth: true
-        //     spacing: 35
-        //     Layout.margins: 20
-        //     LumenLogo{
-
-        //     }
-
-        //     EditorTabBar{
-
-        //     }
-        // }
         RowLayout{
             id: tabButtons
             Layout.fillHeight: true
@@ -44,19 +30,19 @@ Item {
 
             currentIndex: tabbar.currentIndex
             TableSchedule{
-                currentTable: tabbar.currentIndex
+                currentTable: 0
                 //anchors.fill: parent
             }
             TableSchedule{
-                currentTable: tabbar.currentIndex
+                currentTable: 1
                //anchors.fill: parent
             }
             TableSchedule{
-                currentTable: tabbar.currentIndex
+                currentTable: 2
                //anchors.fill: parent
             }
             TableSchedule{
-                currentTable: tabbar.currentIndex
+                currentTable: 3
                 //anchors.fill: parent
             }
         }

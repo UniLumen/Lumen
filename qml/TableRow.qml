@@ -11,7 +11,7 @@ Item{
     TimeSlot{
         id: _testtest
         currentDay: schedule.day
-        currentTable: selectedTable
+        currentTable: schedule.selectedTable
     }
     width: scheduleWidth
     height: timeSlots.height
