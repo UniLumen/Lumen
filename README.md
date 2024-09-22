@@ -7,7 +7,7 @@ Helps university students save valuable time by optimizing their university sche
 <br>
 <br>
 
-![Land Page](https://github.com/user-attachments/assets/53d41d8c-eff9-47fb-96ff-67eb284eb330)
+![Land Page](https://i.imgur.com/TWH93Rt.png)
   <a href="https://www.qt.io/">
       <img src="https://img.shields.io/badge/Made%20with-QT-FCB80A.svg">
   </a>
